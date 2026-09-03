@@ -1,0 +1,1266 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "we'll start with the most common way to write a line, where the slope and the y-intercept are visible at a glance.",
+    "displayText": "Slope-Intercept Form",
+    "action": {
+      "type": "section_heading",
+      "text": "Slope-Intercept Form"
+    }
+  },
+  {
+    "id": 1,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "setup",
+    "narration": "a linear equation in two variables can always be written as wye equals m x plus b.",
+    "displayText": "A linear equation in two variables can always be written as $y = mx + b$.",
+    "action": {
+      "type": "write_math",
+      "latex": "y = \\htmlClass{ann-m}{\\textcolor{#c084fc}{m}}x + \\htmlClass{ann-b}{\\textcolor{#f87171}{b}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    },
+    "annotations": [
+      {
+        "id": "ann-m",
+        "label": "slope",
+        "side": "bottom",
+        "color": "#c084fc"
+      },
+      {
+        "id": "ann-b",
+        "label": "y-intercept",
+        "side": "bottom",
+        "color": "#f87171"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "identify",
+    "narration": "m is the slope, the steepness and direction of the line.",
+    "displayText": "$\\textcolor{#c084fc}{m}$ is the slope — the steepness and direction of the line.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = \\text{slope (rise over run)}",
+      "style": {
+        "fontSize": "lg"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 3,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "identify",
+    "narration": "b is the wye-intercept, where the line crosses the wye axis.",
+    "displayText": "$\\textcolor{#f87171}{b}$ is the y-intercept — where the line crosses the y-axis.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#f87171}{b} = \\text{y-intercept (value of } y \\text{ when } x = 0)",
+      "style": {
+        "fontSize": "lg"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 4,
+    "delayMs": 300,
+    "durationMs": 2200,
+    "operation": "plot",
+    "narration": "here is wye equals 2 x plus 1 on the coordinate plane.",
+    "displayText": "Plotting $y = 2x + 1$",
+    "action": {
+      "type": "coordinate_plane",
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -5,
+        10
+      ],
+      "showGrid": true,
+      "elements": [
+        {
+          "type": "line",
+          "from": [
+            -3,
+            -5
+          ],
+          "to": [
+            4,
+            9
+          ],
+          "style": {
+            "strokeColor": "#60a5fa",
+            "strokeWidth": 2
+          },
+          "label": "y = 2x + 1"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            1
+          ],
+          "label": "(0, 1)",
+          "note": {
+            "text": "y-intercept"
+          },
+          "style": {
+            "color": "#f87171",
+            "radius": 4,
+            "filled": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "the slope is 2, meaning every one step right, the line rises two steps.",
+    "displayText": "The slope is $\\textcolor{#c084fc}{2}$: every one step right, the line rises two steps.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = 2 = \\frac{\\text{rise}}{\\text{run}} = \\frac{2}{1}",
+      "style": {
+        "fontSize": "lg"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 6,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "highlight",
+    "narration": "the wye-intercept sits at 1, exactly the value of b in the equation.",
+    "displayText": "The y-intercept sits at $(0, 1)$, exactly the value of $b = 1$ in the equation.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 4,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 7,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "what is the slope of the equation wye equals 3 x plus 5?",
+    "displayText": "",
+    "action": {
+      "type": "predict",
+      "question": "What is the slope of $y = 3x + 5$?",
+      "options": [
+        "3",
+        "5",
+        "-3",
+        "x"
+      ],
+      "correctOption": 0,
+      "explanation": "In $y = mx + b$, the slope $m$ is the coefficient of $x$. Here that is 3.",
+      "hint": "Match the equation to the form $y = mx + b$ and read off the number in front of $x$.",
+      "visual": {
+        "type": "write_math",
+        "latex": "y = \\textcolor{#c084fc}{m}x + \\textcolor{#f87171}{b} \\quad \\leftrightarrow \\quad y = 3x + 5",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 8,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "for the equation wye equals one half x plus 7, what is the slope and the wye-intercept?",
+    "displayText": "",
+    "action": {
+      "type": "check_in",
+      "question": "For $y = \\tfrac{1}{2}x + 7$, what is the slope and the y-intercept?",
+      "options": [
+        "slope $= \\tfrac{1}{2}$, y-intercept $= 7$",
+        "slope $= 7$, y-intercept $= \\tfrac{1}{2}$",
+        "slope $= 2$, y-intercept $= 7$",
+        "slope $= \\tfrac{1}{2}$, y-intercept $= (0, 0)$"
+      ],
+      "correctOption": 0,
+      "explanation": "The slope is the coefficient of $x$ ($\\tfrac{1}{2}$) and the y-intercept is the constant term ($7$).",
+      "hint": "Remember: $y = mx + b$. The number multiplying $x$ is $m$, the loose constant is $b$.",
+      "detailedHint": "$\\tfrac{1}{2}$ is the coefficient of $x$, so it is the slope. $7$ is the constant added on, so it is the y-intercept.",
+      "visual": {
+        "type": "write_math",
+        "latex": "y = \\textcolor{#c084fc}{\\tfrac{1}{2}}x + \\textcolor{#f87171}{7}",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 9,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "next, let's find where a line crosses each axis by setting one variable to zero at a time.",
+    "displayText": "Finding x and y Intercepts",
+    "action": {
+      "type": "section_heading",
+      "text": "Finding x and y Intercepts"
+    }
+  },
+  {
+    "id": 10,
+    "delayMs": 400,
+    "durationMs": 2000,
+    "operation": "setup",
+    "narration": "now we find the x and wye intercepts of three x plus two wye equals twelve.",
+    "displayText": "$3x + 2y = 12$",
+    "action": {
+      "type": "write_math",
+      "latex": "3x + 2y = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 11,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "the wye-intercept is where the line crosses the wye axis. that happens when x equals zero.",
+    "displayText": "The y-intercept is where the line crosses the y-axis — that happens when $x = 0$.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\text{y-intercept: let } \\htmlClass{src-x0}{\\textcolor{#60a5fa}{x = 0}}",
+      "style": {
+        "fontSize": "md"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 12,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "substitute",
+    "operand": "0",
+    "substituteVar": "x",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "exprBefore": "3*x + 2*y = 12",
+    "exprAfter": "3*0 + 2*y = 12",
+    "narration": "substitute x equals zero into the equation.",
+    "displayText": "substitute $x = 0$",
+    "incomingArrow": {
+      "fromSpanId": "src-x0",
+      "toSpanId": "dst-x0",
+      "color": "oklch(1 0 0 / 0.7)"
+    },
+    "action": {
+      "type": "write_math",
+      "latex": "3(\\htmlClass{op-new dst-x0}{0}) + 2y = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 13,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "exprBefore": "3*0 + 2*y = 12",
+    "exprAfter": "2*y = 12",
+    "narration": "three times zero is zero and disappears.",
+    "displayText": "$3 \\cdot 0$ is zero and disappears",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-cancel}{3(0)} + 2y = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 14,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "good — and now the equation is simpler, with only one variable left.",
+    "displayText": "Now the equation is simpler — only one variable left.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 13,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 15,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "exprAfter": "2*y = 12",
+    "narration": "we now have two wye equals twelve.",
+    "displayText": "$2y = 12$",
+    "action": {
+      "type": "write_math",
+      "latex": "2y = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 16,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "divide",
+    "operand": "2",
+    "operationGroupId": "g2",
+    "phase": "apply",
+    "exprBefore": "2*y = 12",
+    "exprAfter": "(2*y)/2 = 12/2",
+    "narration": "divide both sides by two.",
+    "displayText": "divide both sides by $2$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\frac{2y}{\\htmlClass{op-new}{2}} = \\frac{12}{\\htmlClass{op-new}{2}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 17,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g2",
+    "phase": "collapse",
+    "exprBefore": "(2*y)/2 = 12/2",
+    "exprAfter": "y = 6",
+    "narration": "the twos cancel on the left and twelve divided by two is six.",
+    "displayText": "the $2$s cancel on the left; $\\tfrac{12}{2} = 6$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-cancel}{\\frac{2y}{2}} = \\htmlClass{op-cancel}{\\frac{12}{2}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 18,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "conclude",
+    "operationGroupId": "g2",
+    "phase": "state",
+    "exprAfter": "y = 6",
+    "narration": "wye equals six. the wye-intercept is the point zero comma six.",
+    "displayText": "$y = \\textcolor{#4ade80}{6}$  →  y-intercept $(0, 6)$",
+    "action": {
+      "type": "write_math",
+      "latex": "y = \\htmlClass{op-result}{\\textcolor{#4ade80}{6}} \\quad \\Rightarrow \\quad (0, 6)",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 19,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "plot",
+    "narration": "here is the y-intercept on the plane.",
+    "displayText": "Here is the y-intercept on the plane: $(0, 6)$.",
+    "action": {
+      "type": "coordinate_plane",
+      "xRange": [
+        -2,
+        6
+      ],
+      "yRange": [
+        -2,
+        8
+      ],
+      "showGrid": true,
+      "axisLabels": {
+        "x": "x",
+        "y": "y"
+      },
+      "elements": [
+        {
+          "type": "point",
+          "at": [
+            0,
+            6
+          ],
+          "label": "(0, 6)",
+          "note": {
+            "text": "y-intercept",
+            "placement": "ne"
+          },
+          "style": {
+            "color": "#4ade80"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "for the x-intercept, we set wye equals zero instead.",
+    "displayText": "x-intercept: set $y = 0$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\text{x-intercept: let } \\htmlClass{src-y0}{\\textcolor{#60a5fa}{y = 0}}",
+      "style": {
+        "fontSize": "md"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 21,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "substitute",
+    "operand": "0",
+    "operationGroupId": "g3",
+    "phase": "apply",
+    "exprBefore": "3*x + 2*y = 12",
+    "exprAfter": "3*x + 2*0 = 12",
+    "substituteVar": "y",
+    "narration": "substitute wye equals zero.",
+    "displayText": "substitute $y = 0$",
+    "incomingArrow": {
+      "fromSpanId": "src-y0",
+      "toSpanId": "dst-y0",
+      "color": "oklch(1 0 0 / 0.7)"
+    },
+    "action": {
+      "type": "write_math",
+      "latex": "3x + 2(\\htmlClass{op-new dst-y0}{0}) = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 22,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g3",
+    "phase": "collapse",
+    "exprBefore": "3*x + 2*0 = 12",
+    "exprAfter": "3*x = 12",
+    "narration": "two times zero is zero and disappears.",
+    "displayText": "$2 \\cdot 0$ disappears",
+    "action": {
+      "type": "write_math",
+      "latex": "3x + \\htmlClass{op-cancel}{2(0)} = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 23,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "state",
+    "operationGroupId": "g3",
+    "phase": "state",
+    "exprAfter": "3*x = 12",
+    "narration": "three x equals twelve.",
+    "displayText": "$3x = 12$",
+    "action": {
+      "type": "write_math",
+      "latex": "3x = 12",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 24,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "the two times zero term drops away as well.",
+    "displayText": "$2 \\cdot 0$ drops away",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 22,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 25,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "divide",
+    "operand": "3",
+    "operationGroupId": "g4",
+    "phase": "apply",
+    "exprBefore": "3*x = 12",
+    "exprAfter": "(3*x)/3 = 12/3",
+    "narration": "divide both sides by three.",
+    "displayText": "divide both sides by $3$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\frac{3x}{\\htmlClass{op-new}{3}} = \\frac{12}{\\htmlClass{op-new}{3}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 26,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g4",
+    "phase": "collapse",
+    "exprBefore": "(3*x)/3 = 12/3",
+    "exprAfter": "x = 4",
+    "narration": "the threes cancel on the left and twelve divided by three is four.",
+    "displayText": "the $3$s cancel; $\\tfrac{12}{3} = 4$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-cancel}{\\frac{3x}{3}} = \\htmlClass{op-cancel}{\\frac{12}{3}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 27,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "conclude",
+    "operationGroupId": "g4",
+    "phase": "state",
+    "exprAfter": "x = 4",
+    "narration": "x equals four. the x-intercept is the point four comma zero.",
+    "displayText": "$x = \\textcolor{#4ade80}{4}$  →  x-intercept $(4, 0)$",
+    "action": {
+      "type": "write_math",
+      "latex": "x = \\htmlClass{op-result}{\\textcolor{#4ade80}{4}} \\quad \\Rightarrow \\quad (4, 0)",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 28,
+    "delayMs": 400,
+    "durationMs": 2200,
+    "operation": "plot",
+    "narration": "plotting both intercepts and the line connecting them.",
+    "displayText": "Plotting both intercepts and the line connecting them: $3x + 2y = 12$.",
+    "action": {
+      "type": "coordinate_plane",
+      "xRange": [
+        -1,
+        6
+      ],
+      "yRange": [
+        -2,
+        8
+      ],
+      "showGrid": true,
+      "elements": [
+        {
+          "type": "line",
+          "from": [
+            -0.5,
+            6.75
+          ],
+          "to": [
+            5,
+            -1.5
+          ],
+          "style": {
+            "strokeColor": "#60a5fa",
+            "strokeWidth": 2
+          },
+          "label": "3x + 2y = 12"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            6
+          ],
+          "label": "(0, 6)",
+          "note": {
+            "text": "y-intercept"
+          },
+          "style": {
+            "color": "#4ade80",
+            "radius": 4,
+            "filled": true
+          }
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            0
+          ],
+          "label": "(4, 0)",
+          "note": {
+            "text": "x-intercept"
+          },
+          "style": {
+            "color": "#4ade80",
+            "radius": 4,
+            "filled": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "find the wye-intercept of four x plus three wye equals twenty four. the wye-intercept is at zero comma blank.",
+    "action": {
+      "type": "fill_blank",
+      "prompt": "Find the y-intercept of $4x + 3y = 24$. The y-intercept is $(0, \\_\\_\\_)$.",
+      "acceptedAnswers": [
+        "8",
+        "8.0"
+      ],
+      "explanation": "Setting $x = 0$ gives $3y = 24$, so $y = 8$.",
+      "hint": "Set $x = 0$ and solve for $y$.",
+      "detailedHint": "Replace $x$ with $0$: $4(0) + 3y = 24 \\Rightarrow 3y = 24$. Now divide both sides by 3.",
+      "visual": {
+        "type": "write_math",
+        "latex": "4x + 3y = 24 \\quad \\text{at } x=0",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 30,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "find the x-intercept of two x minus five wye equals ten.",
+    "action": {
+      "type": "check_in",
+      "question": "Find the x-intercept of $2x - 5y = 10$.",
+      "options": [
+        "$(5, 0)$",
+        "$(-2, 0)$",
+        "$(10, 0)$",
+        "$(0, -2)$"
+      ],
+      "correctOption": 0,
+      "explanation": "Setting $y = 0$: $2x = 10$, so $x = 5$. x-intercept is $(5, 0)$.",
+      "hint": "Set $y = 0$ and solve for $x$.",
+      "detailedHint": "Replacing $y$ with $0$: $2x - 5(0) = 10 \\Rightarrow 2x = 10$. Divide by 2.",
+      "visual": {
+        "type": "write_math",
+        "latex": "2x - 5y = 10 \\quad \\text{at } y=0",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 31,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "now let's measure how steep a line is by using two points it passes through.",
+    "displayText": "The Slope Formula",
+    "action": {
+      "type": "section_heading",
+      "text": "The Slope Formula"
+    }
+  },
+  {
+    "id": 32,
+    "delayMs": 400,
+    "durationMs": 2000,
+    "operation": "setup",
+    "narration": "the slope formula finds slope from any two points on a line.",
+    "displayText": "The slope formula finds slope from any two points on a line: $m = \\frac{y_2 - y_1}{x_2 - x_1}$.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = \\frac{y_2 - y_1}{x_2 - x_1}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 33,
+    "delayMs": 400,
+    "durationMs": 2200,
+    "operation": "plot",
+    "narration": "take the two points one comma two and four comma eight.",
+    "displayText": "points $(1, 2)$ and $(4, 8)$",
+    "action": {
+      "type": "coordinate_plane",
+      "xRange": [
+        0,
+        5
+      ],
+      "yRange": [
+        0,
+        10
+      ],
+      "showGrid": true,
+      "elements": [
+        {
+          "type": "line",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            5,
+            10
+          ],
+          "style": {
+            "strokeColor": "#60a5fa",
+            "strokeWidth": 2
+          }
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            2
+          ],
+          "label": "(1, 2)",
+          "note": {
+            "text": "(x₁, y₁)"
+          },
+          "style": {
+            "color": "#f87171",
+            "radius": 4,
+            "filled": true
+          }
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            8
+          ],
+          "label": "(4, 8)",
+          "note": {
+            "text": "(x₂, y₂)"
+          },
+          "style": {
+            "color": "#fbbf24",
+            "radius": 4,
+            "filled": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "identify",
+    "narration": "label one comma two as x sub one wye sub one, and four comma eight as x sub two wye sub two.",
+    "displayText": "$(x_1, y_1) = (1, 2)$   $(x_2, y_2) = (4, 8)$",
+    "action": {
+      "type": "write_math",
+      "latex": "(\\textcolor{#f87171}{x_1, y_1}) = (\\htmlClass{src-x1}{\\textcolor{#f87171}{1}}, \\htmlClass{src-y1}{\\textcolor{#f87171}{2}}) \\qquad (\\textcolor{#fbbf24}{x_2, y_2}) = (\\htmlClass{src-x2}{\\textcolor{#fbbf24}{4}}, \\htmlClass{src-y2}{\\textcolor{#fbbf24}{8}})",
+      "style": {
+        "fontSize": "lg"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 35,
+    "delayMs": 200,
+    "durationMs": 8500,
+    "operation": "substitute",
+    "compact": true,
+    "narration": "plug the values into the slope formula one at a time.",
+    "displayText": "Plug the values into the slope formula $m = \\tfrac{y_2 - y_1}{x_2 - x_1}$ one at a time.",
+    "flyInSubstitution": {
+      "fromLatex": "\\textcolor{#c084fc}{m} = \\frac{\\textcolor{#fbbf24}{\\htmlClass{var-y2}{y_2}} - \\textcolor{#f87171}{\\htmlClass{var-y1}{y_1}}}{\\textcolor{#fbbf24}{\\htmlClass{var-x2}{x_2}} - \\textcolor{#f87171}{\\htmlClass{var-x1}{x_1}}}",
+      "pairs": [
+        {
+          "fromSpan": "var-x1",
+          "toSpan": "val-x1"
+        },
+        {
+          "fromSpan": "var-y1",
+          "toSpan": "val-y1"
+        },
+        {
+          "fromSpan": "var-x2",
+          "toSpan": "val-x2"
+        },
+        {
+          "fromSpan": "var-y2",
+          "toSpan": "val-y2"
+        }
+      ]
+    },
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = \\frac{\\textcolor{#fbbf24}{\\htmlClass{op-new val-y2}{8}} - \\textcolor{#f87171}{\\htmlClass{op-new val-y1}{2}}}{\\textcolor{#fbbf24}{\\htmlClass{op-new val-x2}{4}} - \\textcolor{#f87171}{\\htmlClass{op-new val-x1}{1}}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 36,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "compact": true,
+    "narration": "eight minus two is six; four minus one is three.",
+    "displayText": "$\\tfrac{8 - 2}{4 - 1} = \\tfrac{6}{3}$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = \\frac{\\htmlClass{op-cancel}{8 - 2}}{\\htmlClass{op-cancel}{4 - 1}} = \\frac{6}{3}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 37,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "conclude",
+    "narration": "six over three simplifies to two. the slope is two.",
+    "displayText": "$m = 2$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = \\htmlClass{op-result}{\\textcolor{#4ade80}{2}}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 38,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "highlight",
+    "narration": "on the graph, rise six over run three equals slope two.",
+    "displayText": "rise $6$ over run $3$ = slope $2$",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 33,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 39,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "find the slope of the line through the points two comma three and five comma twelve.",
+    "action": {
+      "type": "fill_blank",
+      "prompt": "Find the slope of the line through $(2, 3)$ and $(5, 12)$. $m = \\_\\_\\_$",
+      "acceptedAnswers": [
+        "3",
+        "3.0"
+      ],
+      "explanation": "$m = \\tfrac{12 - 3}{5 - 2} = \\tfrac{9}{3} = 3$.",
+      "hint": "Apply $m = \\tfrac{y_2 - y_1}{x_2 - x_1}$ with the two points.",
+      "detailedHint": "Numerator: $12 - 3 = 9$. Denominator: $5 - 2 = 3$. So $m = \\tfrac{9}{3}$.",
+      "visual": {
+        "type": "write_math",
+        "latex": "m = \\frac{12 - 3}{5 - 2}",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 40,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "a line passes through zero comma four and two comma zero. what is its slope?",
+    "action": {
+      "type": "check_in",
+      "question": "A line passes through $(0, 4)$ and $(2, 0)$. What is its slope?",
+      "options": [
+        "$-2$",
+        "$2$",
+        "$-\\tfrac{1}{2}$",
+        "$\\tfrac{1}{2}$"
+      ],
+      "correctOption": 0,
+      "explanation": "$m = \\tfrac{0 - 4}{2 - 0} = \\tfrac{-4}{2} = -2$.",
+      "hint": "Apply the slope formula; the numerator is $y_2 - y_1 = 0 - 4 = -4$.",
+      "detailedHint": "$m = \\tfrac{y_2 - y_1}{x_2 - x_1} = \\tfrac{0 - 4}{2 - 0} = \\tfrac{-4}{2}$. What is $-4$ divided by $2$?"
+    }
+  },
+  {
+    "id": 41,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "finally, we'll write a line's equation when we know one point on it and its slope.",
+    "displayText": "Point-Slope Form",
+    "action": {
+      "type": "section_heading",
+      "text": "Point-Slope Form"
+    }
+  },
+  {
+    "id": 42,
+    "delayMs": 400,
+    "durationMs": 2000,
+    "operation": "setup",
+    "narration": "point-slope form lets you write a line from a single point and its slope.",
+    "displayText": "Point-slope form lets you write a line from a single point and its slope: $y - y_1 = m(x - x_1)$.",
+    "action": {
+      "type": "write_math",
+      "latex": "y - \\textcolor{#f87171}{y_1} = \\textcolor{#c084fc}{m}(x - \\textcolor{#f87171}{x_1})",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 43,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "use the point two comma five with slope three.",
+    "displayText": "point $(2, 5)$, slope $m = 3$",
+    "action": {
+      "type": "write_math",
+      "latex": "(\\textcolor{#f87171}{x_1, y_1}) = (\\htmlClass{src-x1}{\\textcolor{#f87171}{2}}, \\htmlClass{src-y1}{\\textcolor{#f87171}{5}}), \\quad \\textcolor{#c084fc}{m} = \\htmlClass{src-m}{\\textcolor{#c084fc}{3}}",
+      "style": {
+        "fontSize": "lg"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 44,
+    "delayMs": 200,
+    "durationMs": 6500,
+    "operation": "substitute",
+    "compact": true,
+    "narration": "substitute the point and slope into the point-slope form one at a time.",
+    "displayText": "Substitute the point and slope into the point-slope form one at a time:",
+    "flyInSubstitution": {
+      "fromLatex": "y - \\textcolor{#f87171}{\\htmlClass{var-y1}{y_1}} = \\textcolor{#c084fc}{\\htmlClass{var-m}{m}}(x - \\textcolor{#f87171}{\\htmlClass{var-x1}{x_1}})",
+      "pairs": [
+        {
+          "fromSpan": "var-y1",
+          "toSpan": "val-y1"
+        },
+        {
+          "fromSpan": "var-m",
+          "toSpan": "val-m"
+        },
+        {
+          "fromSpan": "var-x1",
+          "toSpan": "val-x1"
+        }
+      ]
+    },
+    "action": {
+      "type": "write_math",
+      "latex": "y - \\textcolor{#f87171}{\\htmlClass{op-new val-y1}{5}} = \\textcolor{#c084fc}{\\htmlClass{op-new val-m}{3}}(x - \\textcolor{#f87171}{\\htmlClass{op-new val-x1}{2}})",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 45,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "distribute",
+    "operationGroupId": "g5",
+    "phase": "apply",
+    "exprBefore": "y - 5 = 3*(x - 2)",
+    "exprAfter": "y - 5 = 3*x - 3*2",
+    "narration": "distribute the three across both terms inside the parentheses.",
+    "displayText": "Distribute the $3$ across both terms inside the parentheses.",
+    "action": {
+      "type": "write_math",
+      "latex": "y - 5 = \\htmlClass{op-new}{3 \\cdot x} - \\htmlClass{op-new}{3 \\cdot 2}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 46,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "look at the distributed right side.",
+    "displayText": "Look at the distributed right side.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 45,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 47,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g5",
+    "phase": "collapse",
+    "exprBefore": "y - 5 = 3*x - 3*2",
+    "exprAfter": "y - 5 = 3*x - 6",
+    "narration": "three times x stays, and three times two becomes six.",
+    "displayText": "$3 \\cdot 2 = 6$",
+    "action": {
+      "type": "write_math",
+      "latex": "y - 5 = 3x - \\htmlClass{op-cancel}{3 \\cdot 2}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 48,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "state",
+    "operationGroupId": "g5",
+    "phase": "state",
+    "exprAfter": "y - 5 = 3*x - 6",
+    "narration": "we have wye minus five equals three x minus six.",
+    "displayText": "$y - 5 = 3x - 6$",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-result}{y - 5 = 3x - 6}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 49,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "add",
+    "operand": "5",
+    "operationGroupId": "g6",
+    "phase": "apply",
+    "exprBefore": "y - 5 = 3*x - 6",
+    "exprAfter": "y - 5 + 5 = 3*x - 6 + 5",
+    "narration": "add five to both sides to isolate wye.",
+    "displayText": "add $5$ to both sides",
+    "action": {
+      "type": "write_math",
+      "latex": "y - 5 \\htmlClass{op-new}{+ 5} = 3x - 6 \\htmlClass{op-new}{+ 5}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 50,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g6",
+    "phase": "collapse",
+    "exprBefore": "y - 5 + 5 = 3*x - 6 + 5",
+    "exprAfter": "y = 3*x - 1",
+    "narration": "negative five plus five cancels on the left; negative six plus five is negative one on the right.",
+    "displayText": "$-5 + 5$ cancels; $-6 + 5 = -1$",
+    "action": {
+      "type": "write_math",
+      "latex": "y \\htmlClass{op-cancel}{- 5 + 5} = 3x \\htmlClass{op-cancel}{- 6 + 5}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 51,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "plot",
+    "narration": "the line passes through the point two comma five.",
+    "displayText": "The line $y = 3x - 1$ passes through the point $(2, 5)$.",
+    "action": {
+      "type": "coordinate_plane",
+      "xRange": [
+        -2,
+        5
+      ],
+      "yRange": [
+        -3,
+        8
+      ],
+      "showGrid": true,
+      "axisLabels": {
+        "x": "x",
+        "y": "y"
+      },
+      "elements": [
+        {
+          "type": "line",
+          "from": [
+            -1,
+            -4
+          ],
+          "to": [
+            4,
+            11
+          ],
+          "style": {
+            "strokeColor": "#2563eb",
+            "strokeWidth": 2
+          },
+          "label": "y = 3x - 1"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            5
+          ],
+          "label": "(2, 5)",
+          "note": {
+            "text": "given point"
+          },
+          "style": {
+            "color": "#dc2626"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 52,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "conclude",
+    "operationGroupId": "g6",
+    "phase": "state",
+    "exprAfter": "y = 3*x - 1",
+    "narration": "wye equals three x minus one. this is slope-intercept form.",
+    "displayText": "$y = 3x - 1$  (slope-intercept form)",
+    "action": {
+      "type": "write_math",
+      "latex": "y = 3x \\htmlClass{op-result}{- 1}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 53,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "slope three, wye-intercept negative one. matching m and b from the original form.",
+    "displayText": "Slope $= 3$, y-intercept $= -1$ — matching $m$ and $b$ from the original form.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#c084fc}{m} = 3, \\quad \\textcolor{#f87171}{b} = -1",
+      "style": {
+        "fontSize": "lg"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 54,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "write the equation of a line through negative one comma two with slope negative two, using point-slope form.",
+    "action": {
+      "type": "check_in",
+      "question": "Write the equation of a line through $(-1, 2)$ with slope $-2$ in point-slope form.",
+      "options": [
+        "$y - 2 = -2(x + 1)$",
+        "$y + 2 = -2(x - 1)$",
+        "$y - 2 = -2(x - 1)$",
+        "$y + 1 = -2(x - 2)$"
+      ],
+      "correctOption": 0,
+      "explanation": "Point-slope is $y - y_1 = m(x - x_1)$. With $(x_1, y_1) = (-1, 2)$ and $m = -2$: $y - 2 = -2(x - (-1)) = -2(x + 1)$.",
+      "hint": "Plug into $y - y_1 = m(x - x_1)$. Watch the sign: $x - (-1) = x + 1$.",
+      "detailedHint": "Point-slope: $y - y_1 = m(x - x_1)$. With $y_1 = 2$, $m = -2$, $x_1 = -1$: $y - 2 = -2(x - (-1))$. Simplify the inner minus minus: $x - (-1) = x + 1$.",
+      "visual": {
+        "type": "write_math",
+        "latex": "y - \\textcolor{#f87171}{y_1} = \\textcolor{#c084fc}{m}(x - \\textcolor{#f87171}{x_1})",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  }
+]

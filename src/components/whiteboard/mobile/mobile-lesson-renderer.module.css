@@ -1,0 +1,8 @@
+/* Scoped to the portrait mobile renderer so the desktop whiteboard's own
+   op-* treatment is untouched. The desktop board animates the COLLAPSE phase
+   (cancelled terms fade during the morph); a phone card is read more
+   statically, so we mute op-cancel to mirror that fade, letting the surviving
+   terms and the result stand out during the collapse frame. */
+.morph :global(.op-cancel) {
+  opacity: 0.4;
+}

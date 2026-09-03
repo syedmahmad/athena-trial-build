@@ -1,0 +1,465 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "let's learn how to multiply two binomials by pairing every term in one with every term in the other.",
+    "displayText": "Multiplying Binomials",
+    "action": {
+      "type": "section_heading",
+      "text": "Multiplying Binomials"
+    }
+  },
+  {
+    "id": 1,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "setup",
+    "narration": "multiplying two binomials means expanding a product like the quantity x plus 3 times the quantity x plus 2.",
+    "displayText": "Multiplying two binomials: expand $(x + 3)(x + 2)$.",
+    "action": {
+      "type": "write_math",
+      "latex": "(\\textcolor{#60a5fa}{x} + \\textcolor{#c084fc}{3})(\\textcolor{#60a5fa}{x} + \\textcolor{#f87171}{2})",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 2,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "identify",
+    "narration": "we will use the distributive property: every term in the first binomial multiplies every term in the second.",
+    "displayText": "Distributive property: every term in the first binomial multiplies every term in the second.",
+    "action": {
+      "type": "write_math",
+      "latex": "(a + b)(c + d) = a \\cdot c + a \\cdot d + b \\cdot c + b \\cdot d",
+      "style": {
+        "fontSize": "md"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 3,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "identify",
+    "narration": "this is sometimes called FOIL: first, outer, inner, last — the four pairings.",
+    "displayText": "FOIL: First, Outer, Inner, Last — the four pairings.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\text{F: } a \\cdot c \\quad \\text{O: } a \\cdot d \\quad \\text{I: } b \\cdot c \\quad \\text{L: } b \\cdot d",
+      "style": {
+        "fontSize": "md"
+      },
+      "indentLevel": 1
+    }
+  },
+  {
+    "id": 4,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "in the product the quantity x plus 3 times the quantity x plus 2, what are the four pairings?",
+    "displayText": "",
+    "action": {
+      "type": "predict",
+      "question": "What are the four pairings for $(x + 3)(x + 2)$?",
+      "options": [
+        "$x \\cdot x$, $x \\cdot 2$, $3 \\cdot x$, $3 \\cdot 2$",
+        "$x + x$, $x + 2$, $3 + x$, $3 + 2$",
+        "$x \\cdot 3$, $x \\cdot 2$, $x \\cdot x$, $3 \\cdot 2$",
+        "$2x + 3$"
+      ],
+      "correctOption": 0,
+      "explanation": "Each term of the first binomial pairs with each term of the second. First $\\cdot$ first, first $\\cdot$ last, last $\\cdot$ first, last $\\cdot$ last.",
+      "hint": "Multiply, don't add. Each term on the left meets each term on the right.",
+      "visual": {
+        "type": "write_math",
+        "latex": "(\\textcolor{#60a5fa}{x} + \\textcolor{#c084fc}{3})(\\textcolor{#60a5fa}{x} + \\textcolor{#f87171}{2})",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "now let's expand a specific product, distributing carefully so we don't miss any pairings.",
+    "displayText": "Expanding Step by Step",
+    "action": {
+      "type": "section_heading",
+      "text": "Expanding Step by Step"
+    }
+  },
+  {
+    "id": 6,
+    "delayMs": 400,
+    "durationMs": 2000,
+    "operation": "setup",
+    "narration": "let's expand step by step.",
+    "displayText": "Expand step by step.",
+    "action": {
+      "type": "write_math",
+      "latex": "(x + 3)\\htmlClass{dist-src}{(x + 2)}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 7,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "distribute",
+    "operand": "(x + 2)",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "exprBefore": "(x + 3)*(x + 2)",
+    "exprAfter": "x*(x + 2) + 3*(x + 2)",
+    "narration": "distribute the second binomial across the first: x times the quantity x plus 2, plus 3 times the quantity x plus 2.",
+    "displayText": "Distribute $(x + 2)$ across $(x + 3)$.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#60a5fa}{x} \\cdot \\htmlClass{op-new}{(x + 2)} + \\textcolor{#c084fc}{3} \\cdot \\htmlClass{op-new}{(x + 2)}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 8,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "exprBefore": "x*(x + 2) + 3*(x + 2)",
+    "exprAfter": "x*x + x*2 + 3*x + 3*2",
+    "narration": "now distribute again inside each piece: x times x plus x times 2, plus 3 times x plus 3 times 2.",
+    "displayText": "Distribute inside each piece: $x \\cdot x + x \\cdot 2 + 3 \\cdot x + 3 \\cdot 2$.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\textcolor{#60a5fa}{x} \\cdot \\textcolor{#60a5fa}{x} + \\textcolor{#60a5fa}{x} \\cdot \\textcolor{#f87171}{2} + \\textcolor{#c084fc}{3} \\cdot \\textcolor{#60a5fa}{x} + \\textcolor{#c084fc}{3} \\cdot \\textcolor{#f87171}{2}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 9,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "all four pairings are now on the board.",
+    "displayText": "All four FOIL pairings are now visible.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 8,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 10,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "exprAfter": "x*x + x*2 + 3*x + 3*2",
+    "narration": "we have four products to evaluate.",
+    "displayText": "We have four products to evaluate.",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-result}{x \\cdot x + x \\cdot 2 + 3 \\cdot x + 3 \\cdot 2}",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 11,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "narration": "x times x is x squared, x times 2 is 2 x, 3 times x is 3 x, and 3 times 2 is 6.",
+    "displayText": "$x \\cdot x = x^2$, $x \\cdot 2 = 2x$, $3 \\cdot x = 3x$, $3 \\cdot 2 = 6$.",
+    "action": {
+      "type": "write_math",
+      "latex": "x^2 + 2x + 3x + 6",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 12,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "two of these are like terms — same variable, same power.",
+    "displayText": "Two of these are like terms — same variable, same power.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 11,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 13,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "which two terms are like terms in x squared plus 2 x plus 3 x plus 6?",
+    "displayText": "",
+    "action": {
+      "type": "check_in",
+      "question": "Which terms in $x^2 + 2x + 3x + 6$ are like terms?",
+      "options": [
+        "$2x$ and $3x$",
+        "$x^2$ and $6$",
+        "$x^2$ and $2x$",
+        "$3x$ and $6$"
+      ],
+      "correctOption": 0,
+      "explanation": "Like terms have the same variable raised to the same power. $2x$ and $3x$ are both first-power $x$ terms.",
+      "hint": "Look for terms with matching variable and exponent.",
+      "detailedHint": "$x^2$ is degree two; $2x$ and $3x$ are degree one; $6$ is constant. Only the degree-one terms can combine.",
+      "visual": {
+        "type": "write_math",
+        "latex": "x^2 + \\textcolor{#fbbf24}{2x} + \\textcolor{#fbbf24}{3x} + 6",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 14,
+    "delayMs": 200,
+    "durationMs": 1800,
+    "operation": "combine",
+    "operand": "5",
+    "operationGroupId": "g2",
+    "phase": "apply",
+    "exprBefore": "x^2 + 2*x + 3*x + 6",
+    "exprAfter": "x^2 + (2 + 3)*x + 6",
+    "narration": "combine the like terms: 2 x plus 3 x equals the quantity 2 plus 3 times x.",
+    "displayText": "Combine: $2x + 3x = (2 + 3)x$.",
+    "action": {
+      "type": "write_math",
+      "latex": "x^2 + (\\htmlClass{op-new}{2 + 3})x + 6",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 15,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "simplify",
+    "operationGroupId": "g2",
+    "phase": "collapse",
+    "exprBefore": "x^2 + (2 + 3)*x + 6",
+    "exprAfter": "x^2 + 5*x + 6",
+    "narration": "2 plus 3 is 5.",
+    "displayText": "$2 + 3 = 5$.",
+    "action": {
+      "type": "write_math",
+      "latex": "x^2 + \\htmlClass{op-cancel}{(2 + 3)}x + 6",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 16,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "the like terms collapse into a single coefficient.",
+    "displayText": "The like terms collapse into a single coefficient.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 15,
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": 17,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "conclude",
+    "operationGroupId": "g2",
+    "phase": "state",
+    "exprAfter": "x^2 + 5*x + 6",
+    "narration": "the expanded form is x squared plus 5 x plus 6.",
+    "displayText": "$(x + 3)(x + 2) = x^2 + \\textcolor{#fbbf24}{5}x + 6$.",
+    "action": {
+      "type": "write_math",
+      "latex": "x^2 + \\htmlClass{op-result}{5}x + 6",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 18,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "let's also see this same expansion as the area of a rectangle, which makes the four products easy to picture.",
+    "displayText": "The Area Model",
+    "action": {
+      "type": "section_heading",
+      "text": "The Area Model"
+    }
+  },
+  {
+    "id": 19,
+    "delayMs": 300,
+    "durationMs": 1800,
+    "operation": "plot",
+    "narration": "you can also see this as an area: a rectangle with sides x plus 3 and x plus 2.",
+    "displayText": "Visual: rectangle with sides $x + 3$ and $x + 2$.",
+    "action": {
+      "type": "table",
+      "headers": [
+        "",
+        "$x$",
+        "$2$"
+      ],
+      "rows": [
+        [
+          "$x$",
+          "$x^2$",
+          "$2x$"
+        ],
+        [
+          "$3$",
+          "$3x$",
+          "$6$"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "identify",
+    "narration": "each interior cell is one of the four products. summing them gives the same result.",
+    "displayText": "Each interior cell is one product; summing them gives $x^2 + 5x + 6$.",
+    "action": {
+      "type": "write_math",
+      "latex": "x^2 + 2x + 3x + 6 = x^2 + 5x + 6",
+      "style": {
+        "fontSize": "lg"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 21,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "identify",
+    "narration": "let's verify by trying x equals 2: the original side gives 5 times 4, which is 20.",
+    "displayText": "Verify with $x = 2$: $(2 + 3)(2 + 2) = 5 \\cdot 4 = 20$.",
+    "action": {
+      "type": "write_math",
+      "latex": "(2 + 3)(2 + 2) = 5 \\cdot 4 = 20",
+      "style": {
+        "fontSize": "lg"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 22,
+    "delayMs": 200,
+    "durationMs": 1400,
+    "operation": "simplify",
+    "narration": "and the expanded side gives 4 plus 10 plus 6, also 20.",
+    "displayText": "And $2^2 + 5 \\cdot 2 + 6 = 4 + 10 + 6 = 20$. ✓",
+    "action": {
+      "type": "write_math",
+      "latex": "2^{2} + 5 \\cdot 2 + 6 = 4 + 10 + 6 = 20 \\;\\;\\checkmark",
+      "style": {
+        "fontSize": "lg"
+      },
+      "align": "center"
+    }
+  },
+  {
+    "id": 23,
+    "delayMs": 200,
+    "durationMs": 1200,
+    "operation": "highlight",
+    "narration": "both sides agree — the expansion is correct.",
+    "displayText": "Both sides match — the expansion is correct.",
+    "action": {
+      "type": "highlight",
+      "targetStepId": 22,
+      "color": "#22c55e"
+    }
+  },
+  {
+    "id": 24,
+    "delayMs": 300,
+    "durationMs": 0,
+    "narration": "now you try. expand the quantity x plus 1 times the quantity x plus 4.",
+    "displayText": "",
+    "action": {
+      "type": "predict",
+      "question": "Expand $(x + 1)(x + 4)$.",
+      "options": [
+        "$x^2 + 5x + 4$",
+        "$x^2 + 4x + 1$",
+        "$x^2 + 5x + 5$",
+        "$x^2 + 4$"
+      ],
+      "correctOption": 0,
+      "explanation": "FOIL: $x \\cdot x + x \\cdot 4 + 1 \\cdot x + 1 \\cdot 4 = x^2 + 4x + x + 4 = x^2 + 5x + 4$.",
+      "hint": "Pair every term in the first binomial with every term in the second, then combine like terms.",
+      "detailedHint": "First: $x \\cdot x = x^2$. Outer: $x \\cdot 4 = 4x$. Inner: $1 \\cdot x = x$. Last: $1 \\cdot 4 = 4$. Combine $4x + x = 5x$.",
+      "visual": {
+        "type": "write_math",
+        "latex": "(x + 1)(x + 4) = ?",
+        "style": {
+          "fontSize": "xl"
+        },
+        "align": "center"
+      }
+    }
+  },
+  {
+    "id": 25,
+    "delayMs": 200,
+    "durationMs": 1600,
+    "operation": "conclude",
+    "narration": "to multiply binomials, distribute every term across every term and combine the matching ones.",
+    "displayText": "Multiply binomials: distribute every term across every term, then combine like terms.",
+    "action": {
+      "type": "write_math",
+      "latex": "(a + b)(c + d) = ac + ad + bc + bd",
+      "style": {
+        "fontSize": "xl"
+      },
+      "align": "center"
+    }
+  }
+]

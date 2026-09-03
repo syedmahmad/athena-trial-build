@@ -1,0 +1,207 @@
+/*
+ * Educator surface theme — scoped to .edu-theme so the near-black HUD look
+ * never leaks into the student app. Tailwind 4 resolves --color-* from these
+ * vars at usage point, so overriding them on the wrapper re-skins every
+ * bg-background / text-foreground / etc. utility inside the subtree.
+ *
+ * Ported from the Lovable "Athena for Teachers" prototype, toned for a more
+ * serious read: slower/dimmer ambient motion, desaturated accents.
+ */
+
+.edu-theme {
+  --background: hsl(0 0% 2%);
+  --foreground: hsl(0 0% 96%);
+  --hud: hsl(0 0% 100%);
+  --hud-dim: hsl(0 0% 70%);
+
+  --card: hsl(0 0% 4%);
+  --card-foreground: hsl(0 0% 96%);
+  --popover: hsl(0 0% 4%);
+  --popover-foreground: hsl(0 0% 96%);
+  --primary: hsl(217 60% 70%);
+  --primary-foreground: hsl(0 0% 2%);
+  --secondary: hsl(0 0% 10%);
+  --secondary-foreground: hsl(0 0% 96%);
+  --muted: hsl(0 0% 10%);
+  --muted-foreground: hsl(0 0% 55%);
+  --accent: hsl(0 0% 10%);
+  --accent-foreground: hsl(0 0% 96%);
+  --destructive: hsl(0 60% 50%);
+  --border: hsl(0 0% 96% / 0.12);
+  --input: hsl(0 0% 96% / 0.12);
+  --ring: hsl(0 0% 96% / 0.4);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  color-scheme: dark; /* native date inputs etc. render dark */
+}
+
+.edu-theme .font-mono-hud {
+  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.edu-theme .edu-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.edu-theme .hud-text {
+  color: var(--hud);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.edu-theme .hud-dim {
+  color: var(--hud-dim);
+}
+
+/* ── Landing ambient — slow, dim, desaturated ───────────────────────── */
+
+.edu-theme .onb-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.edu-theme .onb-orb--a {
+  width: 620px;
+  height: 620px;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle at 35% 35%,
+    hsl(222 50% 60% / 0.45) 0%,
+    hsl(250 40% 40% / 0.25) 35%,
+    transparent 70%
+  );
+  animation: edu-drift-a 30s ease-in-out infinite;
+}
+
+.edu-theme .onb-orb--b {
+  width: 480px;
+  height: 480px;
+  bottom: -15%;
+  left: 18%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(250 35% 45% / 0.3) 0%,
+    hsl(222 40% 35% / 0.15) 50%,
+    transparent 75%
+  );
+  animation: edu-drift-b 36s ease-in-out infinite;
+}
+
+.edu-theme .onb-orb--c {
+  width: 420px;
+  height: 420px;
+  top: 35%;
+  right: 8%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(205 50% 55% / 0.25) 0%,
+    hsl(235 40% 30% / 0.12) 55%,
+    transparent 78%
+  );
+  animation: edu-drift-c 42s ease-in-out infinite;
+}
+
+.edu-theme .onb-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--background) 95%);
+}
+
+.edu-theme .onb-noise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(hsl(0 0% 100% / 0.03) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+}
+
+@keyframes edu-drift-a {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-48%, 3%) scale(1.04);
+  }
+}
+
+@keyframes edu-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(4%, -2%) scale(1.05);
+    opacity: 0.42;
+  }
+}
+
+@keyframes edu-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-3%, 4%) scale(1.04);
+    opacity: 0.38;
+  }
+}
+
+/* Glowing lightbulb — the AI class-insight affordance. Idle: a slow warm
+   breathe; .is-on (while/after generating): brighter, steady halo. */
+.edu-theme .insight-bulb {
+  color: hsl(45 90% 70%);
+  animation: edu-bulb-breathe 3.2s ease-in-out infinite;
+}
+.edu-theme .insight-bulb.is-on {
+  animation: edu-bulb-on 2s ease-in-out infinite;
+}
+
+@keyframes edu-bulb-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px hsl(45 90% 60% / 0.35));
+    opacity: 0.8;
+  }
+  50% {
+    filter: drop-shadow(0 0 7px hsl(45 90% 65% / 0.7));
+    opacity: 1;
+  }
+}
+
+@keyframes edu-bulb-on {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px hsl(45 95% 65% / 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px hsl(45 95% 70% / 0.95));
+  }
+}
+
+/* Single calm pulse on the Homework tab when arriving from the landing page. */
+.edu-theme .nav-glow {
+  animation: edu-nav-glow 1.6s ease-in-out 1;
+  border-color: hsl(0 0% 96% / 0.6) !important;
+  color: var(--foreground) !important;
+}
+
+@keyframes edu-nav-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 hsl(222 60% 65% / 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 1px hsl(222 60% 65% / 0.4);
+  }
+}

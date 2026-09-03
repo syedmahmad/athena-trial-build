@@ -1,0 +1,241 @@
+{
+  "manifest": {
+    "version": "0.1.0",
+    "lesson_ref": {
+      "topic_slug": "_seed",
+      "subtopic_slug": "linear-equations-two-variables-wrapup",
+      "lesson_id": null,
+      "is_custom": false
+    },
+    "topic": "Linear equations (two variables) \u2014 wrap-up",
+    "concept": {
+      "math_concept": "Slope-intercept form y = mx + b for linear equations in two variables: the coefficient m is the slope (rise/run), the constant b is the y-intercept, and the x-intercept is the point where y = 0.",
+      "real_world_analog": "Playing basketball on a hill whose shape IS the line y = mx + b. The ball rolling down the hill traces the line. The slope is how steep the hill is (down 2 for every 1 right when m = -2). The y-intercept is where the player starts standing. The x-intercept is where the ball lands on level ground.",
+      "style_strategy": "metaphorical"
+    },
+    "style": {
+      "palette": "white_on_black",
+      "background_motif": "blank",
+      "anchor_objects": [
+        {
+          "id": "hill_line",
+          "description": "The line y = -2x + 3 drawn on coordinate axes, doubling as a hill that the wireframe character stands on and the basketball rolls down. Persistent across all narrated beats \u2014 same axes, same line, only the overlay phase changes."
+        }
+      ]
+    },
+    "narration": {
+      "script": "You are playing basketball at the top of a hill shaped like the equation y equals negative two x plus three. Oh no! The basketball starts rolling down the slope. The negative two is the slope, which means the line goes down two units for every one unit to the right. The plus three is the y-intercept, where the line starts on the graph. The basketball reaches the x-intercept, where the line crosses the x-axis and y equals zero. Yay! Now you know linear equations!",
+      "voice": {
+        "provider": "elevenlabs",
+        "voice_id": "hpp4J3VqNfWAUOO0d1Us"
+      },
+      "audio_url": null,
+      "audio_duration_s": null,
+      "word_timings": []
+    },
+    "beats": [
+      {
+        "id": "b1_setup",
+        "start_s": 0.0,
+        "end_s": 8.0,
+        "narration_span": "You are playing basketball at the top of a hill shaped like the equation y equals negative two x plus three.",
+        "visual": {
+          "primary": "Wireframe coordinate plane with the line y = -2x + 3 drawn diagonally down-right; a small stick-figure character stands on the line at its highest visible point (near the y-axis, at the y-intercept), spinning a basketball on one finger. Equation label 'y = -2x + 3' in the top-right corner.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "character_idle",
+                "show_axes": true,
+                "show_equation_label": true,
+                "ball_position_x": 0
+              }
+            }
+          }
+        },
+        "overlays": []
+      },
+      {
+        "id": "b2_roll",
+        "start_s": 8.0,
+        "end_s": 12.0,
+        "narration_span": "Oh no! The basketball starts rolling down the slope.",
+        "visual": {
+          "primary": "Same coordinate plane and line. The basketball detaches from the character at the y-intercept and rolls along the line toward the bottom-right, leaving a faint dashed trail along the segment it has traveled.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "rolling",
+                "show_axes": true,
+                "show_equation_label": true
+              }
+            }
+          }
+        },
+        "overlays": []
+      },
+      {
+        "id": "b3_slope",
+        "start_s": 12.0,
+        "end_s": 22.0,
+        "narration_span": "The negative two is the slope, which means the line goes down two units for every one unit to the right.",
+        "visual": {
+          "primary": "Same coordinate plane + line. A right-triangle slope marker appears on the middle of the line: a horizontal arrow labeled 'right 1' and a vertical arrow labeled 'down 2' meeting at a right angle, indicating the rise/run that defines the slope.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "slope_arrows",
+                "show_axes": true,
+                "show_equation_label": true
+              }
+            }
+          }
+        },
+        "overlays": []
+      },
+      {
+        "id": "b4_yintercept",
+        "start_s": 22.0,
+        "end_s": 29.0,
+        "narration_span": "The plus three is the y-intercept, where the line starts on the graph.",
+        "visual": {
+          "primary": "Same coordinate plane + line. A pulsing glow point appears on the y-axis at (0, 3); the label '(0, 3)' renders next to it. The character + ball dim slightly so the focus stays on the y-intercept point.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "y_intercept_glow",
+                "show_axes": true,
+                "show_equation_label": true
+              }
+            }
+          }
+        },
+        "overlays": []
+      },
+      {
+        "id": "b5_xintercept",
+        "start_s": 29.0,
+        "end_s": 36.0,
+        "narration_span": "The basketball reaches the x-intercept, where the line crosses the x-axis and y equals zero.",
+        "visual": {
+          "primary": "Same coordinate plane + line. The basketball has rolled to the x-axis at (1.5, 0); the character has moved to the bottom of the hill to catch it. A small label '(1.5, 0)' marks the x-intercept.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "x_intercept_catch",
+                "show_axes": true,
+                "show_equation_label": true
+              }
+            }
+          }
+        },
+        "overlays": []
+      },
+      {
+        "id": "b6_celebration",
+        "start_s": 36.0,
+        "end_s": 44.0,
+        "narration_span": "Yay! Now you know linear equations!",
+        "visual": {
+          "primary": "Character at frame center holding the basketball overhead in celebration; the line + coordinate axes faded back as a softer background. The slope-intercept form y = mx + b is the final visual frame as a KaTeX overlay.",
+          "renderer_hint": {
+            "code": {
+              "primitive": "linear_hill_story",
+              "props": {
+                "slope": -2,
+                "y_intercept": 3,
+                "x_range": [
+                  -0.5,
+                  3.5
+                ],
+                "y_range": [
+                  -0.5,
+                  5
+                ],
+                "phase": "celebration",
+                "show_axes": true,
+                "show_equation_label": false
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "math",
+            "content": "y = mx + b",
+            "position": "top_center",
+            "appear_s": 1.5,
+            "disappear_s": 7.6
+          }
+        ]
+      }
+    ],
+    "qa_constraints": {
+      "max_dead_frame_seconds": 1.0,
+      "dead_frame_brightness_threshold": 10.0
+    },
+    "_meta": {
+      "generated_by": "hand-authored: agents/video_intro/briefs/linear_eq_two_var_wrapup.json",
+      "role": "wrap-up",
+      "purpose": "Wrap-up animation for the 'linear equations, two variables' subtopic. Uses a single sustained hill+basketball analogy to lock slope-intercept form into memory after the lesson. The `linear_hill_story` primitive is hand-authored (not AI-authored) \u2014 the bathroom-sign figure + 6-phase rendering is too compositionally specific for the auto-author loop to reliably converge on.",
+      "note": "Run with `python -m video_intro generate --brief-file agents/video_intro/briefs/linear_eq_two_var_wrapup.json --out out/linear_eq_wrapup --remotion-root ../video-intro-remotion --skip-primitive-author`. The primitive lives at video-intro-remotion/src/primitives/LinearHillStory.tsx and is already registered in IntroVideo.tsx / types/manifest.ts / brief_generator.py KNOWN_PRIMITIVES."
+    },
+    "render": {
+      "duration_s": 44.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "athena-mobile",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "expo start --dev-client --port 8085",
+    "start:prod": "EXPO_PUBLIC_WEB_URL=https://athena.sset.dev expo start --dev-client --port 8085",
+    "android": "expo run:android --port 8085",
+    "ios": "expo run:ios --port 8085",
+    "web": "expo start --web",
+    "prebuild": "expo prebuild",
+    "doctor": "expo-doctor",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "^2.99.1",
+    "expo": "~57.0.1",
+    "expo-build-properties": "~57.0.2",
+    "expo-constants": "~57.0.2",
+    "expo-dev-client": "~57.0.4",
+    "expo-linking": "~57.0.1",
+    "expo-splash-screen": "~57.0.1",
+    "expo-status-bar": "~57.0.0",
+    "expo-system-ui": "~57.0.0",
+    "expo-web-browser": "~57.0.0",
+    "react": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-url-polyfill": "^2.0.0",
+    "react-native-webview": "13.16.1"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  }
+}

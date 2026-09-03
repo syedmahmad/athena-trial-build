@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "slope-intercept form",
+    "operation": "state",
+    "action": { "type": "write_math", "latex": "y = mx + b" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "definition of slope",
+    "operation": "state",
+    "action": { "type": "write_math", "latex": "m = \\frac{\\text{rise}}{\\text{run}}" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "plot the line",
+    "operation": "plot",
+    "action": { "type": "coordinate_plane", "xRange": [-5, 5], "yRange": [-5, 5] }
+  }
+]

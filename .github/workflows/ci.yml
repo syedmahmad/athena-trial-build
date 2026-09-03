@@ -1,0 +1,51 @@
+name: CI
+
+# Runs on every PR and on every push to main. Catches the
+# voice-listening regression class (and anything else covered by the
+# unit tests) before merge. Typecheck is included because some of
+# the regression guards are TypeScript-level (e.g., the
+# exhaustiveness check in thresholdsForListeningState).
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Cancel any in-flight run for the same branch when a new commit lands.
+# Saves CI minutes during fast-iteration days.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # No `version:` here on purpose — pnpm/action-setup v4 refuses to
+      # operate when both `version:` and the package.json `packageManager`
+      # field are set. The lockfile is pinned via `packageManager` in
+      # package.json (pnpm@10.20.0+sha512...), which the action picks up
+      # automatically and gives us reproducible installs across local
+      # dev + CI without keeping the two in sync by hand.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        # Includes the exhaustiveness check on VoiceListeningState.
+        # Adding a new phase without updating thresholdsForListeningState
+        # fails here before tests even run.
+        run: pnpm exec tsc --noEmit
+
+      - name: Unit tests
+        run: pnpm test

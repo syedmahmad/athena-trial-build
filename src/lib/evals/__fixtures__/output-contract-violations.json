@@ -1,0 +1,29 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the cost is 30 dollars per month plus 10 cents per text",
+    "displayText": "The cost is $30 per month plus $0.10 per text.",
+    "operation": "setup",
+    "action": { "type": "write_math", "latex": "30 + 0.10x" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "$x equals 100",
+    "displayText": "Substitute \\textcolor{#c084fc}{x = 100}.",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "x = 100" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the result is wye equals 130",
+    "displayText": "We get $y = 130.",
+    "operation": "conclude",
+    "action": { "type": "write_math", "latex": "y = 130" }
+  }
+]

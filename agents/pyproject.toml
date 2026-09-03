@@ -1,0 +1,58 @@
+[project]
+name = "athena-agents"
+version = "0.1.0"
+description = "Athena AI tutoring agents powered by Agno"
+requires-python = ">=3.11"
+dependencies = [
+    # Agno + Anthropic + OpenAI pinned with floors because the Majordomo
+    # helper at agents/app/utils/llm_client.py depends on Agno's
+    # `client_params` + `default_headers` constructor args (present in
+    # 2.5.17) and the OpenAI/Anthropic SDKs' `base_url` constructor arg
+    # (stable, both 1.x and 0.96+). Lower bounds are the versions running
+    # in prod at pinning time; upper bounds hold below the next major.
+    "agno>=2.5.17,<3",
+    "anthropic>=0.96,<1",
+    "openai>=2.30,<3",
+    "mcp",
+    "fastapi",
+    "uvicorn[standard]",
+    "supabase",
+    "pydantic",
+    "python-dotenv",
+    "resend",
+    # sympy was previously a transitive dep via agno. Pinned explicitly
+    # so the runtime math-equivalence endpoint (`/math-equiv`, used by
+    # the fill_blank comparator) doesn't break if the upstream chain
+    # ever drops it. The shim at agents/eval_math_shim.py also relies
+    # on this.
+    "sympy>=1.13,<2",
+    # QA gate for rendered intro MP4s — samples brightness per second
+    # and flags dead-frame runs (dark visual while audio is still
+    # active). Used by `python -m video_intro render` which wraps
+    # `npx remotion render` and runs qa_gate.py on the output.
+    "pillow>=10",
+    "numpy>=1.26",
+    # Required by `agno.media.Image` when constructed with raw bytes
+    # — Agno calls `filetype.guess(content)` to detect MIME without a
+    # caller-provided hint. Used by the mentor's vision pathway
+    # (`ask_mentor_stream` passes `Image(content=bytes, ...)`).
+    "filetype>=1.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=1.0",
+    "httpx>=0.28",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

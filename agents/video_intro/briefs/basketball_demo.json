@@ -1,0 +1,129 @@
+{
+  "version": "0.1.0",
+  "lesson_ref": {
+    "topic_slug": "_seed",
+    "subtopic_slug": "basketball-primitives",
+    "lesson_id": null,
+    "is_custom": false
+  },
+  "topic": "Basketball — primitive seed brief",
+  "concept": {
+    "math_concept": "Two basketball-themed primitives — shot trajectory (parabolic flight) and bouncing-ball decay (geometric sequence) — authored together for an upcoming demo.",
+    "real_world_analog": "Basketball shot mechanics (release angle + arc + rim) and ball-bounce energy loss (each bounce returns a fraction of previous height — coefficient of restitution).",
+    "style_strategy": "applied"
+  },
+  "style": {
+    "palette": "white_on_black",
+    "background_motif": "blank",
+    "anchor_objects": []
+  },
+  "narration": {
+    "script": "Every basketball shot is a parabola. The release point, the peak, and the rim — three points that uniquely determine the curve. And every bounce after the shot is geometric decay — each rebound returning a fixed fraction of the previous height, the sequence converging toward zero.",
+    "voice": {
+      "provider": "elevenlabs",
+      "voice_id": "hpp4J3VqNfWAUOO0d1Us"
+    },
+    "audio_url": null,
+    "audio_duration_s": null,
+    "word_timings": []
+  },
+  "beats": [
+    {
+      "id": "b1_shot",
+      "start_s": 0.0,
+      "end_s": 15.0,
+      "narration_span": "Every basketball shot is a parabola. The release point, the peak, and the rim — three points that uniquely determine the curve.",
+      "visual": {
+        "primary": "Basketball shot trajectory — wireframe ball arcing from a shooter's release point to the rim of a hoop, with the parabolic path visible as a dashed trail and the rim + net rendered as a clean wireframe diagram.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "basketball_shot",
+            "props": {
+              "release_position": [200, 600],
+              "rim_position": [1000, 350],
+              "peak_height_pixels": 200,
+              "show_trail": true,
+              "show_court_floor": true,
+              "ball_radius": 18
+            },
+            "_new": {
+              "description": "Wireframe basketball shot showing a ball arc from a release point to the rim of a basketball hoop. The ball follows a parabolic path with the rim drawn as a clean circle + short net hatching beneath it. A dashed trail traces past ball positions so the parabola is legible at any frame.",
+              "use_case": "Quadratic equation / projectile motion / parabola intro videos — where you want a recognizable real-world shot rather than an abstract curve. The arc serves as the focal point; the rim anchors the math to a concrete outcome.",
+              "props_schema": {
+                "release_position": "[number, number] — pixel coords of the shooter's release point. Default [200, 600] (lower-left of canvas).",
+                "rim_position": "[number, number] — pixel coords of the rim center. Default [1000, 350] (upper-right).",
+                "peak_height_pixels": "number — how high above the rim the apex of the arc sits. Default 200. Controls the parabola's height; ball must remain ≥ 100px from canvas top.",
+                "show_trail": "boolean — draw a dashed trail of past ball positions so the parabola reads at every frame. Default true.",
+                "show_court_floor": "boolean — draw a faint horizontal floor line at the release y-coord, contextualizing the shot. Default true.",
+                "ball_radius": "number — basketball radius in pixels. Default 18. Drawn with a single horizontal seam line + a single vertical seam line so it reads as a basketball, not just a circle."
+              }
+            }
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "Every basketball shot is a parabola.",
+          "position": "bottom_center",
+          "appear_s": 0.2,
+          "disappear_s": 14.6
+        }
+      ]
+    },
+    {
+      "id": "b2_bounce",
+      "start_s": 15.0,
+      "end_s": 30.0,
+      "narration_span": "And every bounce after the shot is geometric decay — each rebound returning a fixed fraction of the previous height, the sequence converging toward zero.",
+      "visual": {
+        "primary": "Basketball bouncing on a court floor with each successive rebound reaching a lower peak — visualizing geometric decay. Each peak labeled with its decayed height; floor line + bounce-position dots indicate impact points.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "basketball_bounce",
+            "props": {
+              "initial_height_pixels": 380,
+              "restitution": 0.7,
+              "num_bounces": 5,
+              "show_trail": true,
+              "show_heights": true,
+              "ball_radius": 18,
+              "horizontal_speed_pixels_per_s": 80
+            },
+            "_new": {
+              "description": "Wireframe basketball bouncing on a horizontal floor line, with each rebound reaching `restitution` fraction of the previous peak height. The path is the canonical geometric-decay-of-peaks visualization (h, h·r, h·r², h·r³, …). Optional height labels at each peak make the geometric sequence explicit. The ball moves horizontally with a constant speed across the bounces.",
+              "use_case": "Geometric sequences / exponential decay / coefficient-of-restitution intro videos. The shrinking peaks ARE the math being introduced; labels at each peak surface the sequence values.",
+              "props_schema": {
+                "initial_height_pixels": "number — starting drop height above the floor in pixels. Default 380.",
+                "restitution": "number in (0, 1) — fraction of height retained per bounce. Default 0.7. Each successive peak is `restitution × previous_peak`.",
+                "num_bounces": "number — how many bounce arcs to show. Default 5.",
+                "show_trail": "boolean — draw a dashed trail of past ball positions so the full parabolic-sequence pattern reads at every frame. Default true.",
+                "show_heights": "boolean — label each peak with its height value (h₀, h₁ = h₀·r, h₂ = h₀·r², …) so the geometric structure is explicit. Default true.",
+                "ball_radius": "number — basketball radius in pixels. Default 18. Drawn with crossing seams so it reads as a basketball.",
+                "horizontal_speed_pixels_per_s": "number — how fast the ball travels horizontally across the floor while bouncing. Default 80 px/s."
+              }
+            }
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "Every bounce is geometric decay.",
+          "position": "bottom_center",
+          "appear_s": 0.2,
+          "disappear_s": 14.6
+        }
+      ]
+    }
+  ],
+  "qa_constraints": {
+    "max_dead_frame_seconds": 1.0,
+    "dead_frame_brightness_threshold": 10.0
+  },
+  "_meta": {
+    "generated_by": "hand-authored: agents/video_intro/briefs/basketball_demo.json",
+    "purpose": "Seed two basketball primitives (basketball_shot, basketball_bounce) for an upcoming demo where the user really likes basketball.",
+    "note": "Author flow runs against this brief via --brief-file. TTS/render can be skipped; the value is the primitives that land on disk."
+  }
+}

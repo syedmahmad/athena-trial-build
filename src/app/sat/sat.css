@@ -1,0 +1,54 @@
+/*
+ * SAT surface brand theme — scoped to .sat-theme so it never leaks into the
+ * main student app. Unlike the educators HUD, this surface keeps the app's
+ * base light/dark tokens (the restored dashboard/progress components were
+ * designed against them) and layers brand identity on top: an indigo accent,
+ * serif wordmark, and tracked micro-labels.
+ */
+
+.sat-theme {
+  --sat-accent: oklch(0.55 0.19 275);
+  --sat-accent-soft: oklch(0.55 0.19 275 / 0.1);
+  --sat-accent-strong: oklch(0.45 0.21 275);
+
+  /* Re-point the shadcn primary at the brand accent inside the subtree. */
+  --primary: var(--sat-accent);
+  --ring: oklch(0.55 0.19 275 / 0.4);
+}
+
+.dark .sat-theme {
+  --sat-accent: oklch(0.72 0.16 275);
+  --sat-accent-soft: oklch(0.72 0.16 275 / 0.14);
+  --sat-accent-strong: oklch(0.8 0.13 278);
+
+  --primary: var(--sat-accent);
+  --ring: oklch(0.72 0.16 275 / 0.4);
+}
+
+.sat-theme .sat-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.sat-theme .sat-micro {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.sat-theme .sat-accent-text {
+  color: var(--sat-accent);
+}
+
+.sat-theme .sat-accent-bg {
+  background-color: var(--sat-accent);
+}
+
+.sat-theme .sat-accent-pill {
+  background-color: var(--sat-accent-soft);
+  color: var(--sat-accent-strong);
+}
+
+.dark .sat-theme .sat-accent-pill {
+  color: var(--sat-accent);
+}

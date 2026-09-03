@@ -1,0 +1,460 @@
+{
+  "words": [
+    {
+      "start": 0.1,
+      "end": 0.46,
+      "word": "imagine"
+    },
+    {
+      "start": 0.47,
+      "end": 0.56,
+      "word": "if"
+    },
+    {
+      "start": 0.68,
+      "end": 0.95,
+      "word": "the(2)"
+    },
+    {
+      "start": 0.96,
+      "end": 1.05,
+      "word": "the(2)"
+    },
+    {
+      "start": 1.06,
+      "end": 1.71,
+      "word": "court"
+    },
+    {
+      "start": 1.72,
+      "end": 2.48,
+      "word": "out"
+    },
+    {
+      "start": 2.49,
+      "end": 2.74,
+      "word": "for"
+    },
+    {
+      "start": 2.75,
+      "end": 2.8,
+      "word": "it"
+    },
+    {
+      "start": 2.81,
+      "end": 3.29,
+      "word": "lands"
+    },
+    {
+      "start": 3.82,
+      "end": 4.21,
+      "word": "multiple"
+    },
+    {
+      "start": 4.22,
+      "end": 4.66,
+      "word": "possible"
+    },
+    {
+      "start": 4.67,
+      "end": 5.24,
+      "word": "outcomes"
+    },
+    {
+      "start": 5.39,
+      "end": 5.5,
+      "word": "of"
+    },
+    {
+      "start": 5.51,
+      "end": 6.15,
+      "word": "probability"
+    },
+    {
+      "start": 6.16,
+      "end": 6.43,
+      "word": "helps"
+    },
+    {
+      "start": 6.44,
+      "end": 6.56,
+      "word": "us"
+    },
+    {
+      "start": 6.57,
+      "end": 6.86,
+      "word": "measure"
+    },
+    {
+      "start": 6.87,
+      "end": 7.07,
+      "word": "how"
+    },
+    {
+      "start": 7.08,
+      "end": 7.87,
+      "word": "unlikely"
+    },
+    {
+      "start": 7.88,
+      "end": 8.08,
+      "word": "each"
+    },
+    {
+      "start": 8.09,
+      "end": 8.5,
+      "word": "alcohol"
+    },
+    {
+      "start": 8.51,
+      "end": 8.69,
+      "word": "the(2)"
+    },
+    {
+      "start": 8.7,
+      "end": 8.97,
+      "word": "stack"
+    },
+    {
+      "start": 8.98,
+      "end": 9.44,
+      "word": "up"
+    },
+    {
+      "start": 9.45,
+      "end": 9.96,
+      "word": "ability"
+    },
+    {
+      "start": 9.97,
+      "end": 10.07,
+      "word": "is"
+    },
+    {
+      "start": 10.08,
+      "end": 10.35,
+      "word": "measured"
+    },
+    {
+      "start": 10.36,
+      "end": 10.47,
+      "word": "on(2)"
+    },
+    {
+      "start": 10.48,
+      "end": 10.5,
+      "word": "a"
+    },
+    {
+      "start": 10.51,
+      "end": 10.88,
+      "word": "scale"
+    },
+    {
+      "start": 10.89,
+      "end": 11.07,
+      "word": "from"
+    },
+    {
+      "start": 11.08,
+      "end": 11.52,
+      "word": "zero(2)"
+    },
+    {
+      "start": 11.53,
+      "end": 11.67,
+      "word": "to(3)"
+    },
+    {
+      "start": 11.68,
+      "end": 12.16,
+      "word": "want(2)"
+    },
+    {
+      "start": 12.17,
+      "end": 12.27,
+      "word": "we"
+    },
+    {
+      "start": 12.28,
+      "end": 12.43,
+      "word": "can(2)"
+    },
+    {
+      "start": 12.44,
+      "end": 12.97,
+      "word": "calculate"
+    },
+    {
+      "start": 12.98,
+      "end": 13.03,
+      "word": "the"
+    },
+    {
+      "start": 13.04,
+      "end": 13.79,
+      "word": "probability"
+    },
+    {
+      "start": 13.8,
+      "end": 13.94,
+      "word": "by"
+    },
+    {
+      "start": 13.95,
+      "end": 14.56,
+      "word": "comparing"
+    },
+    {
+      "start": 14.57,
+      "end": 14.69,
+      "word": "to"
+    },
+    {
+      "start": 14.74,
+      "end": 14.83,
+      "word": "a"
+    },
+    {
+      "start": 14.84,
+      "end": 15.6,
+      "word": "favorable(2)"
+    },
+    {
+      "start": 15.61,
+      "end": 16.2,
+      "word": "outcomes"
+    },
+    {
+      "start": 16.33,
+      "end": 16.42,
+      "word": "to(3)"
+    },
+    {
+      "start": 16.43,
+      "end": 16.51,
+      "word": "the"
+    },
+    {
+      "start": 16.52,
+      "end": 17.01,
+      "word": "total"
+    },
+    {
+      "start": 17.02,
+      "end": 17.37,
+      "word": "number"
+    },
+    {
+      "start": 17.38,
+      "end": 17.54,
+      "word": "of"
+    },
+    {
+      "start": 17.55,
+      "end": 18.04,
+      "word": "possible"
+    },
+    {
+      "start": 18.05,
+      "end": 18.58,
+      "word": "outcomes"
+    },
+    {
+      "start": 18.73,
+      "end": 19.44,
+      "word": "probability"
+    },
+    {
+      "start": 19.45,
+      "end": 19.76,
+      "word": "helps"
+    },
+    {
+      "start": 19.77,
+      "end": 19.92,
+      "word": "us"
+    },
+    {
+      "start": 19.93,
+      "end": 20.19,
+      "word": "and(2)"
+    },
+    {
+      "start": 20.2,
+      "end": 20.49,
+      "word": "allies(2)"
+    },
+    {
+      "start": 20.5,
+      "end": 20.66,
+      "word": "on(2)"
+    },
+    {
+      "start": 20.67,
+      "end": 21.28,
+      "word": "seventeen"
+    },
+    {
+      "start": 21.29,
+      "end": 21.88,
+      "word": "games"
+    },
+    {
+      "start": 22.16,
+      "end": 22.33,
+      "word": "where"
+    },
+    {
+      "start": 22.34,
+      "end": 22.42,
+      "word": "the"
+    },
+    {
+      "start": 22.43,
+      "end": 22.66,
+      "word": "full"
+    },
+    {
+      "start": 22.67,
+      "end": 23.23,
+      "word": "costs(2)"
+    },
+    {
+      "start": 23.46,
+      "end": 24.05,
+      "word": "science"
+    },
+    {
+      "start": 24.27,
+      "end": 25.05,
+      "word": "finance(3)"
+    },
+    {
+      "start": 25.37,
+      "end": 25.61,
+      "word": "and(2)"
+    },
+    {
+      "start": 25.62,
+      "end": 25.92,
+      "word": "real"
+    },
+    {
+      "start": 25.93,
+      "end": 26.28,
+      "word": "well"
+    },
+    {
+      "start": 26.29,
+      "end": 26.77,
+      "word": "decision"
+    },
+    {
+      "start": 26.78,
+      "end": 27.15,
+      "word": "making"
+    },
+    {
+      "start": 27.39,
+      "end": 27.5,
+      "word": "by"
+    },
+    {
+      "start": 27.51,
+      "end": 27.86,
+      "word": "telling"
+    },
+    {
+      "start": 27.87,
+      "end": 28.56,
+      "word": "uncertainty"
+    },
+    {
+      "start": 28.57,
+      "end": 28.74,
+      "word": "into(2)"
+    },
+    {
+      "start": 28.75,
+      "end": 29.38,
+      "word": "measurable"
+    },
+    {
+      "start": 29.39,
+      "end": 29.96,
+      "word": "taxes"
+    },
+    {
+      "start": 30.06,
+      "end": 30.61,
+      "word": "probability"
+    },
+    {
+      "start": 30.62,
+      "end": 30.93,
+      "word": "allows"
+    },
+    {
+      "start": 30.94,
+      "end": 31.02,
+      "word": "us"
+    },
+    {
+      "start": 31.03,
+      "end": 31.12,
+      "word": "to(3)"
+    },
+    {
+      "start": 31.13,
+      "end": 31.69,
+      "word": "predict"
+    },
+    {
+      "start": 31.7,
+      "end": 32.15,
+      "word": "outcomes"
+    },
+    {
+      "start": 32.16,
+      "end": 32.97,
+      "word": "mathematically(2)"
+    },
+    {
+      "start": 32.98,
+      "end": 33.1,
+      "word": "and(2)"
+    },
+    {
+      "start": 33.11,
+      "end": 33.4,
+      "word": "better"
+    },
+    {
+      "start": 33.41,
+      "end": 33.88,
+      "word": "understand"
+    },
+    {
+      "start": 33.89,
+      "end": 34.75,
+      "word": "randomness"
+    },
+    {
+      "start": 34.76,
+      "end": 34.93,
+      "word": "in"
+    },
+    {
+      "start": 34.94,
+      "end": 35.0,
+      "word": "the"
+    },
+    {
+      "start": 35.01,
+      "end": 35.44,
+      "word": "world"
+    }
+  ],
+  "text": "imagine if the(2) the(2) court out for it lands multiple possible outcomes of probability helps us measure how unlikely each alcohol the(2) stack up ability is measured on(2) a scale from zero(2) to(3) want(2) we can(2) calculate the probability by comparing to a favorable(2) outcomes to(3) the total number of possible outcomes probability helps us and(2) allies(2) on(2) seventeen games where the full costs(2) science finance(3) and(2) real well decision making by telling uncertainty into(2) measurable taxes probability allows us to(3) predict outcomes mathematically(2) and(2) better understand randomness in the world"
+}

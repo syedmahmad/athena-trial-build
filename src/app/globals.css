@@ -1,0 +1,703 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "katex/dist/katex.min.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Athena custom colors */
+  --color-athena-navy: var(--athena-navy);
+  --color-athena-navy-light: var(--athena-navy-light);
+  --color-athena-amber: var(--athena-amber);
+  --color-athena-amber-light: var(--athena-amber-light);
+  --color-athena-success: var(--athena-success);
+  --color-athena-success-light: var(--athena-success-light);
+}
+
+:root,
+.light {
+  --radius: 0.625rem;
+
+  /* Athena palette */
+  --athena-navy: oklch(0.25 0.05 260);
+  --athena-navy-light: oklch(0.35 0.06 260);
+  --athena-amber: oklch(0.75 0.16 75);
+  --athena-amber-light: oklch(0.85 0.12 80);
+  --athena-success: oklch(0.65 0.17 155);
+  --athena-success-light: oklch(0.80 0.12 155);
+
+  /* Light theme — warm, approachable */
+  --background: oklch(0.985 0.002 90);
+  --foreground: oklch(0.18 0.04 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.04 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.04 260);
+  --primary: oklch(0.25 0.05 260);
+  --primary-foreground: oklch(0.98 0.005 90);
+  --secondary: oklch(0.96 0.005 90);
+  --secondary-foreground: oklch(0.25 0.05 260);
+  --muted: oklch(0.96 0.005 90);
+  --muted-foreground: oklch(0.50 0.02 260);
+  --accent: oklch(0.75 0.16 75);
+  --accent-foreground: oklch(0.18 0.04 260);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.91 0.005 90);
+  --input: oklch(0.91 0.005 90);
+  --ring: oklch(0.25 0.05 260);
+  --chart-1: oklch(0.25 0.05 260);
+  --chart-2: oklch(0.75 0.16 75);
+  --chart-3: oklch(0.65 0.17 155);
+  --chart-4: oklch(0.60 0.12 240);
+  --chart-5: oklch(0.70 0.15 30);
+  --sidebar: oklch(0.97 0.003 90);
+  --sidebar-foreground: oklch(0.18 0.04 260);
+  --sidebar-primary: oklch(0.25 0.05 260);
+  --sidebar-primary-foreground: oklch(0.98 0.005 90);
+  --sidebar-accent: oklch(0.93 0.005 90);
+  --sidebar-accent-foreground: oklch(0.25 0.05 260);
+  --sidebar-border: oklch(0.91 0.005 90);
+  --sidebar-ring: oklch(0.25 0.05 260);
+
+  /* Tangent lesson accent colors (HSL values for hsl(var(--name)) usage) */
+  --blue: 195 90% 50%;
+  --green: 155 75% 50%;
+  --yellow: 45 95% 58%;
+  --pink: 340 80% 65%;
+  --orange: 25 95% 55%;
+  --correct: 155 70% 50%;
+
+  /* Whiteboard */
+  --wb-canvas:       oklch(0.99 0.015 90);
+  --wb-hover-fill:   oklch(0.96 0.06 80);
+  --wb-hover-stroke: oklch(0.82 0.14 75);
+}
+
+.dark {
+  /* Athena dark palette */
+  --athena-navy: oklch(0.55 0.08 260);
+  --athena-navy-light: oklch(0.65 0.08 260);
+  --athena-amber: oklch(0.80 0.14 75);
+  --athena-amber-light: oklch(0.90 0.10 80);
+  --athena-success: oklch(0.72 0.15 155);
+  --athena-success-light: oklch(0.82 0.10 155);
+
+  --background: oklch(0.14 0.02 260);
+  --foreground: oklch(0.95 0.005 90);
+  --card: oklch(0.19 0.025 260);
+  --card-foreground: oklch(0.95 0.005 90);
+  --popover: oklch(0.19 0.025 260);
+  --popover-foreground: oklch(0.95 0.005 90);
+  --primary: oklch(0.80 0.14 75);
+  --primary-foreground: oklch(0.14 0.02 260);
+  --secondary: oklch(0.22 0.03 260);
+  --secondary-foreground: oklch(0.95 0.005 90);
+  --muted: oklch(0.22 0.03 260);
+  --muted-foreground: oklch(0.65 0.02 260);
+  --accent: oklch(0.80 0.14 75);
+  --accent-foreground: oklch(0.14 0.02 260);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.28 0.03 260);
+  --input: oklch(0.28 0.03 260);
+  --ring: oklch(0.80 0.14 75);
+  --chart-1: oklch(0.55 0.08 260);
+  --chart-2: oklch(0.80 0.14 75);
+  --chart-3: oklch(0.72 0.15 155);
+  --chart-4: oklch(0.65 0.12 240);
+  --chart-5: oklch(0.70 0.15 30);
+  --sidebar: oklch(0.17 0.025 260);
+  --sidebar-foreground: oklch(0.95 0.005 90);
+  --sidebar-primary: oklch(0.80 0.14 75);
+  --sidebar-primary-foreground: oklch(0.14 0.02 260);
+  --sidebar-accent: oklch(0.22 0.03 260);
+  --sidebar-accent-foreground: oklch(0.95 0.005 90);
+  --sidebar-border: oklch(0.28 0.03 260);
+  --sidebar-ring: oklch(0.80 0.14 75);
+
+  /* Tangent lesson accent colors (HSL values for hsl(var(--name)) usage) */
+  --blue: 195 90% 55%;
+  --green: 155 75% 55%;
+  --yellow: 45 95% 62%;
+  --pink: 340 80% 68%;
+  --orange: 25 95% 58%;
+  --correct: 155 70% 55%;
+
+  /* Whiteboard */
+  --wb-canvas:       oklch(0.19 0.025 260);
+  --wb-hover-fill:   oklch(0.25 0.04 75);
+  --wb-hover-stroke: oklch(0.65 0.15 75);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Tailwind v4's Preflight removes the default pointer cursor on
+     <button> elements (changed from v3). Restore it project-wide so
+     every clickable element behaves like a button — affordance-first. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+/* Tangent lesson pixel-grid background */
+.pixel-grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Prose overrides for tutor message bubbles */
+.prose.prose-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.prose.prose-sm :first-child {
+  margin-top: 0;
+}
+
+.prose.prose-sm :last-child {
+  margin-bottom: 0;
+}
+
+/* Remove hr margins within prose */
+.prose hr {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* KaTeX inline math sizing */
+.prose .katex {
+  font-size: 1em;
+}
+
+/* Streaming cursor */
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--athena-amber);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes border-rotate {
+  from { transform: rotate(0deg) scale(2.5); }
+  to { transform: rotate(360deg) scale(2.5); }
+}
+
+/* ── Observation Record — warm-amber-on-black theme ───────────────────
+ * Matches the /play onboarding palette (var(--p-*)). All non-/play
+ * surfaces (micro-lesson, quiz, mentor, etc.) read these tokens, so
+ * updating them here re-skins the whole product without touching
+ * individual components.
+ *
+ * Typography: JetBrains Mono is the default body font; display
+ * headings opt in to Instrument Serif via .obs-serif (or by setting
+ * font-family inline). Both fonts are loaded as CSS variables in
+ * src/app/layout.tsx.
+ */
+.observation-record {
+  --obs-bg: #000;
+  --obs-surface: oklch(0.12 0.005 80 / 0.85);
+  --obs-fg: oklch(0.96 0.005 80);
+  --obs-muted: oklch(0.62 0.005 80);
+  --obs-dim: oklch(0.58 0.005 80);
+  --obs-border: oklch(0.42 0.005 80);
+  /* Orb palette — warm amber, matching the /play orb. */
+  --obs-glow-core: oklch(0.95 0.08 70);
+  --obs-glow-mid: oklch(0.78 0.16 55);
+  --obs-glow-halo: oklch(0.42 0.14 40);
+  --obs-accent: oklch(0.82 0.14 60);
+  --obs-accent-deep: oklch(0.60 0.14 50);
+
+  /* Let the observation bg show through the whiteboard surface */
+  --wb-canvas: oklch(0.05 0.005 80 / 0.35);
+
+  color-scheme: dark;
+  background-color: var(--obs-bg);
+  color: var(--obs-fg);
+  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display heading inside an observation-record surface. Apply this
+ * class (or set font-family inline) to opt into Instrument Serif for
+ * h1/h2/h3 / hero text. Body text and eyebrows stay JetBrains Mono. */
+.observation-record .obs-serif,
+.obs-serif {
+  font-family: var(--font-instrument-serif), "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.observation-grid-bg {
+  background-image:
+    linear-gradient(oklch(0.92 0.02 80 / 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.92 0.02 80 / 0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.observation-dotted-rule {
+  height: 1px;
+  background-image: radial-gradient(circle, var(--obs-muted) 0.6px, transparent 1px);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+}
+
+@keyframes obs-bar-eq {
+  0%, 100% { transform: scaleY(0.25); }
+  50%      { transform: scaleY(1); }
+}
+
+@keyframes obs-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%      { transform: scale(1.04); opacity: 0.75; }
+}
+
+@keyframes obs-ring-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes obs-ripple {
+  0%   { transform: scale(1);   opacity: 0.45; }
+  100% { transform: scale(2.1); opacity: 0;    }
+}
+
+/* ── Operand-role styling ──────────────────────────────────────────
+   LaTeX authored by the micro-lesson AI wraps meaningful parts with
+   \htmlClass{op-target|op-new|op-result|op-cancel}{...}. By default
+   these spans get NO visible styling — the animations driven from
+   wb-math.tsx are the only signal of the role. The explicit resets
+   below guard against any stale CSS (e.g. hot-reload miss) or
+   browser default interfering with that. */
+.op-target, .op-new, .op-result, .op-cancel {
+  background: transparent !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  outline: none;
+}
+
+/* Role-specific text colors. All change roles default to the Athena
+   amber so the eye reads "this is the part that's changing" without
+   the rainbow of role-specific hues. Intentionally NOT !important so
+   the author can still override with \textcolor{#hex}{...} inside a
+   tagged span — and so the src-X/dst-X color propagation in wb-math
+   (which sets inline style.color) takes precedence when a destination
+   span is connected to a colored source span. */
+.op-target,
+.op-new,
+.op-result,
+.op-cancel {
+  color: var(--athena-amber);
+  /* HMR rebuild trigger — see globals.css mtime touch on 2026-04-27 */
+}
+
+/* Whiteboard-canvas equation monochrome — force every KaTeX descendant
+   inside a whiteboard step overlay to the current text color. Beats:
+     - authored `\textcolor{#hex}{...}` inline styles (KaTeX emits
+       `<span style="color:#hex">…</span>` which would otherwise win
+       over class-based color rules)
+     - the .op-target / .op-new / .op-result / .op-cancel role colors
+     - the src-X / dst-X color propagation that wb-math sets on
+       connected spans during a morph
+   The op-cancel strike-through still draws because it's painted with
+   `currentColor`, which is now var(--obs-fg). Scope = anything inside
+   a `[data-wbstep-overlay]` div, i.e. the wb-math / wb-callout /
+   wb-table / wb-section-heading layers — leaves MathContent renders
+   OUTSIDE the canvas (caption pill, interaction cards) alone. */
+[data-wbstep-overlay] .katex,
+[data-wbstep-overlay] .katex * {
+  color: var(--obs-fg) !important;
+}
+
+.debug-ops .op-target { outline: 1px dashed oklch(0.75 0.16 80)  !important; outline-offset: 2px; }
+.debug-ops .op-new    { outline: 1px dashed oklch(0.72 0.20 145) !important; outline-offset: 2px; }
+.debug-ops .op-result { outline: 1px dashed oklch(0.72 0.18 270) !important; outline-offset: 2px; }
+.debug-ops .op-cancel { outline: 1px dashed oklch(0.65 0.22 25)  !important; outline-offset: 2px; }
+
+/* Strikethrough overlay for cancelled terms. wb-math's animateTaggedSpans
+   adds the `.striking` class to .op-cancel spans at the start of the
+   COLLAPSE phase. The ::after pseudo-element draws a diagonal line
+   from the top-right corner to the bottom-left of the term, painted
+   into the background as a gradient band so the angle scales with
+   the term's bbox. clip-path grows from the top-right corner along
+   the diagonal so the strike "draws" right-to-left, then the
+   existing opacity fade carries the span (and its strike) out
+   together. The line uses currentColor so it inherits the operand's
+   amber/textcolor styling. */
+.op-cancel.striking {
+  position: relative;
+}
+.op-cancel.striking::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* The strike-through is a diagonal band painted with currentColor so
+     it picks up the operand's amber / textcolor styling. Width is
+     ±1.75px (3.5px total) — heavier than the 1.25 it shipped with so
+     the line reads cleanly against KaTeX italic glyphs at small sizes
+     without overpowering larger sizes. Anti-alias-pad pixels are
+     present on either side of the line so the edge of the band
+     doesn't pixel-shimmer during the clip-path reveal. */
+  background: linear-gradient(
+    to top left,
+    transparent calc(50% - 1.75px),
+    currentColor calc(50% - 1.75px),
+    currentColor calc(50% + 1.75px),
+    transparent calc(50% + 1.75px)
+  );
+  clip-path: polygon(100% 0%, 100% 0%, 100% 0%, 100% 0%);
+  /* 500ms reveal paces with the op-new fade-in (also 500ms) on the
+     STATE side of the morph — the eye sees the cancel-line draw and
+     the result fade in at the same pace, not one rushing the other. */
+  animation: op-cancel-strike 500ms ease-out forwards;
+  pointer-events: none;
+}
+@keyframes op-cancel-strike {
+  from { clip-path: polygon(100% 0%, 100% 0%, 100% 0%, 100% 0%); }
+  to   { clip-path: polygon(100% 0%, 100% 8%,   0% 100%,   0% 92%); }
+}
+
+/* ── Distribution arrows (the curved bezier from a multiplier to each
+   distributed term during a distribute APPLY step) ─────────────────
+   The path is rendered with `pathLength="100"` so the dash math is
+   normalized — regardless of the curve's true length, `dasharray:100`
+   + `dashoffset:100→0` draws the stroke from start to end. The
+   arrowhead polygon pops in at the tail of the stroke draw. Timing
+   matches op-new fade-in (~500ms) so the eye sees the multiplier
+   appear, then the arrows reach toward it. The animation only fires
+   on first mount per arrow — the React keys are stable across the
+   measurement-loop's setState calls, so re-measuring doesn't restart
+   the draw. */
+.wb-dist-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: wb-dist-arrow-draw 520ms ease-out 80ms forwards;
+}
+.wb-dist-head {
+  opacity: 0;
+  animation: wb-dist-arrow-head 220ms ease-out 540ms forwards;
+}
+@keyframes wb-dist-arrow-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes wb-dist-arrow-head {
+  to { opacity: 0.9; }
+}
+
+/* ── wb-math cross-fade stack ───────────────────────────────────
+   Stacks the rendered equation and its cross-fade ghost in the
+   same grid cell so CSS Grid's baseline alignment lands both
+   equations' baselines (and therefore the `=` glyph at math axis
+   = baseline - 0.25em) at the same Y. */
+.wb-math-grid {
+  display: grid;
+  grid-template-areas: "stack";
+  /* Top-align: both stacked items render at the same top edge.
+     Webkit + grid + baseline alignment on a stretched cell pushes
+     content to the BOTTOM of the cell (the `align-items: baseline`
+     interaction with a taller-than-content row), which made arrows
+     and span measurements drift relative to the rendered text. With
+     `start`, both engines render content at the top of the cell.
+     Cross-fade vertical `=` continuity holds because both stacked
+     equations use the same fontSize so their baselines coincide
+     when their tops coincide. */
+  align-items: start;
+  width: 100%;
+}
+.wb-math-grid > * {
+  grid-area: stack;
+  min-width: 0;
+}
+
+/* ── KaTeX display margin trim ───────────────────────────────────
+   KaTeX sets `.katex-display { margin: 1em 0 }` by default which
+   stacks ~24px of empty space above and below every display-mode
+   equation. In the whiteboard each equation is its own step with
+   its own layout slot, so that margin is wasted vertical space and
+   makes the lesson feel sparse. Trim it to a small breath. */
+.katex-display {
+  margin: 0.15em 0 !important;
+}
+
+/* ── Click-to-replay affordance ─────────────────────────────────
+   Only applied to steps that actually animate (triplet APPLY /
+   COLLAPSE / conclude). A faint refresh icon appears in the top-
+   right corner on hover. No background highlight — the cursor +
+   icon is enough to signal the action. */
+.wb-math-replay-icon {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  color: oklch(0.70 0.06 275);
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+}
+.wb-math-replayable:hover .wb-math-replay-icon {
+  opacity: 0.55;
+}
+
+/* Per-op entry animations are driven from wb-math.tsx via the Web
+   Animations API (see animateTaggedSpans). CSS here only sets the
+   default static styling above; don't add @keyframes rules targeting
+   op-* spans — they'll fight the JS-driven animations. */
+
+/* Hint / detailed-hint callout body. MathContent renders prose markdown
+   when the body contains $...$ math; the prose plugin adds vertical
+   margins to its first/last children which Safari lets escape the
+   foreignObject, overlapping the row above. Zero them out so the body
+   sits within the panel padding cleanly across browsers. */
+.wb-callout-body > .prose > :first-child {
+  margin-top: 0;
+}
+.wb-callout-body > .prose > :last-child {
+  margin-bottom: 0;
+}
+
+/* ── /play onboarding surface ─────────────────────────────────────── */
+.play-stage {
+  --p-bg: #000;
+  --p-fg: oklch(0.96 0.005 80);
+  --p-fg-dim: oklch(0.70 0.005 80);
+  --p-fg-mute: oklch(0.48 0.005 80);
+  --p-fg-faint: oklch(0.30 0.005 80);
+  --p-rule: oklch(0.22 0.005 80);
+  --p-accent: oklch(0.82 0.14 60);
+  --p-accent-deep: oklch(0.60 0.14 50);
+  background: var(--p-bg);
+  color: var(--p-fg);
+  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  font-weight: 300;
+}
+
+.play-vignette {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 38%, oklch(0.22 0.05 60 / 0.20), transparent 60%),
+    radial-gradient(ellipse at center, transparent 30%, #000 80%);
+}
+.play-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  animation: play-grain-shift 6s steps(6) infinite;
+}
+@keyframes play-grain-shift {
+  0% { transform: translate(0,0); }
+  20% { transform: translate(-2%,1%); }
+  40% { transform: translate(1%,-2%); }
+  60% { transform: translate(-1%,2%); }
+  80% { transform: translate(2%,-1%); }
+  100% { transform: translate(0,0); }
+}
+
+.play-orb {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%,
+    oklch(0.95 0.08 70 / 0.95) 0%,
+    oklch(0.78 0.16 55 / 0.85) 22%,
+    oklch(0.42 0.14 40 / 0.6) 60%,
+    oklch(0.10 0.05 40 / 0) 90%);
+  box-shadow:
+    0 0 50px 4px oklch(0.65 0.18 50 / 0.55),
+    0 0 120px 24px oklch(0.55 0.16 45 / 0.32),
+    inset -16px -18px 32px oklch(0.20 0.10 40 / 0.6),
+    inset 12px 14px 24px oklch(0.95 0.08 70 / 0.55);
+  animation: play-orb-breathe 5.5s ease-in-out infinite;
+}
+.play-orb::before {
+  content: "";
+  position: absolute;
+  top: 14%;
+  left: 24%;
+  width: 38%;
+  height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, oklch(1 0 0 / 0.85), transparent 70%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+.play-orb::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px solid oklch(0.85 0.12 60 / 0.18);
+  border-radius: 50%;
+  animation: play-ring-pulse 4s ease-in-out infinite;
+}
+@keyframes play-orb-breathe {
+  0%, 100% { transform: scale(1) translateY(0); filter: brightness(1); }
+  50% { transform: scale(1.035) translateY(-2px); filter: brightness(1.08); }
+}
+@keyframes play-ring-pulse {
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.08); }
+}
+.play-orb-ring { animation: play-spin 60s linear infinite; }
+@keyframes play-spin { to { transform: rotate(360deg); } }
+
+.play-spark {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: oklch(0.92 0.10 65 / 0.9);
+  box-shadow: 0 0 6px oklch(0.85 0.14 60 / 0.8);
+  opacity: 0;
+  animation: play-rise 4.5s linear infinite;
+}
+@keyframes play-rise {
+  0% { transform: translate(0, 24px) scale(0.6); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(var(--dx, 0px), -90px) scale(1); opacity: 0; }
+}
+
+@keyframes play-fade-in { to { opacity: 1; } }
+@keyframes play-fade-up { to { opacity: 1; transform: translateY(0); } }
+@keyframes play-underline { to { opacity: 0.7; transform: scaleX(1); } }
+
+.play-anim-orb { opacity: 0; animation: play-fade-in 1100ms 80ms ease-out forwards; }
+.play-anim-h1 { opacity: 0; animation: play-fade-up 900ms 380ms ease-out forwards; }
+.play-anim-sub { opacity: 0; animation: play-fade-up 800ms 700ms ease-out forwards; }
+.play-anim-name-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.06em;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--p-accent) 30%, var(--p-accent) 70%, transparent);
+  opacity: 0;
+  transform: scaleX(0.2);
+  transform-origin: center;
+  animation: play-underline 900ms 1100ms ease-out forwards;
+}
+.play-card { opacity: 0; transform: translateY(14px); animation: play-fade-up 800ms ease-out forwards; }
+.play-card:nth-child(1) { animation-delay: 900ms; }
+.play-card:nth-child(2) { animation-delay: 1040ms; }
+.play-card:nth-child(3) { animation-delay: 1180ms; }
+.play-card:nth-child(4) { animation-delay: 1320ms; }
+
+/* Lesson icon — book page-turn */
+.play-ic-lesson .page-turn {
+  transform-origin: 36px 41px;
+  animation: play-page-turn 4.4s ease-in-out infinite;
+}
+@keyframes play-page-turn {
+  0%, 12% { transform: scaleX(1) translateX(0); opacity: 1; }
+  50% { transform: scaleX(-1) translateX(0); opacity: 1; }
+  88%, 100% { transform: scaleX(1) translateX(0); opacity: 1; }
+}
+.play-ic-lesson .book-glint { animation: play-book-glint 4.4s ease-in-out infinite; }
+@keyframes play-book-glint {
+  0%, 40%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Practice icon — target with pulsing ring + sweeping crosshair + hit pulse */
+.play-ic-practice .pulse-ring { transform-origin: center; animation: play-pulse-ring 2.6s ease-in-out infinite; }
+@keyframes play-pulse-ring {
+  0%, 100% { opacity: 0.2; transform: scale(0.85); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+.play-ic-practice .scan { transform-origin: 36px 36px; animation: play-spin 4s linear infinite; }
+.play-ic-practice .hit { animation: play-hit 2.6s ease-in-out infinite; transform-origin: 36px 36px; }
+@keyframes play-hit {
+  0%, 70%, 100% { transform: scale(1); opacity: 1; }
+  78% { transform: scale(1.7); opacity: 0.6; }
+  86% { transform: scale(0.9); opacity: 1; }
+}
+
+/* Chat icon — typing dots */
+.play-ic-chat .d1 { animation: play-type-dot 1.4s ease-in-out 0s infinite; }
+.play-ic-chat .d2 { animation: play-type-dot 1.4s ease-in-out 0.18s infinite; }
+.play-ic-chat .d3 { animation: play-type-dot 1.4s ease-in-out 0.36s infinite; }
+@keyframes play-type-dot {
+  0%, 60%, 100% { transform: translateY(0) scale(1); opacity: 0.55; }
+  30% { transform: translateY(-3px) scale(1.1); opacity: 1; }
+}
+
+/* /play card icon accent shift on hover/focus. The accent strokes/fills
+   on the icons live as currentColor-via-CSS-var so the card can swap
+   from --p-accent-deep to --p-accent on hover. */
+.play-card .play-ic-lesson,
+.play-card .play-ic-practice,
+.play-card .play-ic-chat {
+  --accent-stroke: var(--p-accent-deep);
+}
+.play-card:hover .play-ic-lesson,
+.play-card:focus-visible .play-ic-lesson,
+.play-card:hover .play-ic-practice,
+.play-card:focus-visible .play-ic-practice,
+.play-card:hover .play-ic-chat,
+.play-card:focus-visible .play-ic-chat {
+  --accent-stroke: var(--p-accent);
+}

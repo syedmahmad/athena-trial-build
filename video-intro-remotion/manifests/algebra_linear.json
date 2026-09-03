@@ -1,0 +1,436 @@
+{
+  "manifest": {
+    "version": "0.1.0",
+    "lesson_ref": {
+      "topic_slug": "algebra",
+      "subtopic_slug": "linear-equations-one-variable",
+      "lesson_id": null,
+      "is_custom": false
+    },
+    "topic": "Linear equations (one variable)",
+    "concept": {
+      "math_concept": "Solving linear equations in one variable",
+      "real_world_analog": "Finding the balance point on a scale",
+      "style_strategy": "mixed"
+    },
+    "style": {
+      "palette": "white_on_black",
+      "background_motif": "wireframe_terrain",
+      "anchor_objects": [
+        {
+          "id": "balance_scale",
+          "description": "Simple wireframe balance scale with two plates, clean geometric design"
+        },
+        {
+          "id": "geometric_weights",
+          "description": "Abstract geometric shapes representing weights - cubes, spheres, pyramids in wireframe style"
+        }
+      ]
+    },
+    "narration": {
+      "script": "Imagine balancing a scale. You add weights to one side, adjust the other, until everything's perfectly level. Solving linear equations works the same way - we balance both sides by isolating the variable. Whatever we do to one side, we must do to the other. Find the balance, find your answer.",
+      "voice": {
+        "provider": "elevenlabs",
+        "voice_id": "hpp4J3VqNfWAUOO0d1Us"
+      },
+      "audio_url": null,
+      "audio_duration_s": 18.947,
+      "word_timings": [
+        {
+          "word": "Imagine",
+          "start_s": 0.0,
+          "end_s": 0.476
+        },
+        {
+          "word": "balancing",
+          "start_s": 0.522,
+          "end_s": 0.987
+        },
+        {
+          "word": "a",
+          "start_s": 1.033,
+          "end_s": 1.057
+        },
+        {
+          "word": "scale.",
+          "start_s": 1.115,
+          "end_s": 1.718
+        },
+        {
+          "word": "You",
+          "start_s": 1.927,
+          "end_s": 2.043
+        },
+        {
+          "word": "add",
+          "start_s": 2.113,
+          "end_s": 2.252
+        },
+        {
+          "word": "weights",
+          "start_s": 2.31,
+          "end_s": 2.577
+        },
+        {
+          "word": "to",
+          "start_s": 2.624,
+          "end_s": 2.694
+        },
+        {
+          "word": "one",
+          "start_s": 2.775,
+          "end_s": 2.949
+        },
+        {
+          "word": "side,",
+          "start_s": 2.995,
+          "end_s": 3.425
+        },
+        {
+          "word": "adjust",
+          "start_s": 3.448,
+          "end_s": 3.855
+        },
+        {
+          "word": "the",
+          "start_s": 3.901,
+          "end_s": 3.982
+        },
+        {
+          "word": "other,",
+          "start_s": 4.052,
+          "end_s": 4.307
+        },
+        {
+          "word": "until",
+          "start_s": 4.342,
+          "end_s": 4.574
+        },
+        {
+          "word": "everything's",
+          "start_s": 4.656,
+          "end_s": 5.12
+        },
+        {
+          "word": "perfectly",
+          "start_s": 5.178,
+          "end_s": 5.642
+        },
+        {
+          "word": "level.",
+          "start_s": 5.712,
+          "end_s": 6.211
+        },
+        {
+          "word": "Solving",
+          "start_s": 6.653,
+          "end_s": 7.047
+        },
+        {
+          "word": "linear",
+          "start_s": 7.117,
+          "end_s": 7.407
+        },
+        {
+          "word": "equations",
+          "start_s": 7.465,
+          "end_s": 7.988
+        },
+        {
+          "word": "works",
+          "start_s": 8.046,
+          "end_s": 8.29
+        },
+        {
+          "word": "the",
+          "start_s": 8.336,
+          "end_s": 8.417
+        },
+        {
+          "word": "same",
+          "start_s": 8.464,
+          "end_s": 8.684
+        },
+        {
+          "word": "way",
+          "start_s": 8.742,
+          "end_s": 8.975
+        },
+        {
+          "word": "-",
+          "start_s": 9.183,
+          "end_s": 9.358
+        },
+        {
+          "word": "we",
+          "start_s": 9.474,
+          "end_s": 9.601
+        },
+        {
+          "word": "balance",
+          "start_s": 9.671,
+          "end_s": 10.043
+        },
+        {
+          "word": "both",
+          "start_s": 10.089,
+          "end_s": 10.321
+        },
+        {
+          "word": "sides",
+          "start_s": 10.379,
+          "end_s": 10.809
+        },
+        {
+          "word": "by",
+          "start_s": 10.867,
+          "end_s": 11.006
+        },
+        {
+          "word": "isolating",
+          "start_s": 11.122,
+          "end_s": 11.726
+        },
+        {
+          "word": "the",
+          "start_s": 11.773,
+          "end_s": 11.842
+        },
+        {
+          "word": "variable.",
+          "start_s": 11.877,
+          "end_s": 12.597
+        },
+        {
+          "word": "Whatever",
+          "start_s": 12.771,
+          "end_s": 13.119
+        },
+        {
+          "word": "we",
+          "start_s": 13.177,
+          "end_s": 13.259
+        },
+        {
+          "word": "do",
+          "start_s": 13.328,
+          "end_s": 13.433
+        },
+        {
+          "word": "to",
+          "start_s": 13.514,
+          "end_s": 13.584
+        },
+        {
+          "word": "one",
+          "start_s": 13.665,
+          "end_s": 13.851
+        },
+        {
+          "word": "side,",
+          "start_s": 13.897,
+          "end_s": 14.454
+        },
+        {
+          "word": "we",
+          "start_s": 14.571,
+          "end_s": 14.71
+        },
+        {
+          "word": "must",
+          "start_s": 14.803,
+          "end_s": 15.07
+        },
+        {
+          "word": "do",
+          "start_s": 15.139,
+          "end_s": 15.314
+        },
+        {
+          "word": "to",
+          "start_s": 15.406,
+          "end_s": 15.476
+        },
+        {
+          "word": "the",
+          "start_s": 15.534,
+          "end_s": 15.604
+        },
+        {
+          "word": "other.",
+          "start_s": 15.673,
+          "end_s": 16.126
+        },
+        {
+          "word": "Find",
+          "start_s": 16.335,
+          "end_s": 16.602
+        },
+        {
+          "word": "the",
+          "start_s": 16.649,
+          "end_s": 16.718
+        },
+        {
+          "word": "balance,",
+          "start_s": 16.765,
+          "end_s": 17.403
+        },
+        {
+          "word": "find",
+          "start_s": 17.612,
+          "end_s": 17.914
+        },
+        {
+          "word": "your",
+          "start_s": 17.972,
+          "end_s": 18.088
+        },
+        {
+          "word": "answer.",
+          "start_s": 18.146,
+          "end_s": 18.947
+        }
+      ]
+    },
+    "beats": [
+      {
+        "id": "b1_establish",
+        "start_s": 0.0,
+        "end_s": 6.653,
+        "narration_span": "Imagine balancing a scale. You add weights to one side, adjust the other, until everything's perfectly level.",
+        "visual": {
+          "primary": "Balance scale metaphor introduction",
+          "renderer_hint": {}
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "Imagine balancing a scale. You add weights to one side, adjust the other, until everything's perfectly level.",
+            "position": "bottom_center",
+            "appear_s": 0.2,
+            "disappear_s": 5.8
+          }
+        ]
+      },
+      {
+        "id": "b2_transition",
+        "start_s": 6.653,
+        "end_s": 9.474,
+        "narration_span": "Solving linear equations works the same way",
+        "visual": {
+          "primary": "Transition from scale to equation",
+          "renderer_hint": {}
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "Solving linear equations works the same way",
+            "position": "bottom_center",
+            "appear_s": 0.2,
+            "disappear_s": 3.8
+          },
+          {
+            "kind": "math",
+            "content": "2x + 5 = 13",
+            "position": "center",
+            "appear_s": 2.0,
+            "disappear_s": 4.0
+          }
+        ]
+      },
+      {
+        "id": "b3_process",
+        "start_s": 9.474,
+        "end_s": 16.335,
+        "narration_span": "we balance both sides by isolating the variable. Whatever we do to one side, we must do to the other.",
+        "visual": {
+          "primary": "Step-by-step equation solving visualization",
+          "renderer_hint": {}
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "we balance both sides by isolating the variable. Whatever we do to one side, we must do to the other.",
+            "position": "bottom_center",
+            "appear_s": 0.2,
+            "disappear_s": 9.8
+          },
+          {
+            "kind": "math",
+            "content": "2x + 5 = 13",
+            "position": "top_center",
+            "appear_s": 0.5,
+            "disappear_s": 3.0
+          },
+          {
+            "kind": "math",
+            "content": "2x = 8",
+            "position": "top_center",
+            "appear_s": 3.5,
+            "disappear_s": 6.5
+          },
+          {
+            "kind": "math",
+            "content": "x = 4",
+            "position": "top_center",
+            "appear_s": 7.0,
+            "disappear_s": 10.0
+          }
+        ]
+      },
+      {
+        "id": "b4_conclusion",
+        "start_s": 16.335,
+        "end_s": 18.947,
+        "narration_span": "Find the balance, find your answer.",
+        "visual": {
+          "primary": "Final balanced state and solution reveal",
+          "renderer_hint": {}
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "Find the balance, find your answer.",
+            "position": "bottom_center",
+            "appear_s": 0.2,
+            "disappear_s": 4.0
+          },
+          {
+            "kind": "math",
+            "content": "x = 4",
+            "position": "center",
+            "appear_s": 1.0,
+            "disappear_s": 8.0
+          },
+          {
+            "kind": "callout",
+            "content": "BALANCE \u2014 Keep equations equal on both sides",
+            "position": "top_left",
+            "appear_s": 5.0,
+            "disappear_s": 10.0
+          },
+          {
+            "kind": "callout",
+            "content": "ISOLATE \u2014 Get the variable by itself",
+            "position": "top_right",
+            "appear_s": 6.0,
+            "disappear_s": 10.0
+          }
+        ]
+      }
+    ],
+    "qa_constraints": {
+      "max_dead_frame_seconds": 1.0,
+      "dead_frame_brightness_threshold": 10.0
+    },
+    "_meta": {
+      "generated_by": "agents/video_intro/brief_generator.py",
+      "model": "claude-sonnet-4-20250514"
+    },
+    "render": {
+      "audio_path_local": "audio.mp3",
+      "duration_s": 18.947
+    }
+  }
+}

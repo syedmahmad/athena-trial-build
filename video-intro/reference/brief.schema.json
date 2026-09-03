@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://athena.local/video-intro/brief.schema.json",
+  "title": "VideoIntroBrief",
+  "description": "Single source of truth for an intro/motivator video. Consumed by the code renderer (Remotion primitives). Audio is authoritative for total duration; beats are allocated against the measured TTS timeline.",
+  "type": "object",
+  "required": ["version", "lesson_ref", "topic", "concept", "style", "narration", "beats"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Brief schema version. Bump on breaking changes.",
+      "const": "0.1.0"
+    },
+    "lesson_ref": {
+      "type": "object",
+      "description": "Identifies which Athena lesson this brief is for.",
+      "required": ["topic_slug", "subtopic_slug"],
+      "properties": {
+        "topic_slug": { "type": "string" },
+        "subtopic_slug": { "type": "string" },
+        "lesson_id": { "type": "string", "description": "Optional FK into lessons table" },
+        "is_custom": { "type": "boolean", "default": false, "description": "True if this came from my-learning custom_topics" }
+      }
+    },
+    "topic": {
+      "type": "string",
+      "description": "Human-readable topic name, e.g. 'Linear equations with one variable'."
+    },
+    "concept": {
+      "type": "object",
+      "description": "What the video is actually teaching.",
+      "required": ["math_concept", "real_world_analog", "style_strategy"],
+      "properties": {
+        "math_concept": {
+          "type": "string",
+          "description": "The mathematical idea (e.g. 'slope as rise over run')."
+        },
+        "real_world_analog": {
+          "type": "string",
+          "description": "The concrete narrative anchor (e.g. 'two hiking trails up mountains of different steepness')."
+        },
+        "style_strategy": {
+          "type": "string",
+          "enum": ["metaphorical", "literal", "mixed"],
+          "description": "How tightly the visuals hew to the math. Metaphorical = real-world only; literal = graph/equation only; mixed = open with metaphor, transition to literal."
+        }
+      }
+    },
+    "style": {
+      "type": "object",
+      "description": "Visual style controls. The aesthetic is locked at the system level (white linework on black); per-video choices live here.",
+      "required": ["palette", "background_motif", "anchor_objects"],
+      "properties": {
+        "palette": {
+          "type": "string",
+          "enum": ["white_on_black"],
+          "description": "Locked for v1."
+        },
+        "background_motif": {
+          "type": "string",
+          "enum": ["wireframe_terrain", "starfield", "sparse_arcs", "blank"],
+          "description": "Which environmental motif to use. wireframe_terrain = ex1/ex2 mountains, starfield = ex3 coin-in-space."
+        },
+        "anchor_objects": {
+          "type": "array",
+          "description": "Named visual anchors referenced by beats via `anchor_id` (e.g. a coin, a hiker figure).",
+          "items": {
+            "type": "object",
+            "required": ["id", "description"],
+            "properties": {
+              "id": { "type": "string", "description": "Stable ID referenced by beats" },
+              "description": { "type": "string", "description": "Plain-English description of the anchor." }
+            }
+          }
+        }
+      }
+    },
+    "narration": {
+      "type": "object",
+      "description": "The script + measured TTS timeline. Audio is authoritative for total duration.",
+      "required": ["script", "voice"],
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Full narration as plain prose. TTS consumes this."
+        },
+        "voice": {
+          "type": "object",
+          "properties": {
+            "provider": { "type": "string", "enum": ["elevenlabs", "openai"] },
+            "voice_id": { "type": "string" }
+          }
+        },
+        "audio_url": { "type": "string", "description": "Filled in after TTS" },
+        "audio_duration_s": { "type": "number", "description": "Filled in after TTS. Drives beat duration allocation." },
+        "word_timings": {
+          "type": "array",
+          "description": "Word-level timestamps from ElevenLabs character timestamps or Whisper alignment.",
+          "items": {
+            "type": "object",
+            "required": ["word", "start_s", "end_s"],
+            "properties": {
+              "word": { "type": "string" },
+              "start_s": { "type": "number" },
+              "end_s": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "beats": {
+      "type": "array",
+      "description": "Ordered visual beats. Each consumes a contiguous slice of the audio timeline.",
+      "items": {
+        "type": "object",
+        "required": ["id", "start_s", "end_s", "narration_span", "visual"],
+        "properties": {
+          "id": { "type": "string", "description": "Stable beat ID, e.g. 'b1'." },
+          "start_s": { "type": "number" },
+          "end_s": { "type": "number" },
+          "narration_span": {
+            "type": "string",
+            "description": "The slice of narration this beat covers (for QA + caption sync)."
+          },
+          "visual": {
+            "type": "object",
+            "description": "Renderer-agnostic description of what should be on screen.",
+            "required": ["primary", "renderer_hint"],
+            "properties": {
+              "primary": {
+                "type": "string",
+                "description": "Plain-English description of the dominant visual element."
+              },
+              "renderer_hint": {
+                "type": "object",
+                "description": "Guidance for the code renderer. Falls back to 'primary' if 'code' is absent.",
+                "properties": {
+                  "code": {
+                    "type": "object",
+                    "description": "Remotion primitive spec.",
+                    "properties": {
+                      "primitive": {
+                        "type": "string",
+                        "enum": ["wireframe_mountain", "particle_terrain", "coordinate_axes", "animated_line", "coin_flip", "scale_bar", "fraction_compare", "anchor_pan", "callout_grid"],
+                        "description": "Which Remotion component to invoke."
+                      },
+                      "props": {
+                        "type": "object",
+                        "description": "Component-specific props. E.g. for animated_line: slope, intercept, color, draw_in_ms."
+                      },
+                      "anchor_id": {
+                        "type": "string",
+                        "description": "Reference to a style.anchor_objects entry if this beat needs a photo-real object overlaid."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "overlays": {
+            "type": "array",
+            "description": "Text/math/labels rendered on top of the visual by Remotion. Never generated by the video model.",
+            "items": {
+              "type": "object",
+              "required": ["kind", "content"],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["caption", "math", "label", "callout"]
+                },
+                "content": {
+                  "type": "string",
+                  "description": "Plain text for captions/labels; LaTeX for math."
+                },
+                "position": {
+                  "type": "string",
+                  "enum": ["bottom_center", "top_center", "top_left", "top_right", "center", "anchor"],
+                  "default": "bottom_center"
+                },
+                "appear_s": { "type": "number", "description": "When to fade in, relative to beat start" },
+                "disappear_s": { "type": "number", "description": "When to fade out, relative to beat start. Omit for 'stay until beat end'" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "qa_constraints": {
+      "type": "object",
+      "description": "Acceptance gates for the rendered MP4.",
+      "properties": {
+        "max_dead_frame_seconds": {
+          "type": "number",
+          "default": 1.0,
+          "description": "Max contiguous seconds where mean brightness < threshold while audio is active. Hard fail above this. Ex2 had ~14s, Ex3 had ~20s — we target 0."
+        },
+        "dead_frame_brightness_threshold": {
+          "type": "number",
+          "default": 10.0,
+          "description": "0-255 mean brightness below which a frame counts as 'dead'."
+        }
+      }
+    }
+  }
+}

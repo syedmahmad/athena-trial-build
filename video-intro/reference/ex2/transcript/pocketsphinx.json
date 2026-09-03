@@ -1,0 +1,410 @@
+{
+  "words": [
+    {
+      "start": 0.36,
+      "end": 0.56,
+      "word": "like"
+    },
+    {
+      "start": 0.57,
+      "end": 0.72,
+      "word": "us"
+    },
+    {
+      "start": 0.73,
+      "end": 1.04,
+      "word": "at"
+    },
+    {
+      "start": 1.08,
+      "end": 1.21,
+      "word": "the(2)"
+    },
+    {
+      "start": 1.22,
+      "end": 1.56,
+      "word": "two"
+    },
+    {
+      "start": 1.57,
+      "end": 1.92,
+      "word": "mountain"
+    },
+    {
+      "start": 1.93,
+      "end": 2.34,
+      "word": "trails"
+    },
+    {
+      "start": 2.38,
+      "end": 2.76,
+      "word": "writing"
+    },
+    {
+      "start": 2.77,
+      "end": 2.83,
+      "word": "a(2)"
+    },
+    {
+      "start": 2.93,
+      "end": 3.45,
+      "word": "different(2)"
+    },
+    {
+      "start": 3.46,
+      "end": 4.24,
+      "word": "floods"
+    },
+    {
+      "start": 4.25,
+      "end": 4.49,
+      "word": "ralph"
+    },
+    {
+      "start": 4.5,
+      "end": 4.74,
+      "word": "klein"
+    },
+    {
+      "start": 4.75,
+      "end": 5.21,
+      "word": "shop"
+    },
+    {
+      "start": 5.22,
+      "end": 5.51,
+      "word": "while(2)"
+    },
+    {
+      "start": 5.52,
+      "end": 5.61,
+      "word": "the(2)"
+    },
+    {
+      "start": 5.62,
+      "end": 5.81,
+      "word": "other"
+    },
+    {
+      "start": 5.82,
+      "end": 6.15,
+      "word": "rice"
+    },
+    {
+      "start": 6.16,
+      "end": 6.28,
+      "word": "is"
+    },
+    {
+      "start": 6.29,
+      "end": 6.48,
+      "word": "more"
+    },
+    {
+      "start": 6.49,
+      "end": 7.27,
+      "word": "gradual"
+    },
+    {
+      "start": 7.4,
+      "end": 7.71,
+      "word": "each"
+    },
+    {
+      "start": 7.72,
+      "end": 8.25,
+      "word": "trial"
+    },
+    {
+      "start": 8.35,
+      "end": 8.47,
+      "word": "to(3)"
+    },
+    {
+      "start": 8.48,
+      "end": 8.59,
+      "word": "be"
+    },
+    {
+      "start": 8.6,
+      "end": 9.22,
+      "word": "represented"
+    },
+    {
+      "start": 9.23,
+      "end": 9.33,
+      "word": "as"
+    },
+    {
+      "start": 9.34,
+      "end": 9.38,
+      "word": "a"
+    },
+    {
+      "start": 9.39,
+      "end": 9.93,
+      "word": "lenient"
+    },
+    {
+      "start": 9.94,
+      "end": 10.39,
+      "word": "equate"
+    },
+    {
+      "start": 10.4,
+      "end": 10.72,
+      "word": "and(2)"
+    },
+    {
+      "start": 10.73,
+      "end": 11.03,
+      "word": "cold"
+    },
+    {
+      "start": 11.04,
+      "end": 11.53,
+      "word": "and"
+    },
+    {
+      "start": 11.67,
+      "end": 11.88,
+      "word": "just(2)"
+    },
+    {
+      "start": 11.89,
+      "end": 12.05,
+      "word": "be"
+    },
+    {
+      "start": 12.06,
+      "end": 12.16,
+      "word": "the"
+    },
+    {
+      "start": 12.17,
+      "end": 12.53,
+      "word": "mountain"
+    },
+    {
+      "start": 12.54,
+      "end": 12.75,
+      "word": "has"
+    },
+    {
+      "start": 12.76,
+      "end": 12.8,
+      "word": "a"
+    },
+    {
+      "start": 12.81,
+      "end": 13.19,
+      "word": "lot(2)"
+    },
+    {
+      "start": 13.2,
+      "end": 13.56,
+      "word": "just(2)"
+    },
+    {
+      "start": 13.57,
+      "end": 14.0,
+      "word": "like"
+    },
+    {
+      "start": 14.01,
+      "end": 14.16,
+      "word": "his"
+    },
+    {
+      "start": 14.17,
+      "end": 14.73,
+      "word": "elevation"
+    },
+    {
+      "start": 14.74,
+      "end": 15.18,
+      "word": "changes(2)"
+    },
+    {
+      "start": 15.19,
+      "end": 15.7,
+      "word": "boss"
+    },
+    {
+      "start": 15.84,
+      "end": 15.99,
+      "word": "while"
+    },
+    {
+      "start": 16.0,
+      "end": 16.06,
+      "word": "the"
+    },
+    {
+      "start": 16.07,
+      "end": 16.54,
+      "word": "gentler"
+    },
+    {
+      "start": 16.55,
+      "end": 16.97,
+      "word": "mountain"
+    },
+    {
+      "start": 16.98,
+      "end": 17.16,
+      "word": "has(2)"
+    },
+    {
+      "start": 17.17,
+      "end": 17.2,
+      "word": "a"
+    },
+    {
+      "start": 17.21,
+      "end": 17.7,
+      "word": "small"
+    },
+    {
+      "start": 17.71,
+      "end": 17.9,
+      "word": "us"
+    },
+    {
+      "start": 18.06,
+      "end": 18.34,
+      "word": "because(2)"
+    },
+    {
+      "start": 18.35,
+      "end": 18.9,
+      "word": "elevation"
+    },
+    {
+      "start": 18.91,
+      "end": 19.36,
+      "word": "changes(2)"
+    },
+    {
+      "start": 19.37,
+      "end": 19.71,
+      "word": "more"
+    },
+    {
+      "start": 19.72,
+      "end": 20.25,
+      "word": "slowly"
+    },
+    {
+      "start": 20.35,
+      "end": 20.59,
+      "word": "like"
+    },
+    {
+      "start": 20.6,
+      "end": 21.11,
+      "word": "rotting"
+    },
+    {
+      "start": 21.12,
+      "end": 21.29,
+      "word": "these"
+    },
+    {
+      "start": 21.3,
+      "end": 21.81,
+      "word": "trails"
+    },
+    {
+      "start": 21.82,
+      "end": 22.56,
+      "word": "equations"
+    },
+    {
+      "start": 22.78,
+      "end": 22.88,
+      "word": "we"
+    },
+    {
+      "start": 22.89,
+      "end": 23.02,
+      "word": "can(2)"
+    },
+    {
+      "start": 23.03,
+      "end": 23.35,
+      "word": "better"
+    },
+    {
+      "start": 23.36,
+      "end": 23.76,
+      "word": "understand"
+    },
+    {
+      "start": 23.77,
+      "end": 24.26,
+      "word": "totally"
+    },
+    {
+      "start": 24.27,
+      "end": 24.52,
+      "word": "new(2)"
+    },
+    {
+      "start": 24.53,
+      "end": 25.35,
+      "word": "relationships"
+    },
+    {
+      "start": 25.53,
+      "end": 25.76,
+      "word": "help"
+    },
+    {
+      "start": 25.77,
+      "end": 25.89,
+      "word": "as(2)"
+    },
+    {
+      "start": 25.9,
+      "end": 26.38,
+      "word": "measured"
+    },
+    {
+      "start": 26.39,
+      "end": 26.51,
+      "word": "and"
+    },
+    {
+      "start": 26.52,
+      "end": 26.89,
+      "word": "visual"
+    },
+    {
+      "start": 26.9,
+      "end": 27.52,
+      "word": "exchange"
+    },
+    {
+      "start": 27.53,
+      "end": 27.65,
+      "word": "in"
+    },
+    {
+      "start": 27.66,
+      "end": 27.71,
+      "word": "the"
+    },
+    {
+      "start": 27.72,
+      "end": 28.07,
+      "word": "real"
+    },
+    {
+      "start": 28.08,
+      "end": 28.41,
+      "word": "world"
+    }
+  ],
+  "text": "like us at the(2) two mountain trails writing a(2) different(2) floods ralph klein shop while(2) the(2) other rice is more gradual each trial to(3) be represented as a lenient equate and(2) cold and just(2) be the mountain has a lot(2) just(2) like his elevation changes(2) boss while the gentler mountain has(2) a small us because(2) elevation changes(2) more slowly like rotting these trails equations we can(2) better understand totally new(2) relationships help as(2) measured and visual exchange in the real world"
+}

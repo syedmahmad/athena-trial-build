@@ -1,0 +1,409 @@
+.wall {
+  --cork-base: oklch(0.30 0.05 60);
+  --cork-deep: oklch(0.18 0.04 55);
+  --cork-fleck: oklch(0.20 0.04 50);
+  --thread-red: oklch(0.50 0.22 25);
+  --thread-red-deep: oklch(0.32 0.18 25);
+  --paper: oklch(0.93 0.03 80);
+  --paper-edge: oklch(0.86 0.04 70);
+  --paper-rule: oklch(0.62 0.10 240 / 0.30);
+  --paper-margin: oklch(0.55 0.20 25 / 0.55);
+  --ink: oklch(0.18 0.02 60);
+  --ink-dim: oklch(0.40 0.03 60);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 35%, oklch(0.34 0.06 60 / 0.35), transparent 70%),
+    radial-gradient(ellipse 100% 90% at 50% 100%, oklch(0.10 0.02 50 / 0.85), transparent 80%),
+    var(--cork-base);
+  font-family: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
+  color: var(--ink);
+  perspective: 1800px;
+}
+
+/* Cork texture — layered radial dots at random positions evoke the
+ * pitted surface of a corkboard. Multi-layered with different sizes
+ * and offsets so the eye can't catch the repetition. */
+.cork {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(0.8px 0.8px at 14% 22%, var(--cork-fleck), transparent 60%),
+    radial-gradient(1.2px 1.2px at 73% 18%, var(--cork-deep), transparent 60%),
+    radial-gradient(1px 1px at 32% 78%, var(--cork-fleck), transparent 60%),
+    radial-gradient(0.6px 0.6px at 86% 82%, var(--cork-fleck), transparent 60%),
+    radial-gradient(1.6px 1.6px at 58% 38%, var(--cork-deep), transparent 60%),
+    radial-gradient(0.7px 0.7px at 8% 60%, var(--cork-fleck), transparent 60%),
+    radial-gradient(1.1px 1.1px at 92% 48%, var(--cork-deep), transparent 60%),
+    radial-gradient(0.9px 0.9px at 22% 12%, var(--cork-fleck), transparent 60%),
+    radial-gradient(1px 1px at 64% 64%, var(--cork-deep), transparent 60%),
+    radial-gradient(0.8px 0.8px at 48% 92%, var(--cork-fleck), transparent 60%);
+  background-size:
+    32px 32px, 48px 48px, 28px 28px, 36px 36px, 56px 56px,
+    40px 40px, 44px 44px, 30px 30px, 50px 50px, 38px 38px;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+}
+
+/* Faint vignette darkening the edges of the wall so the cards in
+ * the middle feel lit. */
+.cork::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+
+/* Camera frame — translates the world so the active card centers
+ * in the viewport. The world's children are positioned in
+ * absolute world coordinates centered on (0, 0). */
+.viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  perspective: 2200px;
+}
+
+.world {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* SVG layer for the red thread — overlaid in world coordinates so
+ * paths can use absolute (world-space) (x,y) coordinates to
+ * connect cards. */
+.threads {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  z-index: 3;
+}
+
+.thread {
+  fill: none;
+  stroke: var(--thread-red);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  filter:
+    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 8px oklch(0.50 0.22 25 / 0.30));
+}
+
+.threadShadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.45);
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: blur(2px);
+}
+
+/* Criss-cross extras — slightly thinner, slightly faded so the
+ * primary chain stays the dominant read. */
+.threadExtra {
+  stroke-width: 2;
+  stroke: oklch(0.46 0.20 25 / 0.85);
+  filter:
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 6px oklch(0.50 0.22 25 / 0.22));
+}
+
+.threadShadowExtra {
+  stroke-width: 3;
+}
+
+/* Newly-drawn thread sweeps in: stroke-dasharray initially equals
+ * the path length (so the rendered stroke is a single dash that
+ * matches the whole path), with dashoffset starting at full length
+ * (= invisible). Animate dashoffset 1 → 0 to draw the line in.
+ *
+ * KEY: we use the SVG `pathLength` attribute (set inline on the
+ * path) to normalize the path's logical length to 1, so a fixed
+ * dasharray:1 + dashoffset:1 → 0 works regardless of geometry —
+ * AND we end at dasharray:none so the resting thread is solid (not
+ * dashed). Without this final step the leftover dasharray:1 turns
+ * a curved path into a single dash that may render visually as a
+ * dotted line on some Chromium versions. */
+@keyframes threadDraw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.threadNew {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: threadDraw 0.85s cubic-bezier(0.18, 0.9, 0.25, 1) forwards;
+  animation-delay: 0.15s;
+}
+
+/* When the draw-in animation finishes, drop the dasharray entirely
+ * so the resting stroke is solid. Use a separate tail keyframe at
+ * 0.05s after the draw-in completes. */
+@keyframes threadSettle {
+  to { stroke-dasharray: none; }
+}
+.threadNew {
+  animation:
+    threadDraw 0.85s cubic-bezier(0.18, 0.9, 0.25, 1) 0.15s forwards,
+    threadSettle 0.01s linear 1.05s forwards;
+}
+
+/* ── Index card ──────────────────────────────────────────────── */
+
+/* Outer layer — positions the card so that the pin spot
+ * (slot.x, slot.y) sits exactly at the card's TOP-CENTER, then
+ * statically rotates around that anchor. The card body hangs from
+ * the pin like real paper. Framer's animations live on the inner
+ * .card element so they don't fight this transform. */
+.cardOuter {
+  position: absolute;
+  width: 460px;
+  /* Anchor the top-center to (left, top). */
+  transform: translate(-50%, 0) rotate(var(--card-rot, 0deg));
+  transform-origin: 50% 0%;
+  z-index: 1;
+}
+.cardOuterActive { z-index: 2; }
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  padding: 28px 38px 30px;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-edge) 100%);
+  color: var(--ink);
+  border-radius: 1px;
+  box-shadow:
+    0 1px 0 0 rgba(0, 0, 0, 0.10) inset,
+    0 14px 30px -6px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.30);
+  font-family: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
+  font-size: 18px;
+  line-height: 1.45;
+  /* Index-card horizontal rules */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 27px,
+      var(--paper-rule) 27px,
+      var(--paper-rule) 28px
+    ),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-edge) 100%);
+  isolation: isolate;
+}
+
+/* Red left margin line — classic ruled index card */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 36px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--paper-margin);
+  pointer-events: none;
+}
+
+/* Curl shadow on the lower-right corner — paper has lifted slightly */
+.card::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+  pointer-events: none;
+}
+
+.cardActive {
+  box-shadow:
+    0 1px 0 0 rgba(0, 0, 0, 0.10) inset,
+    0 22px 50px -10px rgba(0, 0, 0, 0.65),
+    0 4px 12px rgba(0, 0, 0, 0.40),
+    0 0 0 1px oklch(0.50 0.10 60 / 0.20);
+}
+
+/* ── Pushpin ──────────────────────────────────────────────── */
+
+/* World-anchored pin — positioned at the pin's actual world
+ * coordinate, rendered AFTER the thread layer so the pin head
+ * paints over the string's terminal point. */
+.pinAnchored {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  /* Centered on its (x, y) world coord. */
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.pinAnchored svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.65));
+}
+
+/* ── Card content ────────────────────────────────────────── */
+
+.cardEyebrow {
+  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.30em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardEyebrow span:first-child {
+  color: oklch(0.50 0.22 25);
+  font-weight: 500;
+}
+
+.cardMath {
+  font-size: 36px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 12px 0;
+  color: var(--ink);
+}
+
+.cardMath :global(.katex) {
+  color: var(--ink) !important;
+}
+.cardMath :global(.katex .mord),
+.cardMath :global(.katex .mrel),
+.cardMath :global(.katex .mbin),
+.cardMath :global(.katex .mop) {
+  color: var(--ink) !important;
+}
+.cardMath :global(.op-target),
+.cardMath :global(.op-target *) { color: var(--ink) !important; }
+.cardMath :global(.op-new),
+.cardMath :global(.op-new *) {
+  color: oklch(0.45 0.18 230) !important;
+}
+.cardMath :global(.op-result),
+.cardMath :global(.op-result *) {
+  color: oklch(0.50 0.22 25) !important;
+}
+.cardMath :global(.op-cancel),
+.cardMath :global(.op-cancel *) {
+  color: oklch(0.55 0.04 60) !important;
+  text-decoration: line-through;
+}
+
+.cardText {
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.cardText em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+.cardCaption {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed oklch(0.55 0.06 60 / 0.5);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-dim);
+  line-height: 1.4;
+}
+
+/* Section heading card — bigger, italic, no math */
+.cardSection {
+  font-family: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
+  font-size: 32px;
+  font-weight: 500;
+  font-style: italic;
+  text-align: center;
+  color: var(--ink);
+  letter-spacing: 0.005em;
+}
+
+.cardSectionSub {
+  margin-top: 8px;
+  font-size: 14px;
+  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-style: normal;
+}
+
+/* Callout card — red string-style accent */
+.cardCallout[data-variant="hint"],
+.cardCallout[data-variant="detailed-hint"] {
+  background: linear-gradient(180deg, oklch(0.95 0.04 80) 0%, oklch(0.88 0.05 70) 100%);
+}
+.cardCallout[data-variant="answer-correct"] {
+  background: linear-gradient(180deg, oklch(0.94 0.06 145) 0%, oklch(0.86 0.07 140) 100%);
+}
+.cardCallout[data-variant="answer-incorrect"] {
+  background: linear-gradient(180deg, oklch(0.94 0.05 25) 0%, oklch(0.88 0.06 25) 100%);
+}
+
+/* ── HUD overlays — corner labels above the wall ─────────── */
+
+.hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hudCorner {
+  position: absolute;
+  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: oklch(0.85 0.04 60 / 0.55);
+}
+.hudCorner.tl { top: 16px; left: 20px; }
+.hudCorner.tr { top: 16px; right: 20px; }
+.hudCorner.bl { bottom: 16px; left: 20px; }
+.hudCorner.br { bottom: 16px; right: 20px; }
+
+.hudCorner span {
+  color: oklch(0.85 0.18 30);
+  font-weight: 500;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 880px) {
+  .card {
+    width: 320px;
+    padding: 40px 22px 22px;
+    font-size: 15px;
+  }
+  .cardMath { font-size: 24px; }
+  .cardText { font-size: 17px; }
+  .cardSection { font-size: 22px; }
+}

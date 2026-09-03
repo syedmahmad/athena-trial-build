@@ -1,0 +1,10 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "",
+    "operation": "solve-everything-at-once",
+    "action": { "type": "write_math", "latex": "x = 5" }
+  }
+]

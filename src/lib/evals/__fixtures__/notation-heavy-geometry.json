@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "two triangles are similar",
+    "operation": "identify",
+    "action": { "type": "write_text", "text": "triangle ABC ~ triangle DEF" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "draw the triangles",
+    "operation": "plot",
+    "action": { "type": "geometry", "figures": [] }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "corresponding sides proportional",
+    "operation": "state",
+    "action": { "type": "write_math", "latex": "\\frac{AB}{DE} = \\frac{BC}{EF} = \\frac{AC}{DF}" }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "highlight the ratio",
+    "operation": "highlight",
+    "action": { "type": "highlight", "targetStepIndex": 2, "color": "#fbbf24" }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "operation": "setup",
+    "action": { "type": "write_math", "latex": "y = mx + b" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 0,
+    "narration": "the slope is 3 because m is the coefficient of x.",
+    "action": {
+      "type": "predict",
+      "question": "What is the slope of $y = 3x + 5$?",
+      "options": ["3", "5", "-3", "x"],
+      "correctOption": 0,
+      "explanation": "In y = mx + b the coefficient of x is the slope.",
+      "hint": "Match the equation to y = mx + b."
+    }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 0,
+    "narration": "the y-intercept is seven because it is the constant added to one-half x.",
+    "action": {
+      "type": "check_in",
+      "question": "For $y = \\tfrac{1}{2}x + 7$, what is the y-intercept?",
+      "options": ["7", "1/2", "0", "-7"],
+      "correctOption": 0,
+      "explanation": "The constant term in slope-intercept form is the y-intercept."
+    }
+  }
+]

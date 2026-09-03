@@ -1,0 +1,193 @@
+{
+  "manifest": {
+    "version": "0.1.0",
+    "lesson_ref": {
+      "topic_slug": "test",
+      "subtopic_slug": "new-primitives",
+      "lesson_id": null,
+      "is_custom": false
+    },
+    "topic": "New code primitives — visual regression test",
+    "concept": {
+      "math_concept": "Validation of 5 new code-tier primitives added to extend the Remotion pipeline",
+      "real_world_analog": "n/a (this is a test fixture)",
+      "style_strategy": "literal"
+    },
+    "style": {
+      "palette": "white_on_black",
+      "background_motif": "wireframe_terrain",
+      "anchor_objects": []
+    },
+    "narration": {
+      "script": "Five new primitives: coordinate axes, fraction compare, callout grid, scale bar, and coin flip.",
+      "voice": {
+        "provider": "elevenlabs",
+        "voice_id": "hpp4J3VqNfWAUOO0d1Us"
+      },
+      "audio_url": null,
+      "audio_duration_s": null,
+      "word_timings": []
+    },
+    "beats": [
+      {
+        "id": "b1_coordinate_axes",
+        "start_s": 0.0,
+        "end_s": 5.0,
+        "narration_span": "Coordinate axes — the foundation for any plot.",
+        "visual": {
+          "primary": "Coordinate axes with grid + ticks + quadrant highlight",
+          "renderer_hint": {
+            "code": {
+              "primitive": "coordinate_axes",
+              "props": {
+                "x_range": [-5, 5],
+                "y_range": [-5, 5],
+                "tick_interval": 1,
+                "show_grid": true,
+                "show_origin_label": true,
+                "axis_label_x": "x",
+                "axis_label_y": "y",
+                "highlight_quadrant": 1
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "coordinate_axes — first quadrant highlighted",
+            "position": "bottom_center",
+            "appear_s": 0.3,
+            "disappear_s": 4.5
+          }
+        ]
+      },
+      {
+        "id": "b2_fraction_compare",
+        "start_s": 5.0,
+        "end_s": 10.0,
+        "narration_span": "Compare two fractions side by side.",
+        "visual": {
+          "primary": "Fraction comparison — 3/4 vs 1/2 (bar style)",
+          "renderer_hint": {
+            "code": {
+              "primitive": "fraction_compare",
+              "props": {
+                "left": { "num": 3, "denom": 4, "label": "three-quarters" },
+                "right": { "num": 1, "denom": 2, "label": "one-half" },
+                "operator": "auto",
+                "style": "bar"
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "fraction_compare — bar style, auto operator",
+            "position": "bottom_center",
+            "appear_s": 0.3,
+            "disappear_s": 4.5
+          }
+        ]
+      },
+      {
+        "id": "b3_callout_grid",
+        "start_s": 10.0,
+        "end_s": 15.0,
+        "narration_span": "Grid of takeaways, sequentially revealed.",
+        "visual": {
+          "primary": "Callout grid — 2x2 with one primary accent",
+          "renderer_hint": {
+            "code": {
+              "primitive": "callout_grid",
+              "props": {
+                "layout": "2x2",
+                "cells": [
+                  { "heading": "Balance", "body": "Both sides stay equal" },
+                  { "heading": "Isolate", "body": "Get x alone", "accent": "primary" },
+                  { "heading": "Inverse", "body": "Undo each operation" },
+                  { "heading": "Check", "body": "Substitute to verify" }
+                ],
+                "stagger_ms": 220
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "callout_grid — 2x2, primary accent on Isolate",
+            "position": "bottom_center",
+            "appear_s": 0.3,
+            "disappear_s": 4.5
+          }
+        ]
+      },
+      {
+        "id": "b4_scale_bar",
+        "start_s": 15.0,
+        "end_s": 20.0,
+        "narration_span": "Three bars — magnitude with auto ratio.",
+        "visual": {
+          "primary": "Scale bar — three values with simplified ratio",
+          "renderer_hint": {
+            "code": {
+              "primitive": "scale_bar",
+              "props": {
+                "bars": [
+                  { "value": 6, "label": "Apples" },
+                  { "value": 3, "label": "Oranges" },
+                  { "value": 9, "label": "Pears" }
+                ],
+                "show_ratio": true
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "scale_bar — counts up + ratio",
+            "position": "bottom_center",
+            "appear_s": 0.3,
+            "disappear_s": 4.5
+          }
+        ]
+      },
+      {
+        "id": "b5_coin_flip",
+        "start_s": 20.0,
+        "end_s": 28.0,
+        "narration_span": "Coin flip — sample space with probabilities.",
+        "visual": {
+          "primary": "Coin flip — 6 outcomes with probability summary",
+          "renderer_hint": {
+            "code": {
+              "primitive": "coin_flip",
+              "props": {
+                "outcomes": ["H", "T", "H", "H", "T", "H"],
+                "show_probability": true,
+                "flip_duration_ms": 500,
+                "landing_dwell_ms": 400
+              }
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "caption",
+            "content": "coin_flip — sequence + tally + probability",
+            "position": "bottom_center",
+            "appear_s": 0.3,
+            "disappear_s": 7.5
+          }
+        ]
+      }
+    ],
+    "qa_constraints": {
+      "max_dead_frame_seconds": 1.0,
+      "dead_frame_brightness_threshold": 10.0
+    }
+  }
+}

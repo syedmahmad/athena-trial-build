@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "subtract three from both sides",
+    "operation": "subtract",
+    "operand": "3",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "exprBefore": "2*x + 3 = 7",
+    "exprAfter": "2*x + 3 - 3 = 7 - 3",
+    "action": { "type": "write_math", "latex": "2x + 3 - 3 = 7 - 3" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "simplify — WRONG: says 7 minus 3 is 5",
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "exprBefore": "2*x + 3 - 3 = 7 - 3",
+    "exprAfter": "2*x = 5",
+    "action": { "type": "write_math", "latex": "2x = 5" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "",
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "exprAfter": "2*x = 5",
+    "action": { "type": "write_math", "latex": "2x = \\htmlClass{op-result}{5}" }
+  }
+]

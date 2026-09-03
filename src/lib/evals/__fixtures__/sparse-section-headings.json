@@ -1,0 +1,101 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "action": { "type": "section_heading", "text": "Solve the equation" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "start with the equation",
+    "operation": "setup",
+    "exprAfter": "2*x + 3 = 7",
+    "action": { "type": "write_math", "latex": "2x + 3 = 7" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "subtract three from both sides",
+    "operation": "subtract",
+    "operand": "3",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "exprBefore": "2*x + 3 = 7",
+    "exprAfter": "2*x + 3 - 3 = 7 - 3",
+    "action": {
+      "type": "write_math",
+      "latex": "2x + 3 \\htmlClass{op-new}{- 3} = 7 \\htmlClass{op-new}{- 3}"
+    }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "the threes on the left cancel and seven minus three is four",
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "exprBefore": "2*x + 3 - 3 = 7 - 3",
+    "exprAfter": "2*x = 4",
+    "action": {
+      "type": "write_math",
+      "latex": "2x \\htmlClass{op-cancel}{+ 3 - 3} = \\htmlClass{op-cancel}{7 - 3}"
+    }
+  },
+  {
+    "id": 4,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "we get 2x equals 4",
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "exprAfter": "2*x = 4",
+    "action": { "type": "write_math", "latex": "2x = \\htmlClass{op-result}{4}" }
+  },
+  {
+    "id": 5,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "divide both sides by two",
+    "operation": "divide",
+    "operand": "2",
+    "operationGroupId": "g2",
+    "phase": "apply",
+    "exprBefore": "2*x = 4",
+    "exprAfter": "(2*x)/2 = 4/2",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-new}{\\frac{2x}{2}} = \\htmlClass{op-new}{\\frac{4}{2}}"
+    }
+  },
+  {
+    "id": 6,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "the two over two cancels and four over two is two",
+    "operation": "simplify",
+    "operationGroupId": "g2",
+    "phase": "collapse",
+    "exprBefore": "(2*x)/2 = 4/2",
+    "exprAfter": "x = 2",
+    "action": {
+      "type": "write_math",
+      "latex": "\\htmlClass{op-cancel}{\\frac{2x}{2}} = \\htmlClass{op-cancel}{\\frac{4}{2}}"
+    }
+  },
+  {
+    "id": 7,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "x equals two",
+    "operation": "conclude",
+    "operationGroupId": "g2",
+    "phase": "state",
+    "exprAfter": "x = 2",
+    "action": { "type": "write_math", "latex": "x = \\htmlClass{op-result}{2}" }
+  }
+]

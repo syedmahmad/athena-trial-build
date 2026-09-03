@@ -1,0 +1,68 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "start with the equation",
+    "operation": "setup",
+    "action": { "type": "write_math", "latex": "y - 5 = 3(x - 2)" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "distribute the three",
+    "operation": "distribute",
+    "compact": true,
+    "action": { "type": "write_math", "latex": "y - 5 = 3x - 6" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "to isolate y we need to move the constant",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "y - 5 = 3x - 6" }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "rewriting after combining constants",
+    "operation": "identify",
+    "compact": true,
+    "action": { "type": "write_math", "latex": "y = 3x - 6 + 5" }
+  },
+  {
+    "id": 4,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the constants give negative one",
+    "operation": "state",
+    "action": { "type": "write_math", "latex": "y = 3x - 1" }
+  },
+  {
+    "id": 5,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the slope is three",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "m = 3" }
+  },
+  {
+    "id": 6,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the y-intercept is negative one",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "b = -1" }
+  },
+  {
+    "id": 7,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "this is slope-intercept form",
+    "operation": "conclude",
+    "action": { "type": "write_math", "latex": "y = 3x - 1" }
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "subtract three from both sides",
+    "operation": "subtract",
+    "operand": "3",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "exprBefore": "2*x = 8",
+    "exprAfter": "x = 4",
+    "action": {
+      "type": "write_math",
+      "latex": "2x = 8 \\Rightarrow x = 4"
+    }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "we cancelled",
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "exprBefore": "x = 4",
+    "exprAfter": "x = 4",
+    "action": { "type": "write_math", "latex": "x = 4" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "x equals 4",
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "exprAfter": "x = 4",
+    "action": { "type": "write_math", "latex": "x = \\htmlClass{op-result}{4}" }
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "metabase-db",
+  "description": "Metabase application database (dashboards, questions, users, audit). App-DB only; analytics data stays in Supabase.",
+  "type": "postgresql",
+  "version": "16-latest",
+  "infrastructure": { "architecture": "x86" },
+  "billing": {
+    "deploymentPlan": "nf-compute-20",
+    "storage": 4096,
+    "replicas": 1
+  },
+  "tlsEnabled": false,
+  "externalAccessEnabled": false
+}

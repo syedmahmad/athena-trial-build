@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "start",
+    "operation": "setup",
+    "action": { "type": "write_math", "latex": "2x + 3 = 7" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "subtract 3",
+    "operation": "subtract",
+    "operand": "3",
+    "compact": true,
+    "action": { "type": "write_math", "latex": "2x = 4" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "divide 2",
+    "operation": "divide",
+    "operand": "2",
+    "compact": true,
+    "action": { "type": "write_math", "latex": "x = 2" }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "done",
+    "operation": "conclude",
+    "action": { "type": "write_math", "latex": "x = \\htmlClass{op-result}{2}" }
+  }
+]

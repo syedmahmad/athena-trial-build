@@ -1,0 +1,274 @@
+{
+  "version": "0.1.0",
+  "lesson_ref": {
+    "topic_slug": "algebra",
+    "subtopic_slug": "linear-equations-one-variable",
+    "lesson_id": null,
+    "is_custom": false
+  },
+  "topic": "Linear equations with one variable",
+  "concept": {
+    "math_concept": "Slope as rise over run; two lines with different slopes (y = 1.75x vs y = 0.65x) model two trails of different steepness.",
+    "real_world_analog": "A steep mountain trail vs a gentler mountain trail. The slope of the line equals the slope of the trail.",
+    "style_strategy": "mixed"
+  },
+  "style": {
+    "palette": "white_on_black",
+    "background_motif": "wireframe_terrain",
+    "anchor_objects": [
+      {
+        "id": "hiker",
+        "description": "A single hiker figure with backpack viewed from behind, white line drawing on transparent background, technical illustration style, no facial detail, neutral silhouette suitable for compositing into mountain terrain. ~720px tall."
+      }
+    ]
+  },
+  "narration": {
+    "script": "A steep trail climbs sharply. A gentler trail has a smaller slope, because elevation changes more slowly along its path. We can describe each slope mathematically as rise over run \u2014 how much we climb for every step forward.",
+    "voice": {
+      "provider": "elevenlabs",
+      "voice_id": "${ELEVENLABS_VOICE_ID}"
+    },
+    "audio_url": null,
+    "audio_duration_s": null,
+    "word_timings": []
+  },
+  "beats": [
+    {
+      "id": "b1_steep_establish",
+      "start_s": 0.0,
+      "end_s": 3.0,
+      "narration_span": "A steep trail climbs sharply.",
+      "visual": {
+        "primary": "Camera arrives at a tall, sharp wireframe mountain peak in white linework on black. Slow push-in toward the peak. Hiker silhouette small at the base, suggesting scale.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "wireframe_mountain",
+            "props": {
+              "peak_height": 0.85,
+              "peak_sharpness": 0.9,
+              "camera": "slow_push_in",
+              "show_grid_floor": true
+            },
+            "anchor_id": "hiker"
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "A steep trail climbs sharply.",
+          "position": "bottom_center",
+          "appear_s": 0.2
+        }
+      ]
+    },
+    {
+      "id": "b2_ascend_develop",
+      "start_s": 3.0,
+      "end_s": 13.0,
+      "narration_span": "(no new narration \u2014 visual development; previous caption persists)",
+      "visual": {
+        "primary": "Camera continues pushing in toward the steep peak. Wireframe particles flow upward along the slope, suggesting the climb. Hiker silhouette ascends a few steps. Caption from b1 remains on screen.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "wireframe_mountain",
+            "props": {
+              "peak_height": 0.85,
+              "peak_sharpness": 0.9,
+              "camera": "continued_push_in",
+              "particle_flow_up": true,
+              "show_grid_floor": true
+            },
+            "anchor_id": "hiker"
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "A steep trail climbs sharply.",
+          "position": "bottom_center",
+          "appear_s": 0.0,
+          "disappear_s": 9.0
+        }
+      ]
+    },
+    {
+      "id": "b3_gentle_reveal",
+      "start_s": 13.0,
+      "end_s": 17.5,
+      "narration_span": "A gentler trail has a smaller slope,",
+      "visual": {
+        "primary": "Camera orbits right to reveal a second, lower and more rolling wireframe terrain. Both peaks now visible.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "wireframe_mountain",
+            "props": {
+              "peak_height": 0.85,
+              "secondary_peak_height": 0.35,
+              "camera": "orbit_right",
+              "show_both": true
+            },
+            "anchor_id": "hiker"
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "A gentler trail has a smaller slope,",
+          "position": "bottom_center",
+          "appear_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": "b4_axes_and_lines",
+      "start_s": 17.5,
+      "end_s": 22.0,
+      "narration_span": "because elevation changes more slowly along its path.",
+      "visual": {
+        "primary": "3D coordinate axes fade in over the terrain. Two animated lines draw themselves from the origin: y=1.75x climbs steeply, y=0.65x climbs gently. Both labels appear as the lines settle.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "animated_line",
+            "props": {
+              "lines": [
+                {
+                  "label": "y = 1.75x",
+                  "slope": 1.75,
+                  "color": "#ffffff",
+                  "draw_in_ms": 1800
+                },
+                {
+                  "label": "y = 0.65x",
+                  "slope": 0.65,
+                  "color": "#ffffff",
+                  "draw_in_ms": 1800
+                }
+              ],
+              "axes_fade_in_ms": 1200,
+              "overlay_on": "wireframe_terrain"
+            },
+            "anchor_id": "hiker"
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "The gentler mountain has a smaller slope because elevation changes more slowly.",
+          "position": "bottom_center",
+          "appear_s": 0.2
+        },
+        {
+          "kind": "math",
+          "content": "y = 1.75x",
+          "position": "top_right",
+          "appear_s": 1.5
+        },
+        {
+          "kind": "math",
+          "content": "y = 0.65x",
+          "position": "center",
+          "appear_s": 2.5
+        }
+      ]
+    },
+    {
+      "id": "b5_rise_over_run",
+      "start_s": 22.0,
+      "end_s": 28.0,
+      "narration_span": "We can describe each slope mathematically as rise over run \u2014",
+      "visual": {
+        "primary": "Zoom into the gentler line. A right-triangle marker is drawn under the line showing rise and run as labeled segments. The slope formula appears next to it.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "rise_run_callout",
+            "props": {
+              "line_slope": 0.65,
+              "show_rise_run_triangle": true,
+              "rise_label": "rise",
+              "run_label": "run",
+              "formula_latex": "m = \\frac{\\text{rise}}{\\text{run}} = 0.65"
+            }
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "caption",
+          "content": "Slope equals rise over run.",
+          "position": "bottom_center",
+          "appear_s": 0.5
+        },
+        {
+          "kind": "math",
+          "content": "m = \\frac{\\text{rise}}{\\text{run}}",
+          "position": "top_right",
+          "appear_s": 3.0
+        },
+        {
+          "kind": "math",
+          "content": "m = 0.65",
+          "position": "top_right",
+          "appear_s": 6.0
+        }
+      ]
+    },
+    {
+      "id": "b6_outro_callouts",
+      "start_s": 28.0,
+      "end_s": 32.0,
+      "narration_span": "how much we climb for every step forward.",
+      "visual": {
+        "primary": "Pull back to reveal the full landscape transformed into an undulating wireframe wave. Four small text callouts fade in around the perimeter linking the concept to broader themes.",
+        "renderer_hint": {
+          "code": {
+            "primitive": "outro_callouts",
+            "props": {
+              "background": "particle_wave_terrain",
+              "callouts_top_left": "LINEAR EQUATIONS \u2014 Model the relationship between change in distance and elevation.",
+              "callouts_top_right": "VISUALIZE CHANGE \u2014 Transform real-world changes into patterns we can see and analyze.",
+              "callouts_bottom_left": "REAL-WORLD CONNECTION \u2014 Mountains, motion, and space follow patterns we can describe mathematically.",
+              "callouts_bottom_right": "MEASURE AND PREDICT \u2014 Use slope to measure rate of change and predict what comes next."
+            }
+          }
+        }
+      },
+      "overlays": [
+        {
+          "kind": "callout",
+          "content": "LINEAR EQUATIONS \u2014 Model the relationship between change in distance and elevation.",
+          "position": "top_left",
+          "appear_s": 1.0
+        },
+        {
+          "kind": "callout",
+          "content": "VISUALIZE CHANGE \u2014 Transform real-world changes into patterns we can see and analyze.",
+          "position": "top_right",
+          "appear_s": 1.5
+        },
+        {
+          "kind": "callout",
+          "content": "REAL-WORLD CONNECTION \u2014 Mountains, motion, and space follow patterns we can describe mathematically.",
+          "position": "bottom_center",
+          "appear_s": 2.5
+        }
+      ]
+    }
+  ],
+  "qa_constraints": {
+    "max_dead_frame_seconds": 1.0,
+    "dead_frame_brightness_threshold": 10.0
+  },
+  "_reference_notes": {
+    "source": "Reconstructed from Example 1.mp4 (uploaded) \u2014 Veo-generated, 32s, 1280x720, animation runs full length (no dead frames).",
+    "reconstruction_method": "Audio extracted, pocketsphinx-transcribed (noisy), corrected from visible bottom-overlay captions in the source video. Math values (y=1.75x, y=0.65x, m=0.65) read directly from source frames at t=18s and t=24s.",
+    "outstanding": [
+      "Re-run real Whisper on a machine that can reach HF/OpenAI CDN to confirm exact wording.",
+      "Beat boundaries are best-guess from caption appearance \u2014 refine after Whisper word-timings land.",
+      "topic_slug/subtopic_slug confirmed against agents/content_workflow.py _make_slug() derivation: 'Algebra' / 'Linear equations (one variable)' \u2192 'algebra' / 'linear-equations-one-variable'."
+    ]
+  }
+}

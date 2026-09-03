@@ -1,0 +1,52 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the slope formula",
+    "operation": "setup",
+    "action": {
+      "type": "write_math",
+      "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1}"
+    }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 800,
+    "narration": "plug in all four values at once — this is the oversize case",
+    "operation": "substitute",
+    "operationGroupId": "g1",
+    "phase": "apply",
+    "action": {
+      "type": "write_math",
+      "latex": "m = \\frac{\\htmlClass{op-new dst-y2}{8} - \\htmlClass{op-new dst-y1}{2}}{\\htmlClass{op-new dst-x2}{4} - \\htmlClass{op-new dst-x1}{1}}"
+    }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "simplify numerator and denominator",
+    "operation": "simplify",
+    "operationGroupId": "g1",
+    "phase": "collapse",
+    "action": {
+      "type": "write_math",
+      "latex": "m = \\frac{6}{3}"
+    }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the slope is two",
+    "operation": "state",
+    "operationGroupId": "g1",
+    "phase": "state",
+    "action": {
+      "type": "write_math",
+      "latex": "m = 2"
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 0,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "we have the equation",
+    "operation": "setup",
+    "action": { "type": "write_math", "latex": "2x + 3 = 7" }
+  },
+  {
+    "id": 1,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "let's restate that for emphasis",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "2x + 3 = 7" }
+  },
+  {
+    "id": 2,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "subtract three from both sides",
+    "operation": "subtract",
+    "phase": "apply",
+    "operationGroupId": "g1",
+    "exprBefore": "2x + 3 = 7",
+    "exprAfter": "2x = 4",
+    "action": { "type": "write_math", "latex": "2x + 3 \\htmlClass{op-cancel}{- 3} = 7 \\htmlClass{op-new}{- 3}" }
+  },
+  {
+    "id": 3,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "the threes cancel on the left and seven minus three is four",
+    "operation": "subtract",
+    "phase": "collapse",
+    "operationGroupId": "g1",
+    "exprBefore": "2x + 3 = 7",
+    "exprAfter": "2x = 4",
+    "action": { "type": "write_math", "latex": "2x = 4" }
+  },
+  {
+    "id": 4,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "now we have a simpler equation to solve",
+    "operation": "subtract",
+    "phase": "state",
+    "operationGroupId": "g1",
+    "exprBefore": "2x + 3 = 7",
+    "exprAfter": "2x = 4",
+    "action": { "type": "write_math", "latex": "2x = 4" }
+  },
+  {
+    "id": 5,
+    "delayMs": 0,
+    "durationMs": 600,
+    "narration": "let's pause to look at where we are",
+    "operation": "identify",
+    "action": { "type": "write_math", "latex": "2x = 4" }
+  }
+]
