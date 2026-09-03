@@ -20,6 +20,14 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
+# Must run before any app.* import: several agent modules build Agno agents
+# at import time via claude(), which reads MAJORDOMO_ENABLED/ANTHROPIC_API_KEY
+# from the environment. Loading .env after those imports (as this used to)
+# means MAJORDOMO_ENABLED defaults to "1" during import and every agent
+# module crashes on load unless MAJORDOMO_API_KEY happens to already be
+# exported in the shell.
+load_dotenv()
+
 from app.utils.llm_client import anthropic_client
 from app.run_time.sat.tutoring_agent import ask_tutor_stream, build_tutoring_agent
 from app.run_time.sat.quiz_tutor_agent import ask_quiz_tutor_stream, build_quiz_tutor_agent
@@ -73,9 +81,6 @@ from app.reports.report_pdf_agent import analyze_report
 from app.studio.router import router as studio_router
 from app.educator.router import router as educator_router
 from eval_math_shim import task_equivalence
-
-load_dotenv()
-
 from app.cron.session_reminders import session_reminder_loop
 
 
