@@ -56,6 +56,43 @@ export async function POST(req: Request) {
     timeElapsedSeconds,
   });
 
+  // Streak freeze: if completing today leaves exactly one day's gap since
+  // the last completed quest (yesterday was missed, the day before was
+  // not), and the student still has their one-time token, spend it now to
+  // cover that specific missed date. getDashboardData's streak walk reads
+  // streak_freeze_used_date back out to treat that gap as covered. Only
+  // ever protects a single missed day — a real multi-day gap still breaks
+  // the streak, matching "softens it without gutting the urgency."
+  let streakFreezeJustUsed: string | null = null;
+  if (user.streakFreezeAvailable) {
+    const todayStr = new Date().toISOString().split("T")[0];
+    const { data: priorQuests } = await supabase
+      .from("daily_quests")
+      .select("quest_date")
+      .eq("user_id", user.id)
+      .eq("status", "completed")
+      .lt("quest_date", todayStr)
+      .order("quest_date", { ascending: false })
+      .limit(1);
+
+    const priorDate = priorQuests?.[0]?.quest_date as string | undefined;
+    if (priorDate) {
+      const gapDays = Math.round(
+        (new Date(todayStr).getTime() - new Date(priorDate).getTime()) /
+          (1000 * 60 * 60 * 24)
+      );
+      if (gapDays === 2) {
+        const missedDate = new Date(priorDate);
+        missedDate.setDate(missedDate.getDate() + 1);
+        streakFreezeJustUsed = missedDate.toISOString().split("T")[0];
+        await updateUser(clerkId, {
+          streakFreezeAvailable: false,
+          streakFreezeUsedDate: streakFreezeJustUsed,
+        });
+      }
+    }
+  }
+
   // Recompute section scores from all historical data
   const { data: rwAnswers } = await (supabase as any)
     .from("quiz_answers")
@@ -135,5 +172,6 @@ export async function POST(req: Request) {
       math: mathScore,
       composite,
     },
+    streakFreezeUsed: streakFreezeJustUsed,
   });
 }

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { useFriends, useInviteFriend, useRespondToFriendRequest } from "@/hooks/use-friends";
 
 type FriendScore = {
   id: string;
@@ -25,30 +25,17 @@ const AVATAR_COLORS = [
 export function FriendsLeaderboard({ friends }: { friends: FriendScore[] }) {
   const [inviteEmail, setInviteEmail] = useState("");
   const [showInvite, setShowInvite] = useState(false);
-  const [inviting, setInviting] = useState(false);
 
-  async function handleInvite() {
+  const { incoming } = useFriends();
+  const inviteMutation = useInviteFriend();
+  const respondMutation = useRespondToFriendRequest();
+
+  function handleInvite() {
     if (!inviteEmail.trim()) return;
-    setInviting(true);
-    try {
-      const res = await fetch("/api/friends/invite", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: inviteEmail.trim() }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        toast.error(data.error || "Failed to send invite");
-        return;
-      }
-      toast.success("Friend request sent!");
-      setInviteEmail("");
-      setShowInvite(false);
-    } catch {
-      toast.error("Failed to send invite");
-    } finally {
-      setInviting(false);
-    }
+    inviteMutation.mutate(
+      { email: inviteEmail.trim() },
+      { onSuccess: () => { setInviteEmail(""); setShowInvite(false); } }
+    );
   }
 
   const sorted = [...friends].sort((a, b) => b.totalScore - a.totalScore);
@@ -58,6 +45,44 @@ export function FriendsLeaderboard({ friends }: { friends: FriendScore[] }) {
       <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         Friends&apos; Scores
       </h3>
+
+      {incoming.length > 0 && (
+        <div className="mb-4 space-y-2 border-b pb-4">
+          {incoming.map((req) => (
+            <div key={req.friendshipId} className="flex items-center gap-2">
+              <UserPlus className="h-3.5 w-3.5 shrink-0 text-primary" />
+              <p className="min-w-0 flex-1 truncate text-sm">
+                <span className="font-medium">
+                  {req.displayName || "Someone"}
+                </span>{" "}
+                <span className="text-muted-foreground">wants to be friends</span>
+              </p>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-6 w-6 text-athena-success"
+                disabled={respondMutation.isPending}
+                onClick={() =>
+                  respondMutation.mutate({ friendshipId: req.friendshipId, action: "accept" })
+                }
+              >
+                <Check className="h-4 w-4" />
+              </Button>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-6 w-6 text-destructive"
+                disabled={respondMutation.isPending}
+                onClick={() =>
+                  respondMutation.mutate({ friendshipId: req.friendshipId, action: "decline" })
+                }
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {sorted.length === 0 ? (
         <p className="mb-4 text-sm text-muted-foreground">
@@ -100,8 +125,8 @@ export function FriendsLeaderboard({ friends }: { friends: FriendScore[] }) {
             onKeyDown={(e) => e.key === "Enter" && handleInvite()}
             className="flex-1 border bg-background px-3 py-1.5 text-sm outline-none focus:border-primary"
           />
-          <Button size="sm" onClick={handleInvite} disabled={inviting}>
-            {inviting ? "..." : "Send"}
+          <Button size="sm" onClick={handleInvite} disabled={inviteMutation.isPending}>
+            {inviteMutation.isPending ? "..." : "Send"}
           </Button>
         </div>
       ) : (

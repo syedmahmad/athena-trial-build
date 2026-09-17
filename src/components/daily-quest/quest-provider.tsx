@@ -10,10 +10,17 @@ import type { QuestionPhase } from "@/components/quiz/types";
 type Props = {
   quest: DailyQuest;
   problems: DailyQuestProblemWithDetails[];
+  /** Where "back to dashboard" / exit actions should land — /sat/dashboard
+   *  when entered from the SAT surface (?sat=1 on /quest), /dashboard
+   *  otherwise. Computed once by the layout (which owns the URL) and
+   *  threaded through context so children don't need their own
+   *  searchParams read, which wouldn't survive navigating to
+   *  /quest/[problemNumber] anyway. */
+  dashboardHref: string;
   children: React.ReactNode;
 };
 
-export function QuestProvider({ quest, problems, children }: Props) {
+export function QuestProvider({ quest, problems, dashboardHref, children }: Props) {
   const [currentIndex, setCurrentIndex] = useState(() => {
     // Resume from first unanswered problem
     const firstUnanswered = problems.findIndex((p) => p.isCorrect === null);
@@ -218,6 +225,7 @@ export function QuestProvider({ quest, problems, children }: Props) {
       value={{
         quest,
         problems,
+        dashboardHref,
         currentIndex,
         answers,
         lockedIds,

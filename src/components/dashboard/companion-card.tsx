@@ -5,7 +5,7 @@ import { Heart, MessageCircle } from "lucide-react";
 
 export function CompanionCard() {
   return (
-    <Link href="/mentor">
+    <Link href="/mentor?sat=1">
       <div className="group cursor-pointer border bg-card p-5 transition-colors hover:border-primary/30">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center bg-pink-500/10">

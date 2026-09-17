@@ -20,7 +20,7 @@ SAT_SUBJECTS = {"math", "reading-writing"}
 
 topic_agent = Agent(
     name="SAT Topic Generator",
-    model=claude(id="claude-sonnet-4-20250514", feature="pregen-topic"),
+    model=claude(id="claude-sonnet-4-6", feature="pregen-topic"),
     description="You generate comprehensive SAT topic metadata.",
     instructions=[
         "You are an expert SAT curriculum designer.",
@@ -81,7 +81,7 @@ def _get_general_topic_agent() -> Agent:
     if _general_topic_agent is None:
         _general_topic_agent = Agent(
             name="Academic Topic Generator",
-            model=claude(id="claude-sonnet-4-20250514", feature="pregen-topic"),
+            model=claude(id="claude-sonnet-4-6", feature="pregen-topic"),
             description="You generate comprehensive academic topic metadata.",
             instructions=_GENERAL_TOPIC_INSTRUCTIONS,
             markdown=False,

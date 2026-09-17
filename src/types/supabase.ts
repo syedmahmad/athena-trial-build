@@ -7,10 +7,30 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.1"
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
   public: {
     Tables: {
@@ -270,17 +290,17 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "educator_assignments_teacher_id_fkey"
-            columns: ["teacher_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "educator_assignments_class_id_fkey"
             columns: ["class_id"]
             isOneToOne: false
             referencedRelation: "educator_classes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "educator_assignments_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -344,17 +364,17 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "educator_parent_reports_teacher_id_fkey"
-            columns: ["teacher_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "educator_parent_reports_student_id_fkey"
             columns: ["student_id"]
             isOneToOne: false
             referencedRelation: "educator_students"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "educator_parent_reports_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -392,8 +412,22 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "educator_students_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "educator_classes"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "educator_students_teacher_id_fkey"
             columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "educator_students_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -462,6 +496,13 @@ export type Database = {
             columns: ["student_id"]
             isOneToOne: false
             referencedRelation: "educator_students"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "educator_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -709,6 +750,44 @@ export type Database = {
         }
         Relationships: []
       }
+      infographics: {
+        Row: {
+          brief: Json
+          created_at: string
+          id: string
+          image_url: string | null
+          status: string
+          subtopic_id: string
+          updated_at: string
+        }
+        Insert: {
+          brief?: Json
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          status?: string
+          subtopic_id: string
+          updated_at?: string
+        }
+        Update: {
+          brief?: Json
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          status?: string
+          subtopic_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "infographics_subtopic_id_subtopics_id_fk"
+            columns: ["subtopic_id"]
+            isOneToOne: true
+            referencedRelation: "subtopics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       learning_queue: {
         Row: {
           added_during: string
@@ -906,94 +985,6 @@ export type Database = {
           },
         ]
       }
-      podcast_scripts: {
-        Row: {
-          created_at: string
-          estimated_duration_minutes: number | null
-          has_guest: boolean
-          id: string
-          lines: Json
-          speakers: Json
-          status: string
-          subtopic_id: string
-          summary: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          estimated_duration_minutes?: number | null
-          has_guest?: boolean
-          id?: string
-          lines?: Json
-          speakers?: Json
-          status?: string
-          subtopic_id: string
-          summary?: string
-          title?: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          estimated_duration_minutes?: number | null
-          has_guest?: boolean
-          id?: string
-          lines?: Json
-          speakers?: Json
-          status?: string
-          subtopic_id?: string
-          summary?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "podcast_scripts_subtopic_id_subtopics_id_fk"
-            columns: ["subtopic_id"]
-            isOneToOne: true
-            referencedRelation: "subtopics"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      infographics: {
-        Row: {
-          brief: Json
-          created_at: string
-          id: string
-          image_url: string | null
-          status: string
-          subtopic_id: string
-          updated_at: string
-        }
-        Insert: {
-          brief?: Json
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          status?: string
-          subtopic_id: string
-          updated_at?: string
-        }
-        Update: {
-          brief?: Json
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          status?: string
-          subtopic_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "infographics_subtopic_id_subtopics_id_fk"
-            columns: ["subtopic_id"]
-            isOneToOne: true
-            referencedRelation: "subtopics"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       onboarding_progress: {
         Row: {
           created_at: string
@@ -1028,6 +1019,56 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: true
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      podcast_scripts: {
+        Row: {
+          created_at: string
+          estimated_duration_minutes: number | null
+          has_guest: boolean
+          id: string
+          lines: Json
+          speakers: Json
+          status: string
+          subtopic_id: string
+          summary: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          estimated_duration_minutes?: number | null
+          has_guest?: boolean
+          id?: string
+          lines: Json
+          speakers: Json
+          status?: string
+          subtopic_id: string
+          summary: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          estimated_duration_minutes?: number | null
+          has_guest?: boolean
+          id?: string
+          lines?: Json
+          speakers?: Json
+          status?: string
+          subtopic_id?: string
+          summary?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "podcast_scripts_subtopic_id_subtopics_id_fk"
+            columns: ["subtopic_id"]
+            isOneToOne: true
+            referencedRelation: "subtopics"
             referencedColumns: ["id"]
           },
         ]
@@ -1185,6 +1226,122 @@ export type Database = {
           },
         ]
       }
+      quiz_challenge_attempts: {
+        Row: {
+          answers: Json | null
+          challenge_id: string
+          created_at: string
+          id: string
+          score: number | null
+          submitted_at: string | null
+          time_elapsed_seconds: number | null
+          user_id: string
+        }
+        Insert: {
+          answers?: Json | null
+          challenge_id: string
+          created_at?: string
+          id?: string
+          score?: number | null
+          submitted_at?: string | null
+          time_elapsed_seconds?: number | null
+          user_id: string
+        }
+        Update: {
+          answers?: Json | null
+          challenge_id?: string
+          created_at?: string
+          id?: string
+          score?: number | null
+          submitted_at?: string | null
+          time_elapsed_seconds?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_challenge_attempts_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "quiz_challenges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_challenge_attempts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_challenges: {
+        Row: {
+          challenger_id: string
+          created_at: string
+          id: string
+          opponent_id: string
+          problem_ids: Json
+          question_count: number
+          scheduled_at: string
+          status: Database["public"]["Enums"]["challenge_status"]
+          subtopic_id: string
+          winner_id: string | null
+        }
+        Insert: {
+          challenger_id: string
+          created_at?: string
+          id?: string
+          opponent_id: string
+          problem_ids: Json
+          question_count: number
+          scheduled_at: string
+          status?: Database["public"]["Enums"]["challenge_status"]
+          subtopic_id: string
+          winner_id?: string | null
+        }
+        Update: {
+          challenger_id?: string
+          created_at?: string
+          id?: string
+          opponent_id?: string
+          problem_ids?: Json
+          question_count?: number
+          scheduled_at?: string
+          status?: Database["public"]["Enums"]["challenge_status"]
+          subtopic_id?: string
+          winner_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_challenges_challenger_id_fkey"
+            columns: ["challenger_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_challenges_opponent_id_fkey"
+            columns: ["opponent_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_challenges_subtopic_id_fkey"
+            columns: ["subtopic_id"]
+            isOneToOne: false
+            referencedRelation: "subtopics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_challenges_winner_id_fkey"
+            columns: ["winner_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quiz_question_events: {
         Row: {
           created_at: string
@@ -1311,6 +1468,30 @@ export type Database = {
           },
         ]
       }
+      report_payloads: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          payload: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id: string
+          payload: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          payload?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
       schedules: {
         Row: {
           created_at: string
@@ -1396,6 +1577,542 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agent_config_sections: {
+        Row: {
+          agent_id: string
+          data: Json
+          id: string
+          section: string
+          updated_at: string | null
+        }
+        Insert: {
+          agent_id: string
+          data?: Json
+          id?: string
+          section: string
+          updated_at?: string | null
+        }
+        Update: {
+          agent_id?: string
+          data?: Json
+          id?: string
+          section?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agent_config_sections_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agent_deployments: {
+        Row: {
+          agent_id: string
+          change_note: string | null
+          config_snapshot: Json
+          created_at: string | null
+          deployed_by: string | null
+          id: string
+          promoted_at: string | null
+          prompt_pins: Json
+          retired_at: string | null
+          status: string
+          version: number
+        }
+        Insert: {
+          agent_id: string
+          change_note?: string | null
+          config_snapshot: Json
+          created_at?: string | null
+          deployed_by?: string | null
+          id?: string
+          promoted_at?: string | null
+          prompt_pins: Json
+          retired_at?: string | null
+          status?: string
+          version: number
+        }
+        Update: {
+          agent_id?: string
+          change_note?: string | null
+          config_snapshot?: Json
+          created_at?: string | null
+          deployed_by?: string | null
+          id?: string
+          promoted_at?: string | null
+          prompt_pins?: Json
+          retired_at?: string | null
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agent_deployments_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agent_prompt_versions: {
+        Row: {
+          author: string | null
+          change_note: string | null
+          content: string
+          created_at: string | null
+          id: string
+          prompt_id: string
+          status: string
+          variables: Json
+          version: number
+        }
+        Insert: {
+          author?: string | null
+          change_note?: string | null
+          content: string
+          created_at?: string | null
+          id?: string
+          prompt_id: string
+          status?: string
+          variables?: Json
+          version: number
+        }
+        Update: {
+          author?: string | null
+          change_note?: string | null
+          content?: string
+          created_at?: string | null
+          id?: string
+          prompt_id?: string
+          status?: string
+          variables?: Json
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agent_prompt_versions_prompt_id_fkey"
+            columns: ["prompt_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agent_prompts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agent_prompts: {
+        Row: {
+          agent_id: string
+          created_at: string | null
+          description: string | null
+          display_name: string
+          id: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          agent_id: string
+          created_at?: string | null
+          description?: string | null
+          display_name: string
+          id?: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          agent_id?: string
+          created_at?: string | null
+          description?: string | null
+          display_name?: string
+          id?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agent_prompts_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agent_skills: {
+        Row: {
+          agent_id: string
+          config: Json | null
+          created_at: string | null
+          enabled: boolean | null
+          id: string
+          skill_slug: string
+        }
+        Insert: {
+          agent_id: string
+          config?: Json | null
+          created_at?: string | null
+          enabled?: boolean | null
+          id?: string
+          skill_slug: string
+        }
+        Update: {
+          agent_id?: string
+          config?: Json | null
+          created_at?: string | null
+          enabled?: boolean | null
+          id?: string
+          skill_slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agent_skills_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_agents: {
+        Row: {
+          agent_config: Json | null
+          archetype_id: string | null
+          avatar_color: string | null
+          cloned_from: string | null
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          display_name: string
+          domain: string
+          icon_url: string | null
+          id: string
+          sort_order: number
+          status: string
+          tagline: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          agent_config?: Json | null
+          archetype_id?: string | null
+          avatar_color?: string | null
+          cloned_from?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          display_name: string
+          domain?: string
+          icon_url?: string | null
+          id: string
+          sort_order?: number
+          status?: string
+          tagline?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          agent_config?: Json | null
+          archetype_id?: string | null
+          avatar_color?: string | null
+          cloned_from?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          display_name?: string
+          domain?: string
+          icon_url?: string | null
+          id?: string
+          sort_order?: number
+          status?: string
+          tagline?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_agents_archetype_id_fkey"
+            columns: ["archetype_id"]
+            isOneToOne: false
+            referencedRelation: "studio_archetypes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_agents_cloned_from_fkey"
+            columns: ["cloned_from"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_archetypes: {
+        Row: {
+          config_schema: Json
+          created_at: string | null
+          description: string | null
+          display_name: string
+          domain: string
+          id: string
+          prompt_sections: Json
+          skills: Json
+          updated_at: string | null
+        }
+        Insert: {
+          config_schema?: Json
+          created_at?: string | null
+          description?: string | null
+          display_name: string
+          domain?: string
+          id: string
+          prompt_sections?: Json
+          skills?: Json
+          updated_at?: string | null
+        }
+        Update: {
+          config_schema?: Json
+          created_at?: string | null
+          description?: string | null
+          display_name?: string
+          domain?: string
+          id?: string
+          prompt_sections?: Json
+          skills?: Json
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      studio_live_sessions: {
+        Row: {
+          agent_config_snapshot: Json
+          agent_id: string | null
+          completed_at: string | null
+          current_phase: string | null
+          deployment_id: string | null
+          duration_secs: number | null
+          evaluator_run_id: string | null
+          id: string
+          messages: Json
+          metadata: Json | null
+          phases_completed: string[] | null
+          resolved_prompts: Json
+          score: number | null
+          skill_description: string | null
+          skill_id: string
+          skill_name: string | null
+          started_at: string | null
+          steps: Json
+          subtitle: string | null
+          title: string | null
+        }
+        Insert: {
+          agent_config_snapshot: Json
+          agent_id?: string | null
+          completed_at?: string | null
+          current_phase?: string | null
+          deployment_id?: string | null
+          duration_secs?: number | null
+          evaluator_run_id?: string | null
+          id?: string
+          messages?: Json
+          metadata?: Json | null
+          phases_completed?: string[] | null
+          resolved_prompts?: Json
+          score?: number | null
+          skill_description?: string | null
+          skill_id: string
+          skill_name?: string | null
+          started_at?: string | null
+          steps?: Json
+          subtitle?: string | null
+          title?: string | null
+        }
+        Update: {
+          agent_config_snapshot?: Json
+          agent_id?: string | null
+          completed_at?: string | null
+          current_phase?: string | null
+          deployment_id?: string | null
+          duration_secs?: number | null
+          evaluator_run_id?: string | null
+          id?: string
+          messages?: Json
+          metadata?: Json | null
+          phases_completed?: string[] | null
+          resolved_prompts?: Json
+          score?: number | null
+          skill_description?: string | null
+          skill_id?: string
+          skill_name?: string | null
+          started_at?: string | null
+          steps?: Json
+          subtitle?: string | null
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_live_sessions_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_live_sessions_deployment_id_fkey"
+            columns: ["deployment_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agent_deployments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_quiz_questions: {
+        Row: {
+          agent_id: string | null
+          attempts: number | null
+          correct_option: number
+          created_at: string | null
+          detailed_hint: string | null
+          difficulty: string
+          explanation: string
+          hint: string | null
+          id: string
+          options: Json
+          question_text: string
+          session_id: string | null
+          solution_steps: Json | null
+          student_answer: number | null
+          student_correct: boolean | null
+          topic: string
+          verification_method: string | null
+          verified: boolean | null
+        }
+        Insert: {
+          agent_id?: string | null
+          attempts?: number | null
+          correct_option: number
+          created_at?: string | null
+          detailed_hint?: string | null
+          difficulty?: string
+          explanation: string
+          hint?: string | null
+          id?: string
+          options: Json
+          question_text: string
+          session_id?: string | null
+          solution_steps?: Json | null
+          student_answer?: number | null
+          student_correct?: boolean | null
+          topic: string
+          verification_method?: string | null
+          verified?: boolean | null
+        }
+        Update: {
+          agent_id?: string | null
+          attempts?: number | null
+          correct_option?: number
+          created_at?: string | null
+          detailed_hint?: string | null
+          difficulty?: string
+          explanation?: string
+          hint?: string | null
+          id?: string
+          options?: Json
+          question_text?: string
+          session_id?: string | null
+          solution_steps?: Json | null
+          student_answer?: number | null
+          student_correct?: boolean | null
+          topic?: string
+          verification_method?: string | null
+          verified?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_quiz_questions_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "studio_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_quiz_questions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "studio_live_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_session_events: {
+        Row: {
+          created_at: string | null
+          event_data: Json
+          event_type: string
+          id: string
+          session_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          event_data?: Json
+          event_type: string
+          id?: string
+          session_id: string
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json
+          event_type?: string
+          id?: string
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_session_events_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "studio_live_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_student_povs: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_session_id: string | null
+          markdown: string
+          sessions_incorporated: number | null
+          student_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_session_id?: string | null
+          markdown?: string
+          sessions_incorporated?: number | null
+          student_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_session_id?: string | null
+          markdown?: string
+          sessions_incorporated?: number | null
+          student_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_student_povs_last_session_id_fkey"
+            columns: ["last_session_id"]
+            isOneToOne: false
+            referencedRelation: "studio_live_sessions"
             referencedColumns: ["id"]
           },
         ]
@@ -1631,6 +2348,8 @@ export type Database = {
           name: string | null
           struggling_topic: string | null
           theme: string | null
+          tutor_character_id: string | null
+          tutor_voice_id: string | null
           updated_at: string
           user_id: string
         }
@@ -1644,6 +2363,8 @@ export type Database = {
           name?: string | null
           struggling_topic?: string | null
           theme?: string | null
+          tutor_character_id?: string | null
+          tutor_voice_id?: string | null
           updated_at?: string
           user_id: string
         }
@@ -1657,6 +2378,8 @@ export type Database = {
           name?: string | null
           struggling_topic?: string | null
           theme?: string | null
+          tutor_character_id?: string | null
+          tutor_voice_id?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -1687,6 +2410,8 @@ export type Database = {
           onboarding_completed: boolean
           skill_score: number | null
           start_composite: number | null
+          streak_freeze_available: boolean
+          streak_freeze_used_date: string | null
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
           subscription_amount_cents: number | null
@@ -1718,6 +2443,8 @@ export type Database = {
           onboarding_completed?: boolean
           skill_score?: number | null
           start_composite?: number | null
+          streak_freeze_available?: boolean
+          streak_freeze_used_date?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           subscription_amount_cents?: number | null
@@ -1749,6 +2476,8 @@ export type Database = {
           onboarding_completed?: boolean
           skill_score?: number | null
           start_composite?: number | null
+          streak_freeze_available?: boolean
+          streak_freeze_used_date?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           subscription_amount_cents?: number | null
@@ -1771,9 +2500,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      reset_onboarding: { Args: { user_email: string }; Returns: undefined }
+      [_ in never]: never
     }
     Enums: {
+      challenge_status:
+        | "pending"
+        | "declined"
+        | "scheduled"
+        | "expired"
+        | "completed"
       problem_source: "onboarding" | "sat" | "practice" | "custom" | "full_sat"
       session_source: "onboarding" | "sat" | "custom" | "full_sat"
     }
@@ -1901,10 +2636,21 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
+      challenge_status: [
+        "pending",
+        "declined",
+        "scheduled",
+        "expired",
+        "completed",
+      ],
       problem_source: ["onboarding", "sat", "practice", "custom", "full_sat"],
       session_source: ["onboarding", "sat", "custom", "full_sat"],
     },
   },
 } as const
+

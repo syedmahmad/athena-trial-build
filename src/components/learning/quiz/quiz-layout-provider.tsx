@@ -59,6 +59,9 @@ type QuizLayoutProviderProps = {
   /** Quiz launched from the SAT brand surface — the tutor chat keeps SAT
    *  prompt framing. Defaults to false (main app unchanged). */
   satFocused?: boolean;
+  /** sessionStorage key for surviving a stray hard reload without losing
+   *  progress — see quiz-progress-storage.ts. Omit for no persistence. */
+  storageKey?: string;
   onSaveResults: (payload: SavePayload) => Promise<SaveResult>;
   children: React.ReactNode;
 };
@@ -74,13 +77,14 @@ export function QuizLayoutProvider({
   targetCount,
   isGenerating = false,
   satFocused = false,
+  storageKey,
   onSaveResults,
   children,
 }: QuizLayoutProviderProps) {
   const pathname = usePathname();
   const onTutorRoute = pathname.endsWith("/tutor");
 
-  const quiz = useQuizState(problems, isGenerating);
+  const quiz = useQuizState(problems, isGenerating, storageKey);
   const timer = useQuizTimer(problems, quiz.phase);
 
   const [feedbackMap, setFeedbackMap] = useState<Map<string, FeedbackState>>(new Map());

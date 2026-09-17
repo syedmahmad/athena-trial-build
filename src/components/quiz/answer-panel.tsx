@@ -5,6 +5,7 @@ import { Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MathContent } from "./math-content";
+import { noCopyProps } from "@/lib/quiz/no-copy";
 import type { Problem } from "./types";
 
 export type FeedbackState = {
@@ -115,7 +116,7 @@ export function AnswerPanel({
                 >
                   {letter}
                 </span>
-                <span className="pt-0.5"><MathContent content={option} /></span>
+                <span className="pt-0.5" {...noCopyProps}><MathContent content={option} /></span>
               </motion.button>
             );
           })}

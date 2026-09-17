@@ -16,10 +16,11 @@ import asyncio
 import sys
 import time
 
-from app.pre_generation.content_workflow import ContentGenerationWorkflow
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from app.pre_generation.content_workflow import ContentGenerationWorkflow
 
 
 async def run_subject(workflow: ContentGenerationWorkflow, subject: str) -> dict:

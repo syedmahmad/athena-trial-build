@@ -94,7 +94,7 @@ export function QuestProblemPageContent() {
         onToggleTimer={ctx.toggleTimerHidden}
         calcOpen={calcOpen}
         onToggleCalc={() => setCalcOpen((o) => !o)}
-        onClose={() => router.push("/dashboard")}
+        onClose={() => router.push(ctx.dashboardHref)}
         hasAnswers={ctx.answers.size > 0}
         subtopicName={currentProblem.subtopicName}
       />

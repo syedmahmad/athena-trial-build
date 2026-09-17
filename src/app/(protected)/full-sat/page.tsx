@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useFullSatStatus, useStartFullSat, useFullSatHistory } from "@/hooks/use-full-sat";
 import { motion } from "framer-motion";
 import { Clock, Trophy, Lock, ArrowRight, ChevronLeft } from "lucide-react";
@@ -15,6 +15,13 @@ function formatDaysUntil(dateString: string): string {
 
 export default function FullSatLandingPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // The SAT dashboard's Full SAT card links here with ?sat=1 — carry it
+  // into the attempt (which has its own nested layout/results pages, all
+  // needing the same dashboardHref) rather than losing it at this page.
+  const satFocused = searchParams.get("sat") === "1";
+  const dashboardHref = satFocused ? "/sat/dashboard" : "/dashboard";
+  const satQuery = satFocused ? "?sat=1" : "";
   const { data: status, isLoading } = useFullSatStatus();
   const { data: history } = useFullSatHistory();
   const startMutation = useStartFullSat();
@@ -29,19 +36,19 @@ export default function FullSatLandingPage() {
 
   const handleStart = async (testId: string) => {
     const result = await startMutation.mutateAsync({ testId });
-    router.push(`/full-sat/${result.attemptId}`);
+    router.push(`/full-sat/${result.attemptId}${satQuery}`);
   };
 
   const handleResume = () => {
     if (status.currentAttempt) {
-      router.push(`/full-sat/${status.currentAttempt.id}`);
+      router.push(`/full-sat/${status.currentAttempt.id}${satQuery}`);
     }
   };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <button
-        onClick={() => router.push("/dashboard")}
+        onClick={() => router.push(dashboardHref)}
         className="mb-6 flex items-center gap-1.5 text-base text-muted-foreground hover:text-foreground transition-colors"
       >
         <ChevronLeft className="h-5 w-5" />

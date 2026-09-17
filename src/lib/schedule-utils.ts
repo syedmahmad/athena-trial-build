@@ -22,8 +22,13 @@ export function generateSessionDates(
   weeksAhead: number = 4
 ): { scheduleId: string; scheduledDate: string }[] {
   const sessions: { scheduleId: string; scheduledDate: string }[] = [];
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // UTC-anchored throughout (see the identical fix + full explanation in
+  // getDashboardData, lib/db/queries/dashboard.ts) — local setHours(0,0,0,0)
+  // followed by toISOString() shifts every generated date back by one day
+  // on a positive-UTC-offset server (local midnight serializes to the
+  // *previous* UTC calendar day), so a student's Wednesday schedule slot
+  // was generating session rows dated Tuesday.
+  const today = new Date(new Date().toISOString().split("T")[0]);
 
   for (const schedule of schedules) {
     const targetDay = DAY_INDEX[schedule.dayOfWeek];
@@ -31,10 +36,10 @@ export function generateSessionDates(
     for (let week = 0; week < weeksAhead; week++) {
       const date = new Date(today);
       // Find the next occurrence of the target day
-      const currentDay = date.getDay();
+      const currentDay = date.getUTCDay();
       let daysUntil = targetDay - currentDay;
       if (daysUntil <= 0) daysUntil += 7;
-      date.setDate(date.getDate() + daysUntil + week * 7);
+      date.setUTCDate(date.getUTCDate() + daysUntil + week * 7);
 
       sessions.push({
         scheduleId: schedule.id,

@@ -16,6 +16,10 @@ import { CompanionCard } from "@/components/dashboard/companion-card";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { FriendsLeaderboard } from "@/components/dashboard/friends-leaderboard";
 import { FullSatCard } from "@/components/dashboard/full-sat-card";
+import { RankUpCelebration } from "@/components/dashboard/rank-up-celebration";
+import { TrophyCase } from "@/components/dashboard/trophy-case";
+import { ChallengesCard } from "@/components/dashboard/challenges-card";
+import { useRankUp } from "@/hooks/use-rank-up";
 import { ParticlesBackground } from "@/components/particles-background";
 
 type StreakDay = {
@@ -40,10 +44,14 @@ type FriendScore = {
 
 type DashboardData = {
   user: {
+    id: string;
     displayName: string | null;
     skillScore: number | null;
     avatarUrl: string | null;
     targetScore: number | null;
+    totalXp: number;
+    bestStreak: number;
+    streakFreezeAvailable: boolean;
   };
   upcomingSessions: unknown[];
   queueItems: unknown[];
@@ -110,6 +118,15 @@ export default function DashboardPage() {
 
   const loading = userLoading || dashLoading;
 
+  // Called unconditionally (before the loading/data early-returns) per the
+  // rules of hooks — data?.totalScore defaults to 0 until it loads, which
+  // getRank() resolves to the base rank, so the pre-load render can never
+  // spuriously look like a rank-up once real data arrives.
+  const { celebratingRank, dismiss } = useRankUp(
+    data?.user.id,
+    data?.totalScore ?? 0
+  );
+
   if (loading) {
     return (
       <div className="mx-auto max-w-6xl p-6">
@@ -134,6 +151,7 @@ export default function DashboardPage() {
 
   return (
     <div className="relative">
+      <RankUpCelebration rank={celebratingRank} onDismiss={dismiss} />
       <ParticlesBackground />
       <div className="relative z-10 p-6">
         <motion.div
@@ -163,6 +181,7 @@ export default function DashboardPage() {
                 <RankCard
                   totalScore={data.totalScore}
                   weeklyDelta={data.weeklyDelta}
+                  totalXp={data.user.totalXp}
                 />
               </motion.div>
 
@@ -182,6 +201,7 @@ export default function DashboardPage() {
                 <QuestStreak
                   streak={data.streak}
                   days={data.weeklyStreakDays}
+                  freezeAvailable={data.user.streakFreezeAvailable}
                 />
               </motion.div>
 
@@ -209,7 +229,21 @@ export default function DashboardPage() {
               </motion.div>
 
               <motion.div variants={staggerItem}>
+                <TrophyCase
+                  stats={{
+                    totalXp: data.user.totalXp,
+                    bestStreak: data.user.bestStreak,
+                    completedSessions: data.completedSessions,
+                  }}
+                />
+              </motion.div>
+
+              <motion.div variants={staggerItem}>
                 <FriendsLeaderboard friends={data.friendsScores} />
+              </motion.div>
+
+              <motion.div variants={staggerItem}>
+                <ChallengesCard />
               </motion.div>
             </motion.div>
           </div>

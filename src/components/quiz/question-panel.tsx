@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MathContent } from "./math-content";
+import { noCopyProps } from "@/lib/quiz/no-copy";
 import type { Problem } from "./types";
 
 type QuestionPanelProps = {
@@ -29,7 +30,9 @@ export function QuestionPanel({ problem, questionNumber, hintRevealed = false }:
         </span>
       </div>
 
-      <MathContent content={problem.questionText} />
+      <div {...noCopyProps}>
+        <MathContent content={problem.questionText} />
+      </div>
 
       {problem.hint && hintRevealed && (
         <div className="mt-6">

@@ -36,13 +36,17 @@ export async function GET() {
       }
     : null;
 
-  // Weekly streak days — based on daily quests
-  const now = new Date();
-  const startOfWeek = new Date(now);
-  startOfWeek.setDate(now.getDate() - now.getDay()); // Sunday
-  startOfWeek.setHours(0, 0, 0, 0);
-  const startOfWeekStr = startOfWeek.toISOString().split("T")[0];
+  // Weekly streak days — based on daily quests. UTC-anchored throughout
+  // (see the identical fix + full explanation in getDashboardData in
+  // lib/db/queries/dashboard.ts) — the previous local setHours(0,0,0,0)
+  // + toISOString() combination shifted every date in the week back by
+  // one day on a positive-UTC-offset server, misaligning each real
+  // completion one slot later than its actual weekday label.
   const today = new Date().toISOString().split("T")[0];
+  const todayUtcMidnight = new Date(today);
+  const startOfWeek = new Date(todayUtcMidnight);
+  startOfWeek.setUTCDate(todayUtcMidnight.getUTCDate() - todayUtcMidnight.getUTCDay()); // Sunday
+  const startOfWeekStr = startOfWeek.toISOString().split("T")[0];
 
   const { data: weekQuestsData } = await supabase
     .from("daily_quests")
@@ -58,7 +62,7 @@ export async function GET() {
 
   const weeklyStreakDays = DAY_ABBREVS.map((abbrev, idx) => {
     const dayDate = new Date(startOfWeek);
-    dayDate.setDate(startOfWeek.getDate() + idx);
+    dayDate.setUTCDate(startOfWeek.getUTCDate() + idx);
     const dateStr = dayDate.toISOString().split("T")[0];
     const completed = completedDates.has(dateStr);
     const isPast = dateStr < today && !completed;

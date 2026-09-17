@@ -257,27 +257,37 @@
  * src/app/layout.tsx.
  */
 .observation-record {
-  --obs-bg: #000;
-  --obs-surface: oklch(0.12 0.005 80 / 0.85);
-  --obs-fg: oklch(0.96 0.005 80);
-  --obs-muted: oklch(0.62 0.005 80);
-  --obs-dim: oklch(0.58 0.005 80);
-  --obs-border: oklch(0.42 0.005 80);
-  /* Orb palette — warm amber, matching the /play orb. */
-  --obs-glow-core: oklch(0.95 0.08 70);
-  --obs-glow-mid: oklch(0.78 0.16 55);
-  --obs-glow-halo: oklch(0.42 0.14 40);
-  --obs-accent: oklch(0.82 0.14 60);
-  --obs-accent-deep: oklch(0.60 0.14 50);
+  /* Re-hued to the brand's indigo accent (matches --sat-accent in
+   * sat.css, hue 275) — this was previously a warm amber palette built
+   * to match the old /play surface's orb before the Ascent rebrand,
+   * which left it visually unrelated to the rest of the product (a
+   * different hue family entirely, plus a monospace body font nothing
+   * else in the app uses). Kept as its own dark "focus mode" rather
+   * than merged into the light theme — going darker while a student is
+   * mid-problem is a reasonable, common pattern — but it now reads as
+   * the same product at night rather than a different app.
+   */
+  --obs-bg: oklch(0.09 0.025 275);
+  --obs-surface: oklch(0.14 0.03 275 / 0.85);
+  --obs-fg: oklch(0.96 0.005 280);
+  --obs-muted: oklch(0.64 0.02 275);
+  --obs-dim: oklch(0.58 0.02 275);
+  --obs-border: oklch(0.42 0.03 275);
+  /* Orb palette — indigo, matching --sat-accent. */
+  --obs-glow-core: oklch(0.93 0.05 275);
+  --obs-glow-mid: oklch(0.72 0.18 275);
+  --obs-glow-halo: oklch(0.38 0.17 275);
+  --obs-accent: oklch(0.72 0.16 275);
+  --obs-accent-deep: oklch(0.5 0.19 275);
 
   /* Let the observation bg show through the whiteboard surface */
-  --wb-canvas: oklch(0.05 0.005 80 / 0.35);
+  --wb-canvas: oklch(0.05 0.02 275 / 0.35);
 
   color-scheme: dark;
   background-color: var(--obs-bg);
   color: var(--obs-fg);
-  font-family: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
-  font-weight: 300;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 

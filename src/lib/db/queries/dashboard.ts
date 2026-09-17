@@ -75,13 +75,34 @@ export async function getDashboardData(userId: string) {
   const completedSessions = (allStatusSessions ?? []).filter((s) => s.status === "completed").length;
   const totalSessions = (allStatusSessions ?? []).length;
 
-  // Calculate streak from daily quest history (consecutive days)
+  // Calculate streak from daily quest history (consecutive days). The
+  // streak is never stored — it's re-derived on every load by walking
+  // backward through completed quest_dates looking for 1-day gaps. A used
+  // streak freeze covers exactly one specific missed date (see
+  // streak_freeze_used_date, set in /api/daily-quest/complete when that
+  // gap first forms): a 2-day gap where the skipped day matches the
+  // frozen date is treated as if it weren't a gap at all, same as the
+  // proposal's "one-time freeze token softens it without gutting the
+  // urgency" — real gaps of any other shape still break the streak.
   const { data: questHistory } = await supabase
     .from("daily_quests")
     .select("quest_date, status")
     .eq("user_id", userId)
     .eq("status", "completed")
     .order("quest_date", { ascending: false });
+
+  const { data: freezeRow } = await supabase
+    .from("users")
+    .select("streak_freeze_used_date")
+    .eq("id", userId)
+    .maybeSingle();
+  const frozenDate = freezeRow?.streak_freeze_used_date ?? null;
+
+  const dayAfter = (dateStr: string) => {
+    const d = new Date(dateStr);
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split("T")[0];
+  };
 
   let streak = 0;
   if (questHistory && questHistory.length > 0) {
@@ -91,8 +112,10 @@ export async function getDashboardData(userId: string) {
     const daysSinceLast = Math.floor(
       (todayDate.getTime() - mostRecent.getTime()) / (1000 * 60 * 60 * 24)
     );
+    const leadGapFrozen =
+      daysSinceLast === 2 && frozenDate === dayAfter(questHistory[0].quest_date);
 
-    if (daysSinceLast <= 1) {
+    if (daysSinceLast <= 1 || leadGapFrozen) {
       streak = 1;
       for (let i = 1; i < questHistory.length; i++) {
         const curr = new Date(questHistory[i].quest_date);
@@ -101,6 +124,11 @@ export async function getDashboardData(userId: string) {
           (prev.getTime() - curr.getTime()) / (1000 * 60 * 60 * 24)
         );
         if (diffDays === 1) {
+          streak++;
+        } else if (
+          diffDays === 2 &&
+          frozenDate === dayAfter(questHistory[i].quest_date)
+        ) {
           streak++;
         } else {
           break;
@@ -155,11 +183,18 @@ export async function getDashboardData(userId: string) {
     subtopicCount: subtopicsByTopic[t.id] ?? 0,
   }));
 
-  // Weekly streak days — based on daily quests, not sessions
-  const now = new Date();
-  const startOfWeek = new Date(now);
-  startOfWeek.setDate(now.getDate() - now.getDay()); // Sunday
-  startOfWeek.setHours(0, 0, 0, 0);
+  // Weekly streak days — based on daily quests, not sessions. Computed
+  // entirely in UTC (Date.UTC-anchored, getUTCDay/setUTCDate) and rooted
+  // in `today` (already a UTC date string) rather than mixing in local-
+  // time methods: `now.getDay()` + `setHours(0,0,0,0)` + `toISOString()`
+  // shifts every date in the week back by one day on any server running
+  // in a positive UTC-offset timezone (local midnight serializes to the
+  // *previous* UTC calendar day) — every real completion showed up one
+  // slot later than its actual weekday label (today's Wednesday activity
+  // rendered under "T" for Thursday).
+  const todayUtcMidnight = new Date(today); // bare YYYY-MM-DD parses as UTC midnight
+  const startOfWeek = new Date(todayUtcMidnight);
+  startOfWeek.setUTCDate(todayUtcMidnight.getUTCDate() - todayUtcMidnight.getUTCDay()); // Sunday
   const startOfWeekStr = startOfWeek.toISOString().split("T")[0];
 
   const { data: weekQuestsData } = await supabase
@@ -174,7 +209,7 @@ export async function getDashboardData(userId: string) {
 
   const weeklyStreakDays = DAY_ABBREVS.map((abbrev, idx) => {
     const dayDate = new Date(startOfWeek);
-    dayDate.setDate(startOfWeek.getDate() + idx);
+    dayDate.setUTCDate(startOfWeek.getUTCDate() + idx);
     const dateStr = dayDate.toISOString().split("T")[0];
     const completed = completedDates.has(dateStr);
     const isPast = dateStr < today && !completed;

@@ -2,14 +2,31 @@
 
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import type { Problem, QuizPhase, QuestionPhase, QuestionStatus } from "@/components/quiz/types";
+import { loadQuizProgress, saveQuizProgress, clearQuizProgress } from "@/components/learning/quiz/quiz-progress-storage";
 
-export function useQuizState(problems: Problem[], isGenerating = false) {
-  const [answers, setAnswers] = useState<Map<string, number>>(new Map());
-  const [markedIds, setMarkedIds] = useState<Set<string>>(new Set());
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [phase, setPhase] = useState<QuizPhase>("active");
-  const [wrongCounts, setWrongCounts] = useState<Map<string, number>>(new Map());
-  const [questionPhases, setQuestionPhases] = useState<Map<string, QuestionPhase>>(new Map());
+/** `storageKey` is optional: when provided, progress survives a stray hard
+ *  reload (see quiz-progress-storage.ts for why that matters). Restoring
+ *  and persisting here is the answers/index/etc. half of that record —
+ *  `useStreamingProblems` owns the `problems` pool half under the same key. */
+export function useQuizState(problems: Problem[], isGenerating = false, storageKey?: string) {
+  const restored = useState(() =>
+    storageKey ? loadQuizProgress(storageKey) : null
+  )[0];
+
+  const [answers, setAnswers] = useState<Map<string, number>>(
+    () => new Map(restored?.answers ?? [])
+  );
+  const [markedIds, setMarkedIds] = useState<Set<string>>(
+    () => new Set(restored?.markedIds ?? [])
+  );
+  const [currentIndex, setCurrentIndex] = useState(restored?.currentIndex ?? 0);
+  const [phase, setPhase] = useState<QuizPhase>(restored?.phase ?? "active");
+  const [wrongCounts, setWrongCounts] = useState<Map<string, number>>(
+    () => new Map(restored?.wrongCounts ?? [])
+  );
+  const [questionPhases, setQuestionPhases] = useState<Map<string, QuestionPhase>>(
+    () => new Map(restored?.questionPhases ?? [])
+  );
 
   // Per-question timing: records Date.now() when each question is first displayed
   const questionStartTimesRef = useRef<Map<string, number>>(new Map());
@@ -106,7 +123,8 @@ export function useQuizState(problems: Problem[], isGenerating = false) {
     setWrongCounts(new Map());
     setQuestionPhases(new Map());
     questionStartTimesRef.current = new Map();
-  }, []);
+    if (storageKey) clearQuizProgress(storageKey);
+  }, [storageKey]);
 
   const getQuestionStatus = useCallback(
     (index: number): QuestionStatus => {
@@ -131,6 +149,32 @@ export function useQuizState(problems: Problem[], isGenerating = false) {
   const unansweredCount = useMemo(() => {
     return problems.filter((p) => !answers.has(p.id)).length;
   }, [problems, answers]);
+
+  // Persist progress as it changes. Merges into whatever `useStreamingProblems`
+  // has already written under the same key (the `problems` pool) rather than
+  // overwriting it — see quiz-progress-storage.ts.
+  useEffect(() => {
+    if (!storageKey) return;
+    const existing = loadQuizProgress(storageKey);
+    saveQuizProgress(storageKey, {
+      problems: [],
+      streamPhase: "idle",
+      ...existing,
+      answers: Array.from(answers.entries()),
+      markedIds: Array.from(markedIds),
+      currentIndex,
+      phase,
+      wrongCounts: Array.from(wrongCounts.entries()),
+      questionPhases: Array.from(questionPhases.entries()),
+    });
+  }, [storageKey, answers, markedIds, currentIndex, phase, wrongCounts, questionPhases]);
+
+  // A submitted quiz is finished — don't let it resurrect on a later reload
+  // (the student would land back on a stale results screen for a session
+  // that's already been scored and saved). `restart()` clears explicitly too.
+  useEffect(() => {
+    if (phase === "submitted" && storageKey) clearQuizProgress(storageKey);
+  }, [phase, storageKey]);
 
   return {
     answers,

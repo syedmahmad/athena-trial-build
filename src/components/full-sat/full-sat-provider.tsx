@@ -19,6 +19,9 @@ type Props = {
   test: FullSatTest;
   problems: FullSatTestProblem[];
   initialAnswers: FullSatAnswer[];
+  /** Where "back to dashboard" should land — see quest-provider.tsx for
+   *  the identical rationale/pattern. */
+  dashboardHref: string;
   children: React.ReactNode;
 };
 
@@ -35,6 +38,7 @@ export function FullSatProvider({
   test,
   problems,
   initialAnswers,
+  dashboardHref,
   children,
 }: Props) {
   const router = useRouter();
@@ -230,7 +234,9 @@ export function FullSatProvider({
       },
       {
         onSuccess: () => {
-          router.push(`/full-sat/${attempt.id}/results`);
+          router.push(
+            `/full-sat/${attempt.id}/results${dashboardHref === "/sat/dashboard" ? "?sat=1" : ""}`
+          );
         },
       }
     );
@@ -256,6 +262,7 @@ export function FullSatProvider({
         attempt,
         test,
         problems,
+        dashboardHref,
         currentIndex,
         currentSection: currentPos.section,
         currentModule: currentPos.module,

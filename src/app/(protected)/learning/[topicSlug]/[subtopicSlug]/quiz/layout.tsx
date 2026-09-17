@@ -35,6 +35,15 @@ export default function QuizLayout({ children }: { children: React.ReactNode }) 
     staleTime: 600_000,
   });
 
+  // Survives a stray hard reload (see quiz-progress-storage.ts). Keyed off
+  // the URL params, not `data.subtopic.id` — params are synchronous from
+  // the first render, but `data` loads async, and useState's lazy
+  // initializer inside useStreamingProblems/useQuizState only ever runs
+  // once (on that first render). A key that isn't ready yet at that moment
+  // would permanently lock in "nothing to restore," even once the real
+  // value arrives a render later.
+  const storageKey = `sat:${params.topicSlug}/${params.subtopicSlug}`;
+
   const { problems, phase, start } = useStreamingProblems({
     topic: data?.topic.name ?? "",
     subtopic: data?.subtopic.name ?? "",
@@ -43,6 +52,7 @@ export default function QuizLayout({ children }: { children: React.ReactNode }) 
     topicSlug: params.topicSlug,
     subtopicSlug: params.subtopicSlug,
     lessonId: data?.subtopic.id,
+    storageKey,
   });
 
   // Begin streaming once metadata (names + linkage) is available.
@@ -77,6 +87,7 @@ export default function QuizLayout({ children }: { children: React.ReactNode }) 
       subtopicName={data.subtopic.name}
       subject="math"
       satFocused={satFocused}
+      storageKey={storageKey}
       basePath={`/learning/${params.topicSlug}/${params.subtopicSlug}`}
       practiceProblemsUrl={`/api/learning/${params.topicSlug}/${params.subtopicSlug}/practice-problems`}
       onSaveResults={async ({ score, totalQuestions, timeElapsedSeconds, answers, events }) => {

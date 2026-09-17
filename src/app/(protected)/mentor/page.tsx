@@ -80,6 +80,10 @@ export default function MentorPage() {
   const searchParams = useSearchParams();
   // ?debug=orb — roaming "living" orb (Clicky-style). Off = fixed corner orb.
   const debugOrb = (searchParams.get("debug") ?? "").split(",").map((s) => s.trim()).includes("orb");
+  // Captured once on entry, same pattern as the quiz layout's satFocused —
+  // the SAT dashboard's companion card links here with ?sat=1 so BACK
+  // returns to /sat/dashboard instead of the old /dashboard.
+  const [satFocused] = useState(() => searchParams.get("sat") === "1");
   // Current step location, so the resting orb can hover beside the latest step.
   const stepFocusRef = useRef<StepFocus | null>(null);
   const handleStepFocus = useCallback((f: StepFocus | null) => {
@@ -329,7 +333,9 @@ export default function MentorPage() {
 
   return (
     <div className="dark">
-      <ObservationFrame onBack={() => router.push("/dashboard")}>
+      <ObservationFrame
+        onBack={() => router.push(satFocused ? "/sat/dashboard" : "/dashboard")}
+      >
         {/* Canvas area — mirrors the micro-lesson layout: a full-bleed
             canvas (wrapped in the IsoContourFrame chrome) with the orb +
             caption floating as an ambient indicator in the top-left corner

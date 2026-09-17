@@ -17,11 +17,11 @@ import asyncio
 import sys
 import time
 
-from app.pre_generation.practice_problem_seeder import generate_practice_problems
-
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from app.pre_generation.practice_problem_seeder import generate_practice_problems
 
 
 async def main():

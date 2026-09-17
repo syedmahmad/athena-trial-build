@@ -15,13 +15,13 @@ import asyncio
 import sys
 import time
 
-from app.pre_generation.content_workflow import MATH_CONTENT_MAP, RW_CONTENT_MAP, _make_slug
-from app.utils.db import get_practice_problem_count, get_topic_by_slug, get_subtopic
-from app.pre_generation.practice_problem_seeder import generate_practice_problems
-
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from app.pre_generation.content_workflow import MATH_CONTENT_MAP, RW_CONTENT_MAP, _make_slug
+from app.utils.db import get_practice_problem_count, get_topic_by_slug, get_subtopic
+from app.pre_generation.practice_problem_seeder import generate_practice_problems
 
 PROBLEMS_PER_SUBTOPIC = 60
 

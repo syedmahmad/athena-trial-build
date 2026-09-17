@@ -49,7 +49,7 @@ export function ObservationFrame({
         className="pointer-events-none absolute inset-0 opacity-80"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 38%, oklch(0.22 0.05 60 / 0.22), transparent 60%), radial-gradient(ellipse at center, transparent 30%, #000 80%)",
+            "radial-gradient(ellipse 60% 40% at 50% 38%, color-mix(in oklch, var(--obs-accent-deep) 16%, transparent), transparent 60%), radial-gradient(ellipse at center, transparent 30%, var(--obs-bg) 80%)",
         }}
       />
 

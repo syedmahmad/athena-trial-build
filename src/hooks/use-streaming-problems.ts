@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import type { Problem } from "@/components/quiz/types";
 import { stemTokens, tooSimilar } from "@/lib/stem-similarity";
+import { loadQuizProgress, saveQuizProgress, clearQuizProgress } from "@/components/learning/quiz/quiz-progress-storage";
 
 type Phase = "idle" | "streaming" | "complete" | "error";
 
@@ -24,6 +25,11 @@ type UseStreamingProblemsOptions = {
   subtopicSlug?: string;
   /** Lesson/topic id forwarded for Majordomo dashboard tagging. */
   lessonId?: string;
+  /** When provided, the problem pool is restored from (and persisted to)
+   *  sessionStorage under this key — survives a stray hard reload without
+   *  losing the student's place or regenerating a new random set. Omit for
+   *  the previous behavior (always starts fresh). */
+  storageKey?: string;
 };
 
 type RequestArgs = {
@@ -51,20 +57,39 @@ export function useStreamingProblems({
   topicSlug,
   subtopicSlug,
   lessonId,
+  storageKey,
 }: UseStreamingProblemsOptions) {
-  const [problems, setProblems] = useState<Problem[]>([]);
-  const [phase, setPhase] = useState<Phase>("idle");
+  // Lazy-init: restore a persisted pool (if any) so a stray hard reload
+  // resumes instead of regenerating a brand-new random set. Runs once, on
+  // mount only — safe to read sessionStorage here despite "use client"
+  // since useState initializers never execute during SSR.
+  const restored = useState(() =>
+    storageKey ? loadQuizProgress(storageKey) : null
+  )[0];
 
-  const problemsRef = useRef<Problem[]>([]);
-  const orderCounterRef = useRef(0);
+  const [problems, setProblems] = useState<Problem[]>(
+    () => restored?.problems ?? []
+  );
+  const [phase, setPhase] = useState<Phase>(
+    () => (restored?.streamPhase as Phase | undefined) ?? "idle"
+  );
+
+  const problemsRef = useRef<Problem[]>(restored?.problems ?? []);
+  const orderCounterRef = useRef(restored?.problems.length ?? 0);
   // Cross-wave dedupe: the server dedupes within one response, but a refill
   // wave doesn't know earlier waves' content, so guard by id + stem here too.
-  const seenIdsRef = useRef<Set<string>>(new Set());
+  const seenIdsRef = useRef<Set<string>>(
+    new Set(restored?.problems.map((p) => p.id) ?? [])
+  );
   const priorStemsRef = useRef<Set<string>[]>([]);
   // Serializes waves: a refill is dropped if one is already in flight (the
   // consumer re-checks on the next advance, so nothing is lost).
   const inFlightRef = useRef(false);
-  const startedRef = useRef(false);
+  // Restoring a non-empty pool means `start()` already ran in a prior
+  // (pre-reload) mount — treat it as already-started so the caller's
+  // unconditional `start({count})` effect is a no-op instead of layering a
+  // second stream on top of the restored one.
+  const startedRef = useRef((restored?.problems.length ?? 0) > 0);
 
   const runStream = useCallback(
     async (args: RequestArgs) => {
@@ -196,7 +221,28 @@ export function useStreamingProblems({
     inFlightRef.current = false;
     setProblems([]);
     setPhase("idle");
-  }, []);
+    if (storageKey) clearQuizProgress(storageKey);
+  }, [storageKey]);
+
+  // Persist the pool as it grows. Merges into whatever `useQuizState` has
+  // already written under the same key (answers/index/etc.) rather than
+  // overwriting it — the two hooks share one storage key but own disjoint
+  // fields of the same record.
+  useEffect(() => {
+    if (!storageKey) return;
+    const existing = loadQuizProgress(storageKey);
+    saveQuizProgress(storageKey, {
+      answers: [],
+      markedIds: [],
+      currentIndex: 0,
+      phase: "active",
+      wrongCounts: [],
+      questionPhases: [],
+      ...existing,
+      problems,
+      streamPhase: phase,
+    });
+  }, [storageKey, problems, phase]);
 
   return {
     problems,

@@ -1,5 +1,6 @@
 "use client";
 
+import { Snowflake } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type StreakDay = {
@@ -11,21 +12,34 @@ type StreakDay = {
 export function QuestStreak({
   streak,
   days,
+  freezeAvailable,
 }: {
   streak: number;
   days: StreakDay[];
+  freezeAvailable?: boolean;
 }) {
   return (
     <div className="border bg-card p-5">
-      <div className="mb-4 flex items-center gap-2">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Quest Streak
-        </h3>
-        <span className="text-xs text-muted-foreground">&middot;</span>
-        <span className="text-xs font-bold text-athena-amber">
-          Day {streak}
-        </span>
-        <span className="text-xs">🔥</span>
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Quest Streak
+          </h3>
+          <span className="text-xs text-muted-foreground">&middot;</span>
+          <span className="text-xs font-bold text-athena-amber">
+            Day {streak}
+          </span>
+          <span className="text-xs">🔥</span>
+        </div>
+        {freezeAvailable && (
+          <span
+            className="flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-0.5 text-[10px] font-medium text-blue-500"
+            title="Miss a day and this automatically covers it once, protecting your streak."
+          >
+            <Snowflake className="h-3 w-3" />
+            Freeze ready
+          </span>
+        )}
       </div>
       <div className="flex items-center gap-2">
         {days.map((d, i) => (

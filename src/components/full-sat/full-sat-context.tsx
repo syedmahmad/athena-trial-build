@@ -16,6 +16,8 @@ export type FullSatContextValue = {
   attempt: FullSatAttempt;
   test: FullSatTest;
   problems: FullSatTestProblem[];
+  /** Where "back to dashboard" should land — see full-sat-provider.tsx. */
+  dashboardHref: string;
 
   // Current position
   currentIndex: number; // Global 0-97

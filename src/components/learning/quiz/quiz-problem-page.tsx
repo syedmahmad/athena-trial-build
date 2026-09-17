@@ -55,6 +55,7 @@ import { deriveVoiceListeningState } from "@/lib/voice/voice-listening-state";
 import { matchByRegex, matchByLLM, looksLikeQuestionOrComment } from "@/lib/voice/answer-matcher";
 import { cleanTranscript, isAmbientNoiseTranscript } from "@/lib/voice/transcript-filters";
 import { isCloseIntent } from "@/lib/voice/close-intent";
+import { noCopyProps } from "@/lib/quiz/no-copy";
 import { Button } from "@/components/ui/button";
 import type { Problem } from "@/components/quiz/types";
 
@@ -137,7 +138,7 @@ function OptionsGrid({
                 String.fromCharCode(65 + i)
               )}
             </span>
-            <span className="flex-1 leading-relaxed">
+            <span className="flex-1 leading-relaxed" {...noCopyProps}>
               <MathContent content={option} />
             </span>
           </button>
@@ -1078,7 +1079,7 @@ export function QuizProblemPageContent() {
       <div className="fixed inset-0 z-50 flex flex-col bg-background">
         <div className="px-6 pt-4 pb-2">
           <Link
-            href="/dashboard"
+            href={satFocused ? "/sat/dashboard" : "/dashboard"}
             className="inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -1112,7 +1113,9 @@ export function QuizProblemPageContent() {
                     // learner to the dashboard instead. Other flows close
                     // back to their subtopic (basePath).
                     basePath.startsWith("/personalized")
-                      ? "/dashboard"
+                      ? satFocused
+                        ? "/sat/dashboard"
+                        : "/dashboard"
                       : basePath
                   )
               : undefined
@@ -1148,7 +1151,7 @@ export function QuizProblemPageContent() {
   // (the common SAT case where the canvas would otherwise be empty).
   const questionAndOptions = (
     <>
-      <div className="text-base leading-relaxed text-[var(--obs-fg)]">
+      <div className="text-base leading-relaxed text-[var(--obs-fg)]" {...noCopyProps}>
         <MathContent content={currentProblem.questionText} size="lg" />
       </div>
       <OptionsGrid
@@ -1175,7 +1178,9 @@ export function QuizProblemPageContent() {
 
   return (
     <div className="dark relative">
-      <ObservationFrame onBack={() => router.push("/dashboard")}>
+      <ObservationFrame
+        onBack={() => router.push(satFocused ? "/sat/dashboard" : "/dashboard")}
+      >
         {/* Top-right progress strip — sits in the frame's top chrome row
             opposite the BACK affordance. Renders even during takeover so
             the student keeps their place in the quiz. Prev/Next chevrons

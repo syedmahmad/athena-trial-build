@@ -20,7 +20,7 @@ SAT_SUBJECTS = {"math", "reading-writing"}
 
 subtopic_agent = Agent(
     name="SAT Subtopic Generator",
-    model=claude(id="claude-sonnet-4-20250514", feature="pregen-subtopic"),
+    model=claude(id="claude-sonnet-4-6", feature="pregen-subtopic"),
     description="You generate comprehensive SAT subtopic metadata.",
     instructions=[
         "You are an expert SAT curriculum designer.",
@@ -82,7 +82,7 @@ def _get_general_subtopic_agent() -> Agent:
     if _general_subtopic_agent is None:
         _general_subtopic_agent = Agent(
             name="Academic Subtopic Generator",
-            model=claude(id="claude-sonnet-4-20250514", feature="pregen-subtopic"),
+            model=claude(id="claude-sonnet-4-6", feature="pregen-subtopic"),
             description="You generate comprehensive academic subtopic metadata.",
             instructions=_GENERAL_SUBTOPIC_INSTRUCTIONS,
             markdown=False,

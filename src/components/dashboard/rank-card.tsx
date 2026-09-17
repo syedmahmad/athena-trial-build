@@ -1,19 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Diamond } from "lucide-react";
+import { ArrowRight, Diamond, Zap } from "lucide-react";
 import Link from "next/link";
 import { getRankProgress, RANKS } from "@/lib/ranks";
+import { getLevelProgress, getLevelTier } from "@/lib/xp";
 import { cn } from "@/lib/utils";
 
 export function RankCard({
   totalScore,
   weeklyDelta,
+  totalXp,
 }: {
   totalScore: number;
   weeklyDelta: number;
+  totalXp: number;
 }) {
   const { current, next, pct, pointsToNext } = getRankProgress(totalScore);
+  const { level, xpIntoLevel, xpForThisLevel, pct: xpPct } =
+    getLevelProgress(totalXp);
+  const tier = getLevelTier(level);
+  const tierColor = `var(${tier.colorVar})`;
 
   return (
     <motion.div
@@ -43,6 +50,45 @@ export function RankCard({
         >
           View Story <ArrowRight className="h-3 w-3" />
         </Link>
+      </div>
+
+      {/* XP / level strip — the number was always computed server-side on
+          every quiz, daily quest, and full-SAT submit; this is the first
+          place it's ever rendered. Deliberately a slim, secondary row
+          (small type, thin bar) so it reads as a running counter under the
+          rank identity above, not a second competing headline. */}
+      <div className="mt-3 flex items-center gap-2">
+        <span
+          className="flex h-5 w-5 shrink-0 items-center justify-center text-[10px] font-bold"
+          style={{
+            color: tierColor,
+            backgroundColor: `color-mix(in oklch, ${tierColor} 14%, transparent)`,
+          }}
+          title={`${tier.name} tier`}
+        >
+          <Zap className="h-3 w-3" />
+        </span>
+        <span className="shrink-0 text-xs font-semibold tabular-nums text-foreground">
+          Lvl {level}
+        </span>
+        <span
+          className="shrink-0 text-[10px] font-semibold uppercase tracking-wider"
+          style={{ color: tierColor }}
+        >
+          {tier.name}
+        </span>
+        <div className="h-1.5 flex-1 overflow-hidden bg-muted">
+          <motion.div
+            className="h-full"
+            style={{ backgroundColor: tierColor }}
+            initial={{ width: 0 }}
+            animate={{ width: `${xpPct}%` }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          />
+        </div>
+        <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+          {xpIntoLevel}/{xpForThisLevel} XP
+        </span>
       </div>
 
       {/* Score + weekly delta */}

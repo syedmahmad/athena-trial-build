@@ -72,7 +72,7 @@ export function DailyQuestCard() {
   const progress = Math.round((answered / quest.totalQuestions) * 100);
 
   return (
-    <Link href="/quest">
+    <Link href="/quest?sat=1">
       <motion.div
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}

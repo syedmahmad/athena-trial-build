@@ -28,7 +28,7 @@ export function FullSatCard() {
   if (status.currentAttempt) {
     return (
       <Link
-        href={`/full-sat/${status.currentAttempt.id}`}
+        href={`/full-sat/${status.currentAttempt.id}?sat=1`}
         className="block rounded-xl border-2 border-primary/50 bg-card p-5 transition-colors hover:bg-primary/5"
       >
         <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function FullSatCard() {
   if (status.lastAttempt) {
     return (
       <Link
-        href="/full-sat"
+        href="/full-sat?sat=1"
         className="block rounded-xl border bg-card p-5 transition-colors hover:bg-muted/50"
       >
         <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export function FullSatCard() {
   // No attempts yet
   return (
     <Link
-      href="/full-sat"
+      href="/full-sat?sat=1"
       className="block rounded-xl border bg-card p-5 transition-colors hover:bg-muted/50"
     >
       <div className="flex items-center gap-3">

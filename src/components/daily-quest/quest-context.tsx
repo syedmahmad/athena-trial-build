@@ -8,6 +8,8 @@ import type { QuestionPhase } from "@/components/quiz/types";
 export type QuestContextValue = {
   quest: DailyQuest;
   problems: DailyQuestProblemWithDetails[];
+  /** Where "back to dashboard" should land — see quest-provider.tsx. */
+  dashboardHref: string;
   currentIndex: number;
   answers: Map<string, number>;
   lockedIds: Set<string>;

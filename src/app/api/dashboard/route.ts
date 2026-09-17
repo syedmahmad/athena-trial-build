@@ -17,10 +17,14 @@ export async function GET() {
 
   return NextResponse.json({
     user: {
+      id: user.id,
       displayName: user.displayName,
       skillScore: user.skillScore,
       avatarUrl: user.avatarUrl,
       targetScore: user.targetScore ?? null,
+      totalXp: user.totalXp ?? 0,
+      bestStreak: user.bestStreak ?? 0,
+      streakFreezeAvailable: user.streakFreezeAvailable,
     },
     ...data,
   });

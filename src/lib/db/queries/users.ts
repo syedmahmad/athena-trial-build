@@ -19,6 +19,8 @@ function mapUser(row: any) {
     currentReadingWriting: row.current_reading_writing,
     currentMath: row.current_math,
     totalXp: row.total_xp,
+    streakFreezeAvailable: row.streak_freeze_available as boolean,
+    streakFreezeUsedDate: row.streak_freeze_used_date as string | null,
     timezone: row.timezone,
     // The homework/learning boundary: true = paid/granted, false = homework-only
     // (educator funnel), null = direct learner (trial-gated). See
@@ -333,6 +335,8 @@ type UserUpdate = Partial<{
   currentMath: number;
   totalXp: number;
   timezone: string;
+  streakFreezeAvailable: boolean;
+  streakFreezeUsedDate: string | null;
 }>;
 
 function buildUserUpdate(data: UserUpdate) {
@@ -348,6 +352,10 @@ function buildUserUpdate(data: UserUpdate) {
   if (data.currentReadingWriting !== undefined) update.current_reading_writing = data.currentReadingWriting;
   if (data.currentMath !== undefined) update.current_math = data.currentMath;
   if (data.totalXp !== undefined) update.total_xp = data.totalXp;
+  if (data.streakFreezeAvailable !== undefined)
+    update.streak_freeze_available = data.streakFreezeAvailable;
+  if (data.streakFreezeUsedDate !== undefined)
+    update.streak_freeze_used_date = data.streakFreezeUsedDate;
   if (data.timezone !== undefined) update.timezone = data.timezone;
   return update;
 }

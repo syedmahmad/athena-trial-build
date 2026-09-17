@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useStartFullSat } from "@/hooks/use-full-sat";
 import { FullSatProvider } from "@/components/full-sat/full-sat-provider";
@@ -26,6 +26,14 @@ export default function FullSatAttemptLayout({
 }) {
   const params = useParams<{ attemptId: string }>();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // Captured once on entry, same pattern as the SAT quiz layout's
+  // satFocused — carries through every nested page (question, break,
+  // results) so "back to dashboard" lands on /sat/dashboard when this
+  // attempt was started from the SAT surface.
+  const [satFocused] = useState(() => searchParams.get("sat") === "1");
+  const dashboardHref = satFocused ? "/sat/dashboard" : "/dashboard";
+  const satQuery = satFocused ? "?sat=1" : "";
   const [data, setData] = useState<LoadedData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +49,7 @@ export default function FullSatAttemptLayout({
 
         if (!res.ok) {
           // If no in-progress attempt, redirect to landing
-          router.push("/full-sat");
+          router.push(`/full-sat${satQuery}`);
           return;
         }
 
@@ -75,13 +83,13 @@ export default function FullSatAttemptLayout({
         });
       } catch {
         toast.error("Failed to load test");
-        router.push("/full-sat");
+        router.push(`/full-sat${satQuery}`);
       } finally {
         setLoading(false);
       }
     }
     load();
-  }, [params.attemptId, router]);
+  }, [params.attemptId, router, satQuery]);
 
   if (loading || !data) {
     return (
@@ -97,6 +105,7 @@ export default function FullSatAttemptLayout({
       test={data.test}
       problems={data.problems}
       initialAnswers={data.answers}
+      dashboardHref={dashboardHref}
     >
       {children}
     </FullSatProvider>

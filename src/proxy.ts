@@ -78,9 +78,29 @@ async function supabaseHandler(req: NextRequest) {
 
   // IMPORTANT: getUser() (not getSession) — it revalidates the token and
   // triggers the refresh that setAll persists.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  //
+  // Rapid navigation (quiz question-to-question, Next.js's automatic Link
+  // prefetching, concurrent API calls) fires several requests in quick
+  // succession, each running this middleware and each calling getUser()
+  // against the same session/refresh token. Supabase's GoTrue rejects
+  // concurrent refresh attempts on the same token ("Too many concurrent
+  // token refresh requests") — without a try/catch that throw crashed the
+  // middleware outright, returning a 503 for whatever the request actually
+  // wanted (a page RSC fetch, an API route, ...). Next's client-side router
+  // then silently hard-reloads the page to recover from the failed RSC
+  // fetch, which is what made the SAT quiz look like it "kept reloading and
+  // couldn't complete." A transient refresh conflict here doesn't mean the
+  // user is signed out — fall through and let the request proceed; a truly
+  // expired/invalid session still gets caught downstream by getAuthIdentity()
+  // in the actual route/page.
+  let user = null;
+  try {
+    const result = await supabase.auth.getUser();
+    user = result.data.user;
+  } catch (err) {
+    console.error("[proxy] supabase.auth.getUser() failed, continuing:", err);
+    return res;
+  }
 
   if (!user && isProtectedPath(req.nextUrl.pathname)) {
     const url = req.nextUrl.clone();

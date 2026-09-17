@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Trophy, BookOpen, Calculator, Clock, ArrowRight } from "lucide-react";
 import type { FullSatSubmitResponse } from "@/types/full-sat";
@@ -9,6 +9,12 @@ import type { FullSatSubmitResponse } from "@/types/full-sat";
 export default function FullSatResultsPage() {
   const router = useRouter();
   const params = useParams<{ attemptId: string }>();
+  // FullSatProvider's submit success handler forwards ?sat=1 into this
+  // page's own URL — read directly rather than pulling in the context,
+  // since this page already does its own independent data fetch.
+  const searchParams = useSearchParams();
+  const dashboardHref =
+    searchParams.get("sat") === "1" ? "/sat/dashboard" : "/dashboard";
   const [results, setResults] = useState<FullSatSubmitResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -206,7 +212,7 @@ export default function FullSatResultsPage() {
             Back to Full SAT
           </button>
           <button
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push(dashboardHref)}
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Dashboard
